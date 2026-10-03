@@ -55,14 +55,49 @@
 
     <style>
         body {
-            background-color: #1c1f2e;
+            background-color: transparent;
             color: #e3d8c8;
-            background-image: 
-                radial-gradient(circle at top right, rgba(40, 50, 75, 0.8), transparent 50%),
-                radial-gradient(circle at bottom left, rgba(20, 25, 40, 0.9), transparent 50%),
-                url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iNDAwIj48Zz48Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSIxIiBmaWxsPSIjZmZmIiBvcGFjaXR5PSIwLjMiLz48Y2lyY2xlIGN4PSIyNTAiIGN5PSIxNTAiIHI9IjEuNSIgZmlsbD0iI2ZmZiIgb3BhY2l0eT0iMC41Ii8+PGNpcmNsZSBjeD0iMTUwIiBjeT0iMzUwIiByPSIwLjgiIGZpbGw9IiNmZmYiIG9wYWNpdHk9IjAuNCIvPjxjaXJjbGUgY3g9IjM1MCIgY3k9IjMwMCIgcj0iMiIgZmlsbD0iI2ZmZiIgb3BhY2l0eT0iMC4yIi8+PC9nPjwvc3ZnPg==');
-            background-attachment: fixed;
             overflow-x: hidden;
+        }
+
+        /* --- Genshin Live Background --- */
+        .live-bg {
+            position: fixed;
+            inset: -50%; /* extend to allow panning */
+            z-index: -1;
+            background-color: #0f111a; /* Deeper space background */
+            background-image: 
+                radial-gradient(circle at 25% 40%, rgba(30, 45, 75, 0.6), transparent 40%),
+                radial-gradient(circle at 75% 60%, rgba(45, 30, 65, 0.5), transparent 40%),
+                radial-gradient(circle at 50% 90%, rgba(20, 35, 55, 0.8), transparent 50%);
+        }
+        
+        @keyframes starFloat { 
+            0% { transform: translateY(0) rotate(0deg); } 
+            100% { transform: translateY(-500px) rotate(5deg); } 
+        }
+        @keyframes pulseGlow { 0%, 100% { opacity: 0.3; } 50% { opacity: 0.8; } }
+
+        .live-bg::before, .live-bg::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: 
+                radial-gradient(1.5px 1.5px at 40px 60px, #ffffff, transparent),
+                radial-gradient(2px 2px at 150px 100px, rgba(255,255,255,0.8), transparent),
+                radial-gradient(1px 1px at 90px 200px, #ffffff, transparent),
+                radial-gradient(2.5px 2.5px at 250px 300px, rgba(230,200,117,0.7), transparent);
+            background-size: 350px 350px;
+            animation: starFloat 120s linear infinite, pulseGlow 7s ease-in-out infinite;
+        }
+
+        .live-bg::after {
+            background-image: 
+                radial-gradient(2px 2px at 20px 80px, rgba(0,191,255,0.5), transparent),
+                radial-gradient(1.5px 1.5px at 180px 40px, rgba(138,43,226,0.4), transparent),
+                radial-gradient(1px 1px at 300px 250px, rgba(255,255,255,0.6), transparent);
+            background-size: 450px 450px;
+            animation: starFloat 180s linear infinite, pulseGlow 9s ease-in-out infinite alternate;
         }
 
         .bg-5star { background: linear-gradient(160deg, #d28c46 0%, #b67333 40%, #443c4a 80%, #2a2530 100%); }
@@ -118,17 +153,39 @@
             transition: transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
 
+        /* Character Card - Element Dynamic Outlines */
         .char-card {
-            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
             position: relative;
-            border: 2px solid transparent;
+            border: 2px solid rgba(var(--elem-rgb), 0.3);
+            box-shadow: inset 0 0 15px rgba(var(--elem-rgb), 0.1), 0 5px 15px rgba(0,0,0,0.5);
         }
+        
+        .char-card::after {
+            content: '';
+            position: absolute;
+            inset: 3px;
+            border: 1px solid rgba(var(--elem-rgb), 0.2);
+            border-radius: inherit;
+            pointer-events: none;
+            transition: all 0.4s ease;
+            z-index: 20;
+        }
+
         .char-card:hover, .char-card:focus-visible {
             transform: scale(1.05) translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.6);
-            border-color: #e6c875;
+            box-shadow: 
+                inset 0 0 30px rgba(var(--elem-rgb), 0.4), 
+                0 0 20px rgba(var(--elem-rgb), 0.4),
+                0 15px 30px rgba(0,0,0,0.7);
+            border-color: rgba(var(--elem-rgb), 0.9);
             z-index: 10;
             outline: none;
+        }
+        
+        .char-card:hover::after, .char-card:focus-visible::after {
+            border-color: rgba(var(--elem-rgb), 1);
+            inset: 4px;
         }
         .char-card:hover .char-img-container img {
             transform: scale(1.1);
@@ -236,6 +293,7 @@
 </head>
 
 <body class="font-sans antialiased min-h-screen flex flex-col selection:bg-gi-gold selection:text-gi-bgDark">
+    <div class="live-bg" aria-hidden="true"></div>
 
     <header class="ui-header sticky top-0 z-40 w-full py-4 px-6 md:px-12 flex flex-col md:flex-row justify-between items-center gap-4">
         <div class="flex items-center gap-3">
@@ -541,9 +599,16 @@
             filtered.forEach((char, index) => {
                 const bgClass = char.rarity === 5 ? 'bg-5star' : 'bg-4star';
                 
+                // Convert Hex to RGB for CSS Custom Properties
+                const hexToRgb = (hex) => {
+                    const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+                    return result ? `${parseInt(result[1], 16)}, ${parseInt(result[2], 16)}, ${parseInt(result[3], 16)}` : '204, 165, 116';
+                };
+                
                 const card = document.createElement('article');
                 card.className = `char-card ${bgClass} rounded-br-[2rem] rounded-tl-lg overflow-hidden cursor-pointer flex flex-col shadow-lg animate-fade-up`;
                 card.style.animationDelay = `${index * 0.05}s`;
+                card.style.setProperty('--elem-rgb', hexToRgb(char.elementColor));
                 card.onclick = () => openModal(char);
 
                 card.innerHTML = `
