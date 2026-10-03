@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Genshin Impact | Best Character Builds & Guides</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Discover the best Genshin Impact character builds, optimal weapons, artifact sets, and team recommendations for every element. F2P and 5-star setups.">
+    <meta name="keywords" content="Genshin Impact, Character Builds, Artifacts, Weapons, Guides, F2P, Genshin Tier List">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://your-domain.netlify.app/">
+    
+    <!-- Open Graph for Social Sharing -->
+    <meta property="og:title" content="Genshin Impact | Best Character Builds">
+    <meta property="og:description" content="Optimize your Genshin characters with our comprehensive build guide.">
+    <meta property="og:type" content="website">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- FontAwesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- Google Fonts: Serif for Headings, Sans for Body -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        gi: {
+                            bgDark: '#1c1f2e',       
+                            panel: '#3b4255',        
+                            panelLight: '#4a536b',   
+                            gold: '#cca574',         
+                            goldBright: '#e6c875',   
+                            textLight: '#e3d8c8',    
+                            textDark: '#3b4255',     
+                            parchment: '#ece5d8',    
+                            
+                            pyro: '#ec4923',
+                            hydro: '#00bfff',
+                            anemo: '#20b2aa',
+                            electro: '#8a2be2',
+                            dendro: '#32cd32',
+                            cryo: '#4682b4',
+                            geo: '#daa520'
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['"Libre Baskerville"', 'serif'],
+                        sans: ['"Nunito"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #1c1f2e;
+            color: #e3d8c8;
+            background-image: 
+                radial-gradient(circle at top right, rgba(40, 50, 75, 0.8), transparent 50%),
+                radial-gradient(circle at bottom left, rgba(20, 25, 40, 0.9), transparent 50%),
+                url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iNDAwIj48Zz48Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSIxIiBmaWxsPSIjZmZmIiBvcGFjaXR5PSIwLjMiLz48Y2lyY2xlIGN4PSIyNTAiIGN5PSIxNTAiIHI9IjEuNSIgZmlsbD0iI2ZmZiIgb3BhY2l0eT0iMC41Ii8+PGNpcmNsZSBjeD0iMTUwIiBjeT0iMzUwIiByPSIwLjgiIGZpbGw9IiNmZmYiIG9wYWNpdHk9IjAuNCIvPjxjaXJjbGUgY3g9IjM1MCIgY3k9IjMwMCIgcj0iMiIgZmlsbD0iI2ZmZiIgb3BhY2l0eT0iMC4yIi8+PC9nPjwvc3ZnPg==');
+            background-attachment: fixed;
+            overflow-x: hidden;
+        }
+
+        .bg-5star { background: linear-gradient(160deg, #d28c46 0%, #b67333 40%, #443c4a 80%, #2a2530 100%); }
+        .bg-4star { background: linear-gradient(160deg, #875c98 0%, #684982 40%, #443c4a 80%, #2a2530 100%); }
+
+        .ui-panel {
+            background: rgba(59, 66, 85, 0.9);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(230, 200, 117, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(0,0,0,0.2);
+        }
+
+        .ui-header {
+            background: linear-gradient(90deg, rgba(28, 31, 46, 0.95), rgba(59, 66, 85, 0.95));
+            border-bottom: 2px solid #cca574;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+        }
+
+        .filter-tab {
+            position: relative;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(230, 200, 117, 0.2);
+            color: #e3d8c8;
+            transition: all 0.2s ease;
+            clip-path: polygon(8% 0, 100% 0, 92% 100%, 0 100%);
+            padding: 8px 24px;
+        }
+        .filter-tab:hover, .filter-tab:focus-visible {
+            background: rgba(204, 165, 116, 0.2);
+            border-color: #cca574;
+            transform: translateY(-2px);
+            outline: none;
+        }
+        .filter-tab.active {
+            background: #ece5d8;
+            color: #3b4255;
+            border-color: #e6c875;
+            font-weight: bold;
+        }
+
+        .char-img-container {
+            aspect-ratio: 3/4;
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .char-img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: 75% 15%; 
+            transition: transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .char-card {
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            position: relative;
+            border: 2px solid transparent;
+        }
+        .char-card:hover, .char-card:focus-visible {
+            transform: scale(1.05) translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.6);
+            border-color: #e6c875;
+            z-index: 10;
+            outline: none;
+        }
+        .char-card:hover .char-img-container img, .char-card:focus-visible .char-img-container img {
+            transform: scale(1.1);
+        }
+
+        .stat-row {
+            background: linear-gradient(90deg, rgba(40,46,60,0.9) 0%, rgba(59,66,85,0.4) 100%);
+            border-left: 4px solid #cca574;
+            transition: transform 0.2s;
+        }
+        .stat-row:hover {
+            transform: translateX(5px);
+            background: linear-gradient(90deg, rgba(59,66,85,0.9) 0%, rgba(74,83,107,0.4) 100%);
+        }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: rgba(0,0,0,0.2); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb { background: #cca574; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #e6c875; }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-up {
+            animation: fadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            opacity: 0;
+        }
+
+        #modal-overlay {
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(8px);
+        }
+        #modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        #modal-content {
+            transform: scale(0.9) translateY(20px);
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        #modal-overlay.active #modal-content {
+            transform: scale(1) translateY(0);
+            opacity: 1;
+        }
+
+        .btn-close {
+            background: #ece5d8;
+            color: #3b4255;
+            border: 2px solid #cca574;
+            transition: all 0.2s;
+        }
+        .btn-close:hover, .btn-close:focus-visible {
+            background: #cca574;
+            color: #fff;
+            transform: scale(1.1) rotate(90deg);
+            outline: none;
+        }
+    </style>
+</head>
+
+<body class="font-sans antialiased min-h-screen flex flex-col selection:bg-gi-gold selection:text-gi-bgDark">
+
+    <header class="ui-header sticky top-0 z-40 w-full py-4 px-6 md:px-12 flex flex-col md:flex-row justify-between items-center gap-4">
+        <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full border-2 border-gi-gold flex items-center justify-center bg-gi-panel shadow-[0_0_10px_rgba(204,165,116,0.5)]">
+                <i class="fa-solid fa-compass text-gi-gold text-xl" aria-hidden="true"></i>
+            </div>
+            <h1 class="text-2xl font-serif text-gi-parchment tracking-wide drop-shadow-md">
+                Genshin <span class="text-gi-goldBright">Builds</span>
+            </h1>
+        </div>
+        
+        <div class="relative w-full md:w-80">
+            <label for="searchInput" class="sr-only">Search Character</label>
+            <input type="text" id="searchInput" placeholder="Search Character..." 
+                class="w-full bg-black/50 border-b-2 border-gi-gold/50 text-gi-parchment py-2 pl-10 pr-4 focus:outline-none focus:border-gi-goldBright transition-colors font-sans placeholder-gi-textLight/50 rounded-t-md">
+            <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 transform -translate-y-1/2 text-gi-gold/70" aria-hidden="true"></i>
+        </div>
+    </header>
+
+    <main class="flex-grow w-full max-w-7xl mx-auto px-6 py-8">
+        
+        <nav class="flex flex-wrap justify-center gap-2 md:gap-3 mb-10" id="filterContainer" aria-label="Element Filters">
+            <button class="filter-tab active font-serif text-sm tracking-wider" data-element="All" aria-pressed="true">ALL</button>
+            <button class="filter-tab font-serif text-sm tracking-wider flex items-center gap-2" data-element="Pyro" aria-pressed="false">
+                <i class="fa-solid fa-fire" style="color: var(--tw-colors-gi-pyro)" aria-hidden="true"></i> PYRO
+            </button>
+            <button class="filter-tab font-serif text-sm tracking-wider flex items-center gap-2" data-element="Hydro" aria-pressed="false">
+                <i class="fa-solid fa-water" style="color: var(--tw-colors-gi-hydro)" aria-hidden="true"></i> HYDRO
+            </button>
+            <button class="filter-tab font-serif text-sm tracking-wider flex items-center gap-2" data-element="Anemo" aria-pressed="false">
+                <i class="fa-solid fa-wind" style="color: var(--tw-colors-gi-anemo)" aria-hidden="true"></i> ANEMO
+            </button>
+            <button class="filter-tab font-serif text-sm tracking-wider flex items-center gap-2" data-element="Electro" aria-pressed="false">
+                <i class="fa-solid fa-bolt" style="color: var(--tw-colors-gi-electro)" aria-hidden="true"></i> ELECTRO
+            </button>
+            <button class="filter-tab font-serif text-sm tracking-wider flex items-center gap-2" data-element="Dendro" aria-pressed="false">
+                <i class="fa-solid fa-leaf" style="color: var(--tw-colors-gi-dendro)" aria-hidden="true"></i> DENDRO
+            </button>
+            <button class="filter-tab font-serif text-sm tracking-wider flex items-center gap-2" data-element="Cryo" aria-pressed="false">
+                <i class="fa-solid fa-snowflake" style="color: var(--tw-colors-gi-cryo)" aria-hidden="true"></i> CRYO
+            </button>
+            <button class="filter-tab font-serif text-sm tracking-wider flex items-center gap-2" data-element="Geo" aria-pressed="false">
+                <i class="fa-solid fa-mountain" style="color: var(--tw-colors-gi-geo)" aria-hidden="true"></i> GEO
+            </button>
+        </nav>
+
+        <section id="characterGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-6 md:gap-8 pb-10" aria-label="Character Cards">
+            <!-- Cards injected by JS -->
+        </section>
+        
+        <!-- Empty State -->
+        <div id="emptyState" class="hidden text-center py-24" aria-live="polite">
+            <i class="fa-solid fa-ghost text-6xl text-gi-panelLight mb-6 opacity-50" aria-hidden="true"></i>
+            <h2 class="text-2xl font-serif text-gi-textLight">No records found in Irminsul...</h2>
+        </div>
+    </main>
+
+    <!-- Copyright Footer -->
+    <footer class="w-full bg-gi-bgDark border-t-2 border-gi-gold/30 mt-auto py-6 px-4 text-center">
+        <p class="text-gi-textLight/70 text-sm max-w-3xl mx-auto font-sans leading-relaxed">
+            This website is a fan-made project and is not affiliated with or endorsed by HoYoverse or COGNOSPHERE PTE. LTD. <br>
+            Genshin Impact™ and all associated game assets, images, and trademarks are the property of COGNOSPHERE PTE. LTD. and their respective owners.
+        </p>
+    </footer>
+
+    <div id="modal-overlay" class="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <button id="closeModalBtn" class="btn-close fixed top-6 right-6 z-[60] w-12 h-12 rounded-full flex items-center justify-center text-xl shadow-[0_0_15px_rgba(204,165,116,0.3)]" aria-label="Close modal">
+            <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+        </button>
+
+        <div id="modal-content" class="ui-panel w-full max-w-5xl max-h-[90vh] rounded-2xl overflow-hidden flex flex-col md:flex-row relative">
+            <div id="modal-body" class="w-full h-full flex flex-col md:flex-row overflow-y-auto md:overflow-hidden"></div>
+        </div>
+    </div>
+
+    <script>
+        const characters = [
+            { id: 'raiden', name: "Raiden Shogun", element: "Electro", elementIcon: "fa-bolt", elementColor: "#8a2be2", rarity: 5, weaponType: "Polearm", bestWeapon: "Engulfing Lightning", altWeapon: "The Catch", artifactSet: "Emblem of Severed Fate (4-Piece)", sands: "Energy Recharge / ATK%", goblet: "Electro DMG / ATK%", circlet: "CRIT Rate / CRIT DMG", image: "https://img.game8.co/3865328/f43ce6a0dea44d17bb8ee0eb0bfbbce8.png/show" },
+            { id: 'zhongli', name: "Zhongli", element: "Geo", elementIcon: "fa-mountain", elementColor: "#daa520", rarity: 5, weaponType: "Polearm", bestWeapon: "Staff of Homa", altWeapon: "Black Tassel (F2P)", artifactSet: "Tenacity of the Millelith (4-Piece)", sands: "HP%", goblet: "HP%", circlet: "HP%", image: "https://img.game8.co/3863434/98a9b6abc09d75128c4c3687da5d6500.png/show" },
+            { id: 'nahida', name: "Nahida", element: "Dendro", elementIcon: "fa-leaf", elementColor: "#32cd32", rarity: 5, weaponType: "Catalyst", bestWeapon: "A Thousand Floating Dreams", altWeapon: "Sacrificial Fragments", artifactSet: "Deepwood Memories (4-Piece)", sands: "Elemental Mastery", goblet: "EM / Dendro DMG", circlet: "EM / CRIT", image: "https://img.game8.co/3864067/a0e8aae1557152bb3c7f0f57ed0d829f.png/show" },
+            { id: 'neuvillette', name: "Neuvillette", element: "Hydro", elementIcon: "fa-water", elementColor: "#00bfff", rarity: 5, weaponType: "Catalyst", bestWeapon: "Tome of the Eternal Flow", altWeapon: "Prototype Amber (F2P)", artifactSet: "Marechaussee Hunter (4-Piece)", sands: "HP%", goblet: "Hydro DMG / HP%", circlet: "CRIT DMG / CRIT Rate", image: "https://img.game8.co/3864870/8ab4c2bb6691abe12434e310a4a638a8.png/show" },
+            { id: 'hutao', name: "Hu Tao", element: "Pyro", elementIcon: "fa-fire", elementColor: "#ec4923", rarity: 5, weaponType: "Polearm", bestWeapon: "Staff of Homa", altWeapon: "Dragon's Bane", artifactSet: "Crimson Witch of Flames (4-Piece)", sands: "EM / HP%", goblet: "Pyro DMG Bonus", circlet: "CRIT Rate / CRIT DMG", image: "https://img.game8.co/3863977/9d9c63d832868a4061172d90e3471267.png/show" },
+            { id: 'kazuha', name: "Kaedehara Kazuha", element: "Anemo", elementIcon: "fa-wind", elementColor: "#20b2aa", rarity: 5, weaponType: "Sword", bestWeapon: "Freedom-Sworn", altWeapon: "Iron Sting / Xiphos' Moonlight", artifactSet: "Viridescent Venerer (4-Piece)", sands: "Elemental Mastery", goblet: "Elemental Mastery", circlet: "Elemental Mastery", image: "https://img.game8.co/3865063/3ef6e7557173885d6e507edc601d32e8.png/show" },
+            { id: 'ayaka', name: "Kamisato Ayaka", element: "Cryo", elementIcon: "fa-snowflake", elementColor: "#4682b4", rarity: 5, weaponType: "Sword", bestWeapon: "Mistsplitter Reforged", altWeapon: "Amenoma Kageuchi", artifactSet: "Blizzard Strayer (4-Piece)", sands: "ATK%", goblet: "Cryo DMG Bonus", circlet: "CRIT DMG", image: "https://img.game8.co/3864034/5712cd2f340a86cab11ddb50eea61676.png/show" },
+            { id: 'bennett', name: "Bennett", element: "Pyro", elementIcon: "fa-fire", elementColor: "#ec4923", rarity: 4, weaponType: "Sword", bestWeapon: "Aquila Favonia / Skyward Blade", altWeapon: "Sapwood Blade", artifactSet: "Noblesse Oblige (4-Piece)", sands: "Energy Recharge", goblet: "HP%", circlet: "Healing Bonus / HP%", image: "https://img.game8.co/3863971/7212b295607f923dad43ee5cc45175f9.png/show" }
+        ];
+
+        const grid = document.getElementById('characterGrid');
+        const emptyState = document.getElementById('emptyState');
+        const searchInput = document.getElementById('searchInput');
+        const filterTabs = document.querySelectorAll('.filter-tab');
+        const modalOverlay = document.getElementById('modal-overlay');
+        const modalBody = document.getElementById('modal-body');
+        const closeModalBtn = document.getElementById('closeModalBtn');
+
+        let currentFilter = 'All';
+        let currentSearch = '';
+
+        function renderCards() {
+            grid.innerHTML = '';
+            
+            const filtered = characters.filter(char => {
+                const searchMatch = char.name.toLowerCase().includes(currentSearch.toLowerCase());
+                const filterMatch = currentFilter === 'All' || char.element === currentFilter;
+                return searchMatch && filterMatch;
+            });
+
+            if (filtered.length === 0) {
+                grid.classList.add('hidden');
+                emptyState.classList.remove('hidden');
+                return;
+            }
+
+            grid.classList.remove('hidden');
+            emptyState.classList.add('hidden');
+
+            filtered.forEach((char, index) => {
+                const bgClass = char.rarity === 5 ? 'bg-5star' : 'bg-4star';
+                
+                const card = document.createElement('article');
+                card.className = `char-card ${bgClass} rounded-br-[2rem] rounded-tl-lg overflow-hidden cursor-pointer flex flex-col shadow-lg animate-fade-up`;
+                card.style.animationDelay = `${index * 0.05}s`;
+                card.tabIndex = 0; 
+                card.onclick = () => openModal(char);
+                card.onkeydown = (e) => { if(e.key === 'Enter') openModal(char); };
+
+                card.innerHTML = `
+                    <div class="char-img-container">
+                        <i class="fa-solid ${char.elementIcon} absolute top-2 left-2 text-3xl opacity-30 z-10 drop-shadow-md" style="color: ${char.elementColor}" aria-hidden="true"></i>
+                        <img src="${char.image}" alt="Portrait of ${char.name}" loading="lazy">
+                        <div class="absolute top-2 right-2 flex flex-col items-end gap-[2px] text-gi-goldBright text-[10px] z-10 drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]" aria-label="${char.rarity} Star">
+                            ${Array(char.rarity).fill('<i class="fa-solid fa-star" aria-hidden="true"></i>').join('')}
+                        </div>
+                    </div>
+                    <div class="bg-gi-bgDark/95 border-t-[3px] border-gi-gold py-3 px-2 text-center backdrop-blur-md relative">
+                        <h2 class="font-serif font-bold text-gi-parchment text-[15px] tracking-wide truncate drop-shadow-sm">${char.name}</h2>
+                        <div class="absolute -top-4 left-1/2 transform -translate-x-1/2 w-8 h-8 rounded-full bg-gi-bgDark border-2 border-gi-gold flex items-center justify-center shadow-md">
+                            <i class="fa-solid ${char.elementIcon} text-[14px]" style="color: ${char.elementColor}" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function openModal(char) {
+            const bgClass = char.rarity === 5 ? 'bg-5star' : 'bg-4star';
+            
+            modalBody.innerHTML = `
+                <div class="w-full md:w-5/12 h-64 md:h-auto ${bgClass} relative flex items-center justify-center overflow-hidden border-b-2 md:border-b-0 md:border-r-2 border-gi-gold/40 shadow-inner">
+                    <div class="absolute inset-0 opacity-20 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjgiPgo8cmVjdCB3aWR0aD0iOCIgaGVpZ2h0PSI4IiBmaWxsPSIjZmZmIiBmaWxsLW9wYWNpdHk9IjAuMSIvPgo8L3N2Zz4=')]"></div>
+                    <i class="fa-solid ${char.elementIcon} absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-[15rem] md:text-[20rem] opacity-10" style="color: #fff" aria-hidden="true"></i>
+                    <img src="${char.image}" alt="Splash art of ${char.name}" class="relative z-10 w-full h-full object-cover md:object-contain object-[75%_15%] md:object-center drop-shadow-[0_15px_25px_rgba(0,0,0,0.8)] p-4 md:p-8">
+                    
+                    <div class="absolute top-4 left-4 md:top-8 md:left-8 z-20">
+                        <div class="flex items-center gap-3">
+                            <div class="w-12 h-12 rounded-full border-2 border-gi-parchment flex items-center justify-center bg-black/50 shadow-lg">
+                                <i class="fa-solid ${char.elementIcon} text-2xl" style="color: ${char.elementColor}" aria-hidden="true"></i>
+                            </div>
+                            <div>
+                                <h2 id="modalTitle" class="text-2xl md:text-3xl font-serif font-bold text-white tracking-widest drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">${char.name}</h2>
+                                <div class="text-gi-goldBright text-sm md:text-lg mt-1 tracking-widest drop-shadow-md">
+                                    ${Array(char.rarity).fill('<i class="fa-solid fa-star" aria-hidden="true"></i>').join('')}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-full md:w-7/12 bg-gi-panel p-6 md:p-10 md:overflow-y-auto custom-scrollbar relative flex flex-col justify-center">
+                    <div class="absolute top-0 right-0 w-20 h-20 border-t-[3px] border-r-[3px] border-gi-gold/30 m-4 rounded-tr-xl pointer-events-none"></div>
+                    <div class="absolute bottom-0 left-0 w-20 h-20 border-b-[3px] border-l-[3px] border-gi-gold/30 m-4 rounded-bl-xl pointer-events-none"></div>
+
+                    <h3 class="font-serif text-2xl text-gi-parchment border-b-[3px] border-gi-gold/50 pb-3 mb-8 tracking-wide flex items-center gap-3">
+                        <i class="fa-solid fa-khanda text-gi-gold" aria-hidden="true"></i> Recommended Build
+                    </h3>
+
+                    <div class="space-y-8 font-sans">
+                        <div>
+                            <p class="text-gi-gold font-bold text-xs md:text-sm uppercase tracking-widest mb-3 opacity-90"><i class="fa-solid fa-gavel mr-2" aria-hidden="true"></i>Weapons</p>
+                            <div class="stat-row p-4 rounded-r-lg mb-3 flex flex-col sm:flex-row sm:items-center justify-between gap-2 shadow-md">
+                                <span class="text-gi-textLight font-semibold text-sm">Best in Slot (5★)</span>
+                                <span class="text-gi-goldBright font-bold sm:text-right text-lg">${char.bestWeapon}</span>
+                            </div>
+                            <div class="stat-row p-4 rounded-r-lg flex flex-col sm:flex-row sm:items-center justify-between gap-2 shadow-md opacity-90">
+                                <span class="text-gi-textLight font-semibold text-sm">F2P / Alternative</span>
+                                <span class="text-gi-parchment font-bold sm:text-right">${char.altWeapon}</span>
+                            </div>
+                        </div>
+                        <div>
+                            <p class="text-gi-gold font-bold text-xs md:text-sm uppercase tracking-widest mb-3 opacity-90"><i class="fa-solid fa-cube mr-2" aria-hidden="true"></i>Artifact Set</p>
+                            <div class="stat-row p-5 rounded-r-lg mb-5 shadow-md">
+                                <div class="flex items-center gap-3 mb-2">
+                                    <i class="fa-solid fa-gem text-gi-goldBright text-xl" aria-hidden="true"></i>
+                                    <span class="text-white font-bold text-lg md:text-xl tracking-wide">${char.artifactSet}</span>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                                <div class="bg-black/30 border border-gi-gold/20 p-4 rounded-lg text-center shadow-inner hover:border-gi-gold/60 transition-colors">
+                                    <i class="fa-regular fa-hourglass-half text-gi-gold text-2xl mb-2 drop-shadow-md" aria-hidden="true"></i>
+                                    <p class="text-[10px] md:text-xs text-gi-textLight uppercase tracking-widest mb-1">Sands</p>
+                                    <p class="text-sm text-gi-parchment font-bold">${char.sands}</p>
+                                </div>
+                                <div class="bg-black/30 border border-gi-gold/20 p-4 rounded-lg text-center shadow-inner hover:border-gi-gold/60 transition-colors">
+                                    <i class="fa-solid fa-wine-glass text-gi-gold text-2xl mb-2 drop-shadow-md" aria-hidden="true"></i>
+                                    <p class="text-[10px] md:text-xs text-gi-textLight uppercase tracking-widest mb-1">Goblet</p>
+                                    <p class="text-sm text-gi-parchment font-bold">${char.goblet}</p>
+                                </div>
+                                <div class="bg-black/30 border border-gi-gold/20 p-4 rounded-lg text-center shadow-inner hover:border-gi-gold/60 transition-colors">
+                                    <i class="fa-solid fa-crown text-gi-gold text-2xl mb-2 drop-shadow-md" aria-hidden="true"></i>
+                                    <p class="text-[10px] md:text-xs text-gi-textLight uppercase tracking-widest mb-1">Circlet</p>
+                                    <p class="text-sm text-gi-parchment font-bold">${char.circlet}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            modalOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden'; 
+            closeModalBtn.focus();
+        }
+
+        function closeModal() {
+            modalOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        searchInput.addEventListener('input', (e) => {
+            currentSearch = e.target.value;
+            renderCards();
+        });
+
+        filterTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                filterTabs.forEach(t => {
+                    t.classList.remove('active');
+                    t.setAttribute('aria-pressed', 'false');
+                });
+                tab.classList.add('active');
+                tab.setAttribute('aria-pressed', 'true');
+                currentFilter = tab.dataset.element;
+                renderCards();
+            });
+        });
+
+        closeModalBtn.addEventListener('click', closeModal);
+        modalOverlay.addEventListener('click', (e) => {
+            if (e.target === modalOverlay) closeModal();
+        });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeModal();
+        });
+
+        renderCards();
+    </script>
+</body>
+</html>
