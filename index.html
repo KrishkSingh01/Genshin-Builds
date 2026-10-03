@@ -8,14 +8,7 @@
     <!-- SEO Meta Tags -->
     <meta name="description" content="Discover the best Genshin Impact character builds, optimal weapons, artifact sets, and team recommendations for every element. F2P and 5-star setups.">
     <meta name="keywords" content="Genshin Impact, Character Builds, Artifacts, Weapons, Guides, F2P, Genshin Tier List">
-    <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://your-domain.netlify.app/">
     
-    <!-- Open Graph for Social Sharing -->
-    <meta property="og:title" content="Genshin Impact | Best Character Builds">
-    <meta property="og:description" content="Optimize your Genshin characters with our comprehensive build guide.">
-    <meta property="og:type" content="website">
-
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
@@ -76,7 +69,7 @@
         .bg-4star { background: linear-gradient(160deg, #875c98 0%, #684982 40%, #443c4a 80%, #2a2530 100%); }
 
         .ui-panel {
-            background: rgba(59, 66, 85, 0.9);
+            background: rgba(59, 66, 85, 0.95);
             backdrop-filter: blur(12px);
             border: 1px solid rgba(230, 200, 117, 0.3);
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(0,0,0,0.2);
@@ -137,7 +130,7 @@
             z-index: 10;
             outline: none;
         }
-        .char-card:hover .char-img-container img, .char-card:focus-visible .char-img-container img {
+        .char-card:hover .char-img-container img {
             transform: scale(1.1);
         }
 
@@ -149,6 +142,49 @@
         .stat-row:hover {
             transform: translateX(5px);
             background: linear-gradient(90deg, rgba(59,66,85,0.9) 0%, rgba(74,83,107,0.4) 100%);
+        }
+
+        /* Hover Interactive Stats Table */
+        .stats-table-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 0.5rem;
+            background: rgba(0,0,0,0.4);
+            border: 1px solid rgba(204,165,116,0.3);
+            transition: all 0.4s ease;
+        }
+        .stats-table-container:hover {
+            border-color: rgba(230,200,117,0.8);
+            box-shadow: 0 0 20px rgba(204,165,116,0.2);
+        }
+        
+        .stat-tr {
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 1;
+        }
+        .stat-tr::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, transparent, rgba(230,200,117,0.15), transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: -1;
+        }
+        .stat-tr:hover {
+            transform: scale(1.02);
+        }
+        .stat-tr:hover::before {
+            opacity: 1;
+        }
+        .stat-tr:hover td {
+            color: #fff;
+        }
+        .stat-tr:hover .stat-value {
+            color: #e6c875;
+            text-shadow: 0 0 10px rgba(230,200,117,0.5);
+            transform: scale(1.05);
         }
 
         ::-webkit-scrollbar { width: 6px; }
@@ -191,11 +227,10 @@
             border: 2px solid #cca574;
             transition: all 0.2s;
         }
-        .btn-close:hover, .btn-close:focus-visible {
+        .btn-close:hover {
             background: #cca574;
             color: #fff;
             transform: scale(1.1) rotate(90deg);
-            outline: none;
         }
     </style>
 </head>
@@ -213,7 +248,6 @@
         </div>
         
         <div class="relative w-full md:w-80">
-            <label for="searchInput" class="sr-only">Search Character</label>
             <input type="text" id="searchInput" placeholder="Search Character..." 
                 class="w-full bg-black/50 border-b-2 border-gi-gold/50 text-gi-parchment py-2 pl-10 pr-4 focus:outline-none focus:border-gi-goldBright transition-colors font-sans placeholder-gi-textLight/50 rounded-t-md">
             <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 transform -translate-y-1/2 text-gi-gold/70" aria-hidden="true"></i>
@@ -222,70 +256,257 @@
 
     <main class="flex-grow w-full max-w-7xl mx-auto px-6 py-8">
         
-        <nav class="flex flex-wrap justify-center gap-2 md:gap-3 mb-10" id="filterContainer" aria-label="Element Filters">
-            <button class="filter-tab active font-serif text-sm tracking-wider" data-element="All" aria-pressed="true">ALL</button>
-            <button class="filter-tab font-serif text-sm tracking-wider flex items-center gap-2" data-element="Pyro" aria-pressed="false">
-                <i class="fa-solid fa-fire" style="color: var(--tw-colors-gi-pyro)" aria-hidden="true"></i> PYRO
+        <nav class="flex flex-wrap justify-center gap-2 md:gap-3 mb-10" id="filterContainer">
+            <button class="filter-tab active font-serif text-sm tracking-wider" data-element="All">ALL</button>
+            <button class="filter-tab font-serif text-sm tracking-wider flex items-center gap-2" data-element="Pyro">
+                <i class="fa-solid fa-fire" style="color: var(--tw-colors-gi-pyro)"></i> PYRO
             </button>
-            <button class="filter-tab font-serif text-sm tracking-wider flex items-center gap-2" data-element="Hydro" aria-pressed="false">
-                <i class="fa-solid fa-water" style="color: var(--tw-colors-gi-hydro)" aria-hidden="true"></i> HYDRO
+            <button class="filter-tab font-serif text-sm tracking-wider flex items-center gap-2" data-element="Hydro">
+                <i class="fa-solid fa-water" style="color: var(--tw-colors-gi-hydro)"></i> HYDRO
             </button>
-            <button class="filter-tab font-serif text-sm tracking-wider flex items-center gap-2" data-element="Anemo" aria-pressed="false">
-                <i class="fa-solid fa-wind" style="color: var(--tw-colors-gi-anemo)" aria-hidden="true"></i> ANEMO
+            <button class="filter-tab font-serif text-sm tracking-wider flex items-center gap-2" data-element="Anemo">
+                <i class="fa-solid fa-wind" style="color: var(--tw-colors-gi-anemo)"></i> ANEMO
             </button>
-            <button class="filter-tab font-serif text-sm tracking-wider flex items-center gap-2" data-element="Electro" aria-pressed="false">
-                <i class="fa-solid fa-bolt" style="color: var(--tw-colors-gi-electro)" aria-hidden="true"></i> ELECTRO
+            <button class="filter-tab font-serif text-sm tracking-wider flex items-center gap-2" data-element="Electro">
+                <i class="fa-solid fa-bolt" style="color: var(--tw-colors-gi-electro)"></i> ELECTRO
             </button>
-            <button class="filter-tab font-serif text-sm tracking-wider flex items-center gap-2" data-element="Dendro" aria-pressed="false">
-                <i class="fa-solid fa-leaf" style="color: var(--tw-colors-gi-dendro)" aria-hidden="true"></i> DENDRO
+            <button class="filter-tab font-serif text-sm tracking-wider flex items-center gap-2" data-element="Dendro">
+                <i class="fa-solid fa-leaf" style="color: var(--tw-colors-gi-dendro)"></i> DENDRO
             </button>
-            <button class="filter-tab font-serif text-sm tracking-wider flex items-center gap-2" data-element="Cryo" aria-pressed="false">
-                <i class="fa-solid fa-snowflake" style="color: var(--tw-colors-gi-cryo)" aria-hidden="true"></i> CRYO
+            <button class="filter-tab font-serif text-sm tracking-wider flex items-center gap-2" data-element="Cryo">
+                <i class="fa-solid fa-snowflake" style="color: var(--tw-colors-gi-cryo)"></i> CRYO
             </button>
-            <button class="filter-tab font-serif text-sm tracking-wider flex items-center gap-2" data-element="Geo" aria-pressed="false">
-                <i class="fa-solid fa-mountain" style="color: var(--tw-colors-gi-geo)" aria-hidden="true"></i> GEO
+            <button class="filter-tab font-serif text-sm tracking-wider flex items-center gap-2" data-element="Geo">
+                <i class="fa-solid fa-mountain" style="color: var(--tw-colors-gi-geo)"></i> GEO
             </button>
         </nav>
 
-        <section id="characterGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-6 md:gap-8 pb-10" aria-label="Character Cards">
+        <section id="characterGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-6 md:gap-8 pb-10">
             <!-- Cards injected by JS -->
         </section>
         
-        <!-- Empty State -->
-        <div id="emptyState" class="hidden text-center py-24" aria-live="polite">
-            <i class="fa-solid fa-ghost text-6xl text-gi-panelLight mb-6 opacity-50" aria-hidden="true"></i>
+        <div id="emptyState" class="hidden text-center py-24">
+            <i class="fa-solid fa-ghost text-6xl text-gi-panelLight mb-6 opacity-50"></i>
             <h2 class="text-2xl font-serif text-gi-textLight">No records found in Irminsul...</h2>
         </div>
     </main>
 
-    <!-- Copyright Footer -->
     <footer class="w-full bg-gi-bgDark border-t-2 border-gi-gold/30 mt-auto py-6 px-4 text-center">
         <p class="text-gi-textLight/70 text-sm max-w-3xl mx-auto font-sans leading-relaxed">
-            This website is a fan-made project and is not affiliated with or endorsed by HoYoverse or COGNOSPHERE PTE. LTD. <br>
-            Genshin Impact™ and all associated game assets, images, and trademarks are the property of COGNOSPHERE PTE. LTD. and their respective owners.
+            This website is a fan-made project and is not affiliated with or endorsed by HoYoverse or COGNOSPHERE PTE. LTD.
         </p>
     </footer>
 
-    <div id="modal-overlay" class="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-        <button id="closeModalBtn" class="btn-close fixed top-6 right-6 z-[60] w-12 h-12 rounded-full flex items-center justify-center text-xl shadow-[0_0_15px_rgba(204,165,116,0.3)]" aria-label="Close modal">
-            <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+    <div id="modal-overlay" class="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4">
+        <button id="closeModalBtn" class="btn-close fixed top-6 right-6 z-[60] w-12 h-12 rounded-full flex items-center justify-center text-xl shadow-[0_0_15px_rgba(204,165,116,0.3)]">
+            <i class="fa-solid fa-xmark"></i>
         </button>
 
-        <div id="modal-content" class="ui-panel w-full max-w-5xl max-h-[90vh] rounded-2xl overflow-hidden flex flex-col md:flex-row relative">
-            <div id="modal-body" class="w-full h-full flex flex-col md:flex-row overflow-y-auto md:overflow-hidden"></div>
+        <div id="modal-content" class="ui-panel w-full max-w-6xl max-h-[90vh] rounded-2xl overflow-hidden flex flex-col lg:flex-row relative">
+            <div id="modal-body" class="w-full h-full flex flex-col lg:flex-row overflow-y-auto lg:overflow-hidden"></div>
         </div>
     </div>
 
     <script>
         const characters = [
-            { id: 'raiden', name: "Raiden Shogun", element: "Electro", elementIcon: "fa-bolt", elementColor: "#8a2be2", rarity: 5, weaponType: "Polearm", bestWeapon: "Engulfing Lightning", altWeapon: "The Catch", artifactSet: "Emblem of Severed Fate (4-Piece)", sands: "Energy Recharge / ATK%", goblet: "Electro DMG / ATK%", circlet: "CRIT Rate / CRIT DMG", image: "https://img.game8.co/3865328/f43ce6a0dea44d17bb8ee0eb0bfbbce8.png/show" },
-            { id: 'zhongli', name: "Zhongli", element: "Geo", elementIcon: "fa-mountain", elementColor: "#daa520", rarity: 5, weaponType: "Polearm", bestWeapon: "Staff of Homa", altWeapon: "Black Tassel (F2P)", artifactSet: "Tenacity of the Millelith (4-Piece)", sands: "HP%", goblet: "HP%", circlet: "HP%", image: "https://img.game8.co/3863434/98a9b6abc09d75128c4c3687da5d6500.png/show" },
-            { id: 'nahida', name: "Nahida", element: "Dendro", elementIcon: "fa-leaf", elementColor: "#32cd32", rarity: 5, weaponType: "Catalyst", bestWeapon: "A Thousand Floating Dreams", altWeapon: "Sacrificial Fragments", artifactSet: "Deepwood Memories (4-Piece)", sands: "Elemental Mastery", goblet: "EM / Dendro DMG", circlet: "EM / CRIT", image: "https://img.game8.co/3864067/a0e8aae1557152bb3c7f0f57ed0d829f.png/show" },
-            { id: 'neuvillette', name: "Neuvillette", element: "Hydro", elementIcon: "fa-water", elementColor: "#00bfff", rarity: 5, weaponType: "Catalyst", bestWeapon: "Tome of the Eternal Flow", altWeapon: "Prototype Amber (F2P)", artifactSet: "Marechaussee Hunter (4-Piece)", sands: "HP%", goblet: "Hydro DMG / HP%", circlet: "CRIT DMG / CRIT Rate", image: "https://img.game8.co/3864870/8ab4c2bb6691abe12434e310a4a638a8.png/show" },
-            { id: 'hutao', name: "Hu Tao", element: "Pyro", elementIcon: "fa-fire", elementColor: "#ec4923", rarity: 5, weaponType: "Polearm", bestWeapon: "Staff of Homa", altWeapon: "Dragon's Bane", artifactSet: "Crimson Witch of Flames (4-Piece)", sands: "EM / HP%", goblet: "Pyro DMG Bonus", circlet: "CRIT Rate / CRIT DMG", image: "https://img.game8.co/3863977/9d9c63d832868a4061172d90e3471267.png/show" },
-            { id: 'kazuha', name: "Kaedehara Kazuha", element: "Anemo", elementIcon: "fa-wind", elementColor: "#20b2aa", rarity: 5, weaponType: "Sword", bestWeapon: "Freedom-Sworn", altWeapon: "Iron Sting / Xiphos' Moonlight", artifactSet: "Viridescent Venerer (4-Piece)", sands: "Elemental Mastery", goblet: "Elemental Mastery", circlet: "Elemental Mastery", image: "https://img.game8.co/3865063/3ef6e7557173885d6e507edc601d32e8.png/show" },
-            { id: 'ayaka', name: "Kamisato Ayaka", element: "Cryo", elementIcon: "fa-snowflake", elementColor: "#4682b4", rarity: 5, weaponType: "Sword", bestWeapon: "Mistsplitter Reforged", altWeapon: "Amenoma Kageuchi", artifactSet: "Blizzard Strayer (4-Piece)", sands: "ATK%", goblet: "Cryo DMG Bonus", circlet: "CRIT DMG", image: "https://img.game8.co/3864034/5712cd2f340a86cab11ddb50eea61676.png/show" },
-            { id: 'bennett', name: "Bennett", element: "Pyro", elementIcon: "fa-fire", elementColor: "#ec4923", rarity: 4, weaponType: "Sword", bestWeapon: "Aquila Favonia / Skyward Blade", altWeapon: "Sapwood Blade", artifactSet: "Noblesse Oblige (4-Piece)", sands: "Energy Recharge", goblet: "HP%", circlet: "Healing Bonus / HP%", image: "https://img.game8.co/3863971/7212b295607f923dad43ee5cc45175f9.png/show" }
+            { 
+                id: 'furina', 
+                name: "Furina", 
+                element: "Hydro", 
+                elementIcon: "fa-water", 
+                elementColor: "#00bfff", 
+                rarity: 5, 
+                weaponType: "Sword", 
+                bestWeapon: "Splendor of Tranquil Waters", 
+                altWeapon: "Festering Desire / Fleuve Cendre", 
+                artifactSet: "Golden Troupe (4-Piece)", 
+                sands: "HP% / Energy Recharge", 
+                goblet: "HP% / Hydro DMG", 
+                circlet: "CRIT Rate / CRIT DMG", 
+                image: "https://img.game8.co/4595141/ec2f77c8abc1a78183a9e2930ac18664.png/show",
+                stats: [
+                    { label: "Max HP", value: "40,000+" },
+                    { label: "Energy Recharge", value: "160% - 200%" },
+                    { label: "CRIT Rate", value: "70%+" },
+                    { label: "CRIT DMG", value: "140%+" }
+                ]
+            },
+            { 
+                id: 'raiden', 
+                name: "Raiden Shogun", 
+                element: "Electro", 
+                elementIcon: "fa-bolt", 
+                elementColor: "#8a2be2", 
+                rarity: 5, 
+                weaponType: "Polearm", 
+                bestWeapon: "Engulfing Lightning", 
+                altWeapon: "The Catch", 
+                artifactSet: "Emblem of Severed Fate (4-Piece)", 
+                sands: "Energy Recharge / ATK%", 
+                goblet: "Electro DMG / ATK%", 
+                circlet: "CRIT Rate / CRIT DMG", 
+                image: "https://img.game8.co/3865328/f43ce6a0dea44d17bb8ee0eb0bfbbce8.png/show",
+                stats: [
+                    { label: "Energy Recharge", value: "250%+" },
+                    { label: "ATK", value: "1,600+" },
+                    { label: "CRIT Rate", value: "60%+" },
+                    { label: "CRIT DMG", value: "120%+" }
+                ]
+            },
+            { 
+                id: 'zhongli', 
+                name: "Zhongli", 
+                element: "Geo", 
+                elementIcon: "fa-mountain", 
+                elementColor: "#daa520", 
+                rarity: 5, 
+                weaponType: "Polearm", 
+                bestWeapon: "Staff of Homa", 
+                altWeapon: "Black Tassel (F2P)", 
+                artifactSet: "Tenacity of the Millelith (4-Piece)", 
+                sands: "HP%", 
+                goblet: "HP%", 
+                circlet: "HP%", 
+                image: "https://img.game8.co/3863434/98a9b6abc09d75128c4c3687da5d6500.png/show",
+                stats: [
+                    { label: "Max HP", value: "40,000 - 50,000+" },
+                    { label: "Energy Recharge", value: "130%+" },
+                    { label: "CRIT Rate", value: "50%+" },
+                    { label: "CRIT DMG", value: "100%+" }
+                ]
+            },
+            { 
+                id: 'nahida', 
+                name: "Nahida", 
+                element: "Dendro", 
+                elementIcon: "fa-leaf", 
+                elementColor: "#32cd32", 
+                rarity: 5, 
+                weaponType: "Catalyst", 
+                bestWeapon: "A Thousand Floating Dreams", 
+                altWeapon: "Sacrificial Fragments", 
+                artifactSet: "Deepwood Memories (4-Piece)", 
+                sands: "Elemental Mastery", 
+                goblet: "EM / Dendro DMG", 
+                circlet: "EM / CRIT", 
+                image: "https://img.game8.co/3864067/a0e8aae1557152bb3c7f0f57ed0d829f.png/show",
+                stats: [
+                    { label: "Elemental Mastery", value: "800 - 1,000" },
+                    { label: "Energy Recharge", value: "130% - 150%" },
+                    { label: "CRIT Rate", value: "50%+" },
+                    { label: "CRIT DMG", value: "120%+" }
+                ]
+            },
+            { 
+                id: 'neuvillette', 
+                name: "Neuvillette", 
+                element: "Hydro", 
+                elementIcon: "fa-water", 
+                elementColor: "#00bfff", 
+                rarity: 5, 
+                weaponType: "Catalyst", 
+                bestWeapon: "Tome of the Eternal Flow", 
+                altWeapon: "Prototype Amber (F2P)", 
+                artifactSet: "Marechaussee Hunter (4-Piece)", 
+                sands: "HP%", 
+                goblet: "Hydro DMG / HP%", 
+                circlet: "CRIT DMG / CRIT Rate", 
+                image: "https://img.game8.co/3864870/8ab4c2bb6691abe12434e310a4a638a8.png/show",
+                stats: [
+                    { label: "Max HP", value: "35,000+" },
+                    { label: "Energy Recharge", value: "120% - 140%" },
+                    { label: "CRIT Rate", value: "50% - 64%" },
+                    { label: "CRIT DMG", value: "200%+" }
+                ]
+            },
+            { 
+                id: 'hutao', 
+                name: "Hu Tao", 
+                element: "Pyro", 
+                elementIcon: "fa-fire", 
+                elementColor: "#ec4923", 
+                rarity: 5, 
+                weaponType: "Polearm", 
+                bestWeapon: "Staff of Homa", 
+                altWeapon: "Dragon's Bane", 
+                artifactSet: "Crimson Witch of Flames (4-Piece)", 
+                sands: "EM / HP%", 
+                goblet: "Pyro DMG Bonus", 
+                circlet: "CRIT Rate / CRIT DMG", 
+                image: "https://img.game8.co/3863977/9d9c63d832868a4061172d90e3471267.png/show",
+                stats: [
+                    { label: "Max HP", value: "30,000+" },
+                    { label: "Elemental Mastery", value: "200 - 300" },
+                    { label: "CRIT Rate", value: "70%+" },
+                    { label: "CRIT DMG", value: "200%+" }
+                ]
+            },
+            { 
+                id: 'kazuha', 
+                name: "Kaedehara Kazuha", 
+                element: "Anemo", 
+                elementIcon: "fa-wind", 
+                elementColor: "#20b2aa", 
+                rarity: 5, 
+                weaponType: "Sword", 
+                bestWeapon: "Freedom-Sworn", 
+                altWeapon: "Iron Sting / Xiphos' Moonlight", 
+                artifactSet: "Viridescent Venerer (4-Piece)", 
+                sands: "Elemental Mastery", 
+                goblet: "Elemental Mastery", 
+                circlet: "Elemental Mastery", 
+                image: "https://img.game8.co/3865063/3ef6e7557173885d6e507edc601d32e8.png/show",
+                stats: [
+                    { label: "Elemental Mastery", value: "800 - 1,000+" },
+                    { label: "Energy Recharge", value: "160% - 200%" },
+                    { label: "CRIT Rate", value: "25%+" },
+                    { label: "ATK", value: "1,200+" }
+                ]
+            },
+            { 
+                id: 'ayaka', 
+                name: "Kamisato Ayaka", 
+                element: "Cryo", 
+                elementIcon: "fa-snowflake", 
+                elementColor: "#4682b4", 
+                rarity: 5, 
+                weaponType: "Sword", 
+                bestWeapon: "Mistsplitter Reforged", 
+                altWeapon: "Amenoma Kageuchi", 
+                artifactSet: "Blizzard Strayer (4-Piece)", 
+                sands: "ATK%", 
+                goblet: "Cryo DMG Bonus", 
+                circlet: "CRIT DMG", 
+                image: "https://img.game8.co/3864034/5712cd2f340a86cab11ddb50eea61676.png/show",
+                stats: [
+                    { label: "ATK", value: "2,000+" },
+                    { label: "Energy Recharge", value: "130% - 140%" },
+                    { label: "CRIT Rate", value: "35% - 45%" },
+                    { label: "CRIT DMG", value: "200%+" }
+                ]
+            },
+            { 
+                id: 'bennett', 
+                name: "Bennett", 
+                element: "Pyro", 
+                elementIcon: "fa-fire", 
+                elementColor: "#ec4923", 
+                rarity: 4, 
+                weaponType: "Sword", 
+                bestWeapon: "Aquila Favonia / Skyward Blade", 
+                altWeapon: "Sapwood Blade", 
+                artifactSet: "Noblesse Oblige (4-Piece)", 
+                sands: "Energy Recharge", 
+                goblet: "HP%", 
+                circlet: "Healing Bonus / HP%", 
+                image: "https://img.game8.co/3863971/7212b295607f923dad43ee5cc45175f9.png/show",
+                stats: [
+                    { label: "Base ATK", value: "700 - 800+" },
+                    { label: "Energy Recharge", value: "200% - 250%+" },
+                    { label: "Max HP", value: "25,000+" },
+                    { label: "Healing Bonus", value: "35.9%+" }
+                ]
+            }
         ];
 
         const grid = document.getElementById('characterGrid');
@@ -323,22 +544,20 @@
                 const card = document.createElement('article');
                 card.className = `char-card ${bgClass} rounded-br-[2rem] rounded-tl-lg overflow-hidden cursor-pointer flex flex-col shadow-lg animate-fade-up`;
                 card.style.animationDelay = `${index * 0.05}s`;
-                card.tabIndex = 0; 
                 card.onclick = () => openModal(char);
-                card.onkeydown = (e) => { if(e.key === 'Enter') openModal(char); };
 
                 card.innerHTML = `
                     <div class="char-img-container">
-                        <i class="fa-solid ${char.elementIcon} absolute top-2 left-2 text-3xl opacity-30 z-10 drop-shadow-md" style="color: ${char.elementColor}" aria-hidden="true"></i>
+                        <i class="fa-solid ${char.elementIcon} absolute top-2 left-2 text-3xl opacity-30 z-10 drop-shadow-md" style="color: ${char.elementColor}"></i>
                         <img src="${char.image}" alt="Portrait of ${char.name}" loading="lazy">
-                        <div class="absolute top-2 right-2 flex flex-col items-end gap-[2px] text-gi-goldBright text-[10px] z-10 drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]" aria-label="${char.rarity} Star">
-                            ${Array(char.rarity).fill('<i class="fa-solid fa-star" aria-hidden="true"></i>').join('')}
+                        <div class="absolute top-2 right-2 flex flex-col items-end gap-[2px] text-gi-goldBright text-[10px] z-10 drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)]">
+                            ${Array(char.rarity).fill('<i class="fa-solid fa-star"></i>').join('')}
                         </div>
                     </div>
                     <div class="bg-gi-bgDark/95 border-t-[3px] border-gi-gold py-3 px-2 text-center backdrop-blur-md relative">
                         <h2 class="font-serif font-bold text-gi-parchment text-[15px] tracking-wide truncate drop-shadow-sm">${char.name}</h2>
                         <div class="absolute -top-4 left-1/2 transform -translate-x-1/2 w-8 h-8 rounded-full bg-gi-bgDark border-2 border-gi-gold flex items-center justify-center shadow-md">
-                            <i class="fa-solid ${char.elementIcon} text-[14px]" style="color: ${char.elementColor}" aria-hidden="true"></i>
+                            <i class="fa-solid ${char.elementIcon} text-[14px]" style="color: ${char.elementColor}"></i>
                         </div>
                     </div>
                 `;
@@ -349,78 +568,104 @@
         function openModal(char) {
             const bgClass = char.rarity === 5 ? 'bg-5star' : 'bg-4star';
             
+            // Build Stats Table Rows
+            const statsRows = char.stats.map(stat => `
+                <tr class="stat-tr border-b border-gi-gold/20 last:border-0 cursor-crosshair">
+                    <td class="py-3 px-4 text-gi-textLight/90 font-medium transition-colors">${stat.label}</td>
+                    <td class="py-3 px-4 text-right text-gi-parchment font-bold stat-value transition-all duration-300">${stat.value}</td>
+                </tr>
+            `).join('');
+
             modalBody.innerHTML = `
-                <div class="w-full md:w-5/12 h-64 md:h-auto ${bgClass} relative flex items-center justify-center overflow-hidden border-b-2 md:border-b-0 md:border-r-2 border-gi-gold/40 shadow-inner">
+                <div class="w-full lg:w-4/12 h-64 lg:h-auto ${bgClass} relative flex items-center justify-center overflow-hidden border-b-2 lg:border-b-0 lg:border-r-2 border-gi-gold/40 shadow-inner">
                     <div class="absolute inset-0 opacity-20 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjgiPgo8cmVjdCB3aWR0aD0iOCIgaGVpZ2h0PSI4IiBmaWxsPSIjZmZmIiBmaWxsLW9wYWNpdHk9IjAuMSIvPgo8L3N2Zz4=')]"></div>
-                    <i class="fa-solid ${char.elementIcon} absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-[15rem] md:text-[20rem] opacity-10" style="color: #fff" aria-hidden="true"></i>
-                    <img src="${char.image}" alt="Splash art of ${char.name}" class="relative z-10 w-full h-full object-cover md:object-contain object-[75%_15%] md:object-center drop-shadow-[0_15px_25px_rgba(0,0,0,0.8)] p-4 md:p-8">
+                    <i class="fa-solid ${char.elementIcon} absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-[15rem] lg:text-[20rem] opacity-10" style="color: #fff"></i>
+                    <img src="${char.image}" alt="${char.name}" class="relative z-10 w-full h-full object-cover lg:object-contain object-[75%_15%] lg:object-center drop-shadow-[0_15px_25px_rgba(0,0,0,0.8)] p-4 lg:p-8">
                     
-                    <div class="absolute top-4 left-4 md:top-8 md:left-8 z-20">
+                    <div class="absolute top-4 left-4 lg:top-8 lg:left-8 z-20">
                         <div class="flex items-center gap-3">
                             <div class="w-12 h-12 rounded-full border-2 border-gi-parchment flex items-center justify-center bg-black/50 shadow-lg">
-                                <i class="fa-solid ${char.elementIcon} text-2xl" style="color: ${char.elementColor}" aria-hidden="true"></i>
+                                <i class="fa-solid ${char.elementIcon} text-2xl" style="color: ${char.elementColor}"></i>
                             </div>
                             <div>
-                                <h2 id="modalTitle" class="text-2xl md:text-3xl font-serif font-bold text-white tracking-widest drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">${char.name}</h2>
-                                <div class="text-gi-goldBright text-sm md:text-lg mt-1 tracking-widest drop-shadow-md">
-                                    ${Array(char.rarity).fill('<i class="fa-solid fa-star" aria-hidden="true"></i>').join('')}
+                                <h2 class="text-2xl lg:text-3xl font-serif font-bold text-white tracking-widest drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">${char.name}</h2>
+                                <div class="text-gi-goldBright text-sm lg:text-lg mt-1 tracking-widest drop-shadow-md">
+                                    ${Array(char.rarity).fill('<i class="fa-solid fa-star"></i>').join('')}
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="w-full md:w-7/12 bg-gi-panel p-6 md:p-10 md:overflow-y-auto custom-scrollbar relative flex flex-col justify-center">
+                
+                <div class="w-full lg:w-8/12 bg-gi-panel p-6 lg:p-10 lg:overflow-y-auto custom-scrollbar relative flex flex-col justify-center">
                     <div class="absolute top-0 right-0 w-20 h-20 border-t-[3px] border-r-[3px] border-gi-gold/30 m-4 rounded-tr-xl pointer-events-none"></div>
                     <div class="absolute bottom-0 left-0 w-20 h-20 border-b-[3px] border-l-[3px] border-gi-gold/30 m-4 rounded-bl-xl pointer-events-none"></div>
 
-                    <h3 class="font-serif text-2xl text-gi-parchment border-b-[3px] border-gi-gold/50 pb-3 mb-8 tracking-wide flex items-center gap-3">
-                        <i class="fa-solid fa-khanda text-gi-gold" aria-hidden="true"></i> Recommended Build
-                    </h3>
-
-                    <div class="space-y-8 font-sans">
-                        <div>
-                            <p class="text-gi-gold font-bold text-xs md:text-sm uppercase tracking-widest mb-3 opacity-90"><i class="fa-solid fa-gavel mr-2" aria-hidden="true"></i>Weapons</p>
-                            <div class="stat-row p-4 rounded-r-lg mb-3 flex flex-col sm:flex-row sm:items-center justify-between gap-2 shadow-md">
-                                <span class="text-gi-textLight font-semibold text-sm">Best in Slot (5★)</span>
-                                <span class="text-gi-goldBright font-bold sm:text-right text-lg">${char.bestWeapon}</span>
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 font-sans">
+                        
+                        <!-- Left Column: Equipment -->
+                        <div class="space-y-6">
+                            <h3 class="font-serif text-xl text-gi-parchment border-b-[2px] border-gi-gold/50 pb-2 tracking-wide flex items-center gap-2">
+                                <i class="fa-solid fa-khanda text-gi-gold"></i> Equipment
+                            </h3>
+                            <div>
+                                <p class="text-gi-gold font-bold text-xs uppercase tracking-widest mb-2 opacity-90"><i class="fa-solid fa-gavel mr-2"></i>Weapons</p>
+                                <div class="stat-row p-3 rounded-r-lg mb-2 flex flex-col justify-between gap-1 shadow-md">
+                                    <span class="text-gi-textLight font-semibold text-xs">Best in Slot</span>
+                                    <span class="text-gi-goldBright font-bold text-sm">${char.bestWeapon}</span>
+                                </div>
+                                <div class="stat-row p-3 rounded-r-lg flex flex-col justify-between gap-1 shadow-md opacity-90">
+                                    <span class="text-gi-textLight font-semibold text-xs">Alternative</span>
+                                    <span class="text-gi-parchment font-bold text-sm">${char.altWeapon}</span>
+                                </div>
                             </div>
-                            <div class="stat-row p-4 rounded-r-lg flex flex-col sm:flex-row sm:items-center justify-between gap-2 shadow-md opacity-90">
-                                <span class="text-gi-textLight font-semibold text-sm">F2P / Alternative</span>
-                                <span class="text-gi-parchment font-bold sm:text-right">${char.altWeapon}</span>
+                            
+                            <div>
+                                <p class="text-gi-gold font-bold text-xs uppercase tracking-widest mb-2 opacity-90"><i class="fa-solid fa-gem mr-2"></i>Artifacts</p>
+                                <div class="stat-row p-4 rounded-r-lg shadow-md">
+                                    <span class="text-white font-bold text-md tracking-wide">${char.artifactSet}</span>
+                                </div>
                             </div>
                         </div>
-                        <div>
-                            <p class="text-gi-gold font-bold text-xs md:text-sm uppercase tracking-widest mb-3 opacity-90"><i class="fa-solid fa-cube mr-2" aria-hidden="true"></i>Artifact Set</p>
-                            <div class="stat-row p-5 rounded-r-lg mb-5 shadow-md">
-                                <div class="flex items-center gap-3 mb-2">
-                                    <i class="fa-solid fa-gem text-gi-goldBright text-xl" aria-hidden="true"></i>
-                                    <span class="text-white font-bold text-lg md:text-xl tracking-wide">${char.artifactSet}</span>
+
+                        <!-- Right Column: Target Stats & Main Stats -->
+                        <div class="space-y-6">
+                            <h3 class="font-serif text-xl text-gi-parchment border-b-[2px] border-gi-gold/50 pb-2 tracking-wide flex items-center gap-2">
+                                <i class="fa-solid fa-chart-simple text-gi-gold"></i> Sub-Stat Priority
+                            </h3>
+                            
+                            <div class="stats-table-container">
+                                <table class="w-full text-left text-sm">
+                                    <tbody>
+                                        ${statsRows}
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="grid grid-cols-3 gap-3 mt-4">
+                                <div class="bg-black/40 border border-gi-gold/20 p-3 rounded-lg text-center shadow-inner hover:border-gi-gold/60 transition-colors">
+                                    <i class="fa-regular fa-hourglass-half text-gi-gold text-lg mb-1"></i>
+                                    <p class="text-[9px] text-gi-textLight uppercase tracking-widest mb-1">Sands</p>
+                                    <p class="text-xs text-gi-parchment font-bold">${char.sands.split('/')[0].trim()}</p>
+                                </div>
+                                <div class="bg-black/40 border border-gi-gold/20 p-3 rounded-lg text-center shadow-inner hover:border-gi-gold/60 transition-colors">
+                                    <i class="fa-solid fa-wine-glass text-gi-gold text-lg mb-1"></i>
+                                    <p class="text-[9px] text-gi-textLight uppercase tracking-widest mb-1">Goblet</p>
+                                    <p class="text-xs text-gi-parchment font-bold">${char.goblet.split('/')[0].trim()}</p>
+                                </div>
+                                <div class="bg-black/40 border border-gi-gold/20 p-3 rounded-lg text-center shadow-inner hover:border-gi-gold/60 transition-colors">
+                                    <i class="fa-solid fa-crown text-gi-gold text-lg mb-1"></i>
+                                    <p class="text-[9px] text-gi-textLight uppercase tracking-widest mb-1">Circlet</p>
+                                    <p class="text-xs text-gi-parchment font-bold">${char.circlet.split('/')[0].trim()}</p>
                                 </div>
                             </div>
-                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                                <div class="bg-black/30 border border-gi-gold/20 p-4 rounded-lg text-center shadow-inner hover:border-gi-gold/60 transition-colors">
-                                    <i class="fa-regular fa-hourglass-half text-gi-gold text-2xl mb-2 drop-shadow-md" aria-hidden="true"></i>
-                                    <p class="text-[10px] md:text-xs text-gi-textLight uppercase tracking-widest mb-1">Sands</p>
-                                    <p class="text-sm text-gi-parchment font-bold">${char.sands}</p>
-                                </div>
-                                <div class="bg-black/30 border border-gi-gold/20 p-4 rounded-lg text-center shadow-inner hover:border-gi-gold/60 transition-colors">
-                                    <i class="fa-solid fa-wine-glass text-gi-gold text-2xl mb-2 drop-shadow-md" aria-hidden="true"></i>
-                                    <p class="text-[10px] md:text-xs text-gi-textLight uppercase tracking-widest mb-1">Goblet</p>
-                                    <p class="text-sm text-gi-parchment font-bold">${char.goblet}</p>
-                                </div>
-                                <div class="bg-black/30 border border-gi-gold/20 p-4 rounded-lg text-center shadow-inner hover:border-gi-gold/60 transition-colors">
-                                    <i class="fa-solid fa-crown text-gi-gold text-2xl mb-2 drop-shadow-md" aria-hidden="true"></i>
-                                    <p class="text-[10px] md:text-xs text-gi-textLight uppercase tracking-widest mb-1">Circlet</p>
-                                    <p class="text-sm text-gi-parchment font-bold">${char.circlet}</p>
-                                </div>
-                            </div>
+
                         </div>
                     </div>
                 </div>
             `;
             modalOverlay.classList.add('active');
             document.body.style.overflow = 'hidden'; 
-            closeModalBtn.focus();
         }
 
         function closeModal() {
@@ -435,12 +680,8 @@
 
         filterTabs.forEach(tab => {
             tab.addEventListener('click', () => {
-                filterTabs.forEach(t => {
-                    t.classList.remove('active');
-                    t.setAttribute('aria-pressed', 'false');
-                });
+                filterTabs.forEach(t => t.classList.remove('active'));
                 tab.classList.add('active');
-                tab.setAttribute('aria-pressed', 'true');
                 currentFilter = tab.dataset.element;
                 renderCards();
             });
