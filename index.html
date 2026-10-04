@@ -338,242 +338,374 @@
     </div>
 
     <script>
+        
         const characters = [
             { 
                 id: 'furina', name: "Furina", element: "Hydro", elementIcon: "fa-water", elementColor: "#00bfff", rarity: 5, 
                 role: "Sub-DPS / Buffer", weaponType: "Sword", 
-                introGuide: "Furina is a 5-star Hydro Sword character in Genshin Impact. Learn about Furina's build, ascension materials, best weapons, best artifacts, talent priority, skills, teams, and our rating of the character in this build guide!",
+                introGuide: "Furina is a 5-star Hydro Sword character. Learn about her best build, F2P alternatives like Favonius Sword, best artifacts, and simplified constellations in this guide!",
                 title: "Endless Solo of Solitude", constellation: "Animula Choragi",
                 loreQuote: "The absolute focus of the stage, until the final applause sounds.",
                 talentPriority: "Elemental Skill > Elemental Burst > Normal Attack",
-                bestWeapon: "Splendor of Tranquil Waters", altWeapon: "Festering Desire (R5) / Fleuve Cendre Ferryman", 
+                bestWeapon: "Splendor of Tranquil Waters", altWeapon: "Favonius Sword / Fleuve Cendre Ferryman (F2P)", 
                 artifactSet: "Golden Troupe (4-Piece)", altArtifacts: "Tenacity of the Millelith (4-Piece) / 2pc HP% Mix", 
                 sands: "HP% / Energy Recharge", goblet: "HP% / Hydro DMG", circlet: "CRIT Rate / CRIT DMG", 
                 image: "https://img.game8.co/4595141/ec2f77c8abc1a78183a9e2930ac18664.png/show",
                 stats: [ { label: "Max HP", value: "40,000+" }, { label: "Energy Recharge", value: "160% - 200%" }, { label: "CRIT Rate", value: "70%+" }, { label: "CRIT DMG", value: "140%+" } ],
                 teams: [
-                    { label: "Premium Meta", members: ["Neuvillette", "Kaedehara Kazuha", "Baizhu"] },
-                    { label: "Quickbloom", members: ["Cyno", "Nahida", "Baizhu"] },
-                    { label: "F2P Friendly", members: ["Noelle", "Xingqiu", "Fischl"] }
+                    { label: "Meta Hypercarry", members: ["Neuvillette", "Kaedehara Kazuha", "Xilonen"] },
+                    { label: "Natlan Plunge", members: ["Mavuika", "Xianyun", "Citlali"] },
+                    { label: "F2P Friendly", members: ["Gaming", "Xingqiu", "Bennett"] }
                 ],
                 constellations: [
-                    { name: "Love Is a Rebellious Bird...", desc: "When using Let the People Rejoice, Furina gains 150 Fanfare. Fanfare limit is increased by 150." },
-                    { name: "A Woman Adapts Like Duckweed...", desc: "Fanfare gain from HP changes is increased by 250%. Each point over the limit increases Furina's Max HP." },
-                    { name: "My Secret Is Hidden Within Me...", desc: "Increases the Level of Let the People Rejoice by 3. Maximum upgrade level is 15." },
-                    { name: "They Know Not Life...", desc: "When Salon Members hit opponents or the Singer heals, Furina restores 4 Energy. This triggers once every 5s." },
-                    { name: "His Name I Now Know, It Is...!", desc: "Increases the Level of Salon Solitaire by 3. Maximum upgrade level is 15." },
-                    { name: "Hear Me — Let Us Raise...", desc: "Using her Elemental Skill grants 'Center of Attention' for 10s, infusing her Normal Attacks with Hydro and granting scaling buffs." }
+                    { name: "C1: Love Is a Rebellious Bird", desc: "Gives 150 Fanfare instantly upon using her Burst, and raises the maximum Fanfare limit by 150." },
+                    { name: "C2: A Woman Adapts Like Duckweed", desc: "Fanfare stacks build 2.5 times faster. Any extra stacks over the limit boost her Max HP." },
+                    { name: "C3: My Secret Is Hidden Within Me", desc: "Increases her Burst level by 3." },
+                    { name: "C4: They Know Not Life", desc: "Restores 4 Energy every 5 seconds when her pets attack or heal." },
+                    { name: "C5: His Name I Now Know, It Is...!", desc: "Increases her Skill level by 3." },
+                    { name: "C6: Hear Me — Let Us Raise", desc: "Using her Skill infuses her attacks with Hydro for 10 seconds, granting massive damage or party-wide healing." }
                 ]
             },
             { 
                 id: 'raiden', name: "Raiden Shogun", element: "Electro", elementIcon: "fa-bolt", elementColor: "#8a2be2", rarity: 5, 
                 role: "On-Field DPS / Battery", weaponType: "Polearm", 
-                introGuide: "Raiden Shogun is a 5-star Electro Polearm character in Genshin Impact. Learn about Raiden Shogun's build, ascension materials, best weapons, best artifacts, talent priority, skills, teams, and our rating of the character in this build guide!",
+                introGuide: "Raiden Shogun is a 5-star Electro Polearm character. Learn about her updated Overload teams, F2P weapon options like The Catch, and simplified constellations!",
                 title: "Plane of Euthymia", constellation: "Imperatrix Umbrosa",
                 loreQuote: "Her Excellency, the Almighty Narukami Ogosho, who promised the people of Inazuma an unchanging Eternity.",
                 talentPriority: "Elemental Burst > Elemental Skill > Normal Attack",
-                bestWeapon: "Engulfing Lightning", altWeapon: "The Catch (F2P) / Staff of Homa / Skyward Spine", 
+                bestWeapon: "Engulfing Lightning", altWeapon: "The Catch (F2P) / Staff of Homa", 
                 artifactSet: "Emblem of Severed Fate (4-Piece)", altArtifacts: "Gilded Dreams (4-Piece for Hyperbloom)", 
                 sands: "Energy Recharge / EM", goblet: "Electro DMG / EM", circlet: "CRIT / EM", 
                 image: "https://img.game8.co/3865328/f43ce6a0dea44d17bb8ee0eb0bfbbce8.png/show",
                 stats: [ { label: "Energy Recharge", value: "250%+" }, { label: "ATK", value: "1,600+" }, { label: "CRIT Rate", value: "60%+" }, { label: "CRIT DMG", value: "120%+" } ],
                 teams: [
-                    { label: "Hypercarry", members: ["Kujou Sara (C6)", "Kaedehara Kazuha", "Bennett"] },
-                    { label: "Rational", members: ["Xiangling", "Xingqiu", "Bennett"] },
-                    { label: "Natlan Overload", members: ["Chevreuse", "Mavuika", "Kujou Sara"] }
+                    { label: "Premium Overload", members: ["Mavuika", "Chevreuse", "Kujou Sara"] },
+                    { label: "Hyperbloom", members: ["Nahida", "Yelan", "Baizhu"] },
+                    { label: "F2P National", members: ["Xiangling", "Xingqiu", "Bennett"] }
                 ],
                 constellations: [
-                    { name: "Ominous Inscription", desc: "Chakra Desiderata gathers Resolve even faster. Electro characters' Bursts grant 80% more Resolve." },
-                    { name: "Steelbreaker", desc: "Secret Art: Musou Shinsetsu's attacks ignore 60% of opponents' DEF." },
-                    { name: "Shinkage Bygones", desc: "Increases the Level of Secret Art: Musou Shinsetsu by 3." },
-                    { name: "Pledge of Propriety", desc: "When the Musou Isshin state expires, all nearby party members (excluding Raiden) gain 30% bonus ATK for 10s." },
-                    { name: "Shogun's Descent", desc: "Increases the Level of Transcendence: Baleful Omen by 3." },
-                    { name: "Wishbearer", desc: "While in the Musou Isshin state, Raiden's Normal Attacks decrease all nearby party members' Elemental Burst CD by 1s (max 5 times)." }
+                    { name: "C1: Ominous Inscription", desc: "Her Burst builds damage-boosting Resolve stacks much faster, especially from Electro teammates." },
+                    { name: "C2: Steelbreaker", desc: "Her Burst attacks completely ignore 60% of the enemy's DEF." },
+                    { name: "C3: Shinkage Bygones", desc: "Increases her Burst level by 3." },
+                    { name: "C4: Pledge of Propriety", desc: "When her Burst ends, all teammates get a 30% ATK boost for 10 seconds." },
+                    { name: "C5: Shogun's Descent", desc: "Increases her Skill level by 3." },
+                    { name: "C6: Wishbearer", desc: "Hitting enemies during her Burst reduces all teammates' Burst cooldowns by up to 5 seconds." }
                 ]
             },
             { 
                 id: 'zhongli', name: "Zhongli", element: "Geo", elementIcon: "fa-mountain", elementColor: "#daa520", rarity: 5, 
                 role: "Shielder / Support", weaponType: "Polearm", 
-                introGuide: "Zhongli is a 5-star Geo Polearm character in Genshin Impact. Learn about Zhongli's build, ascension materials, best weapons, best artifacts, talent priority, skills, teams, and our rating of the character in this build guide!",
+                introGuide: "Zhongli is a 5-star Geo Polearm character. See how he fits into the Geo meta, his F2P shield weapon Black Tassel, and easy-to-read constellations.",
                 title: "Vago Mundo", constellation: "Lapis Dei",
                 loreQuote: "A mysterious expert contracted by the Wangsheng Funeral Parlor. Extremely knowledgeable in all things.",
                 talentPriority: "Elemental Skill > Elemental Burst > Normal Attack",
-                bestWeapon: "Black Tassel (Shield) / Staff of Homa", altWeapon: "Favonius Lance / Rightful Reward", 
-                artifactSet: "Tenacity of the Millelith (4-Piece)", altArtifacts: "Archaic Petra (4-Piece) / Noblesse Oblige", 
+                bestWeapon: "Black Tassel (F2P Shield) / Staff of Homa", altWeapon: "Favonius Lance / Rightful Reward", 
+                artifactSet: "Tenacity of the Millelith (4-Piece)", altArtifacts: "Archaic Petra (4-Piece)", 
                 sands: "HP%", goblet: "HP%", circlet: "HP%", 
                 image: "https://img.game8.co/3863434/98a9b6abc09d75128c4c3687da5d6500.png/show",
-                stats: [ { label: "Max HP", value: "40,000 - 50,000+" }, { label: "Energy Recharge", value: "130%+" }, { label: "CRIT Rate", value: "50%+" }, { label: "CRIT DMG", value: "100%+" } ],
+                stats: [ { label: "Max HP", value: "45,000 - 55,000+" }, { label: "Energy Recharge", value: "130%+" }, { label: "CRIT Rate", value: "50%+" }, { label: "CRIT DMG", value: "100%+" } ],
                 teams: [
-                    { label: "Premium Hu Tao", members: ["Hu Tao", "Yelan", "Xingqiu"] },
-                    { label: "Double Geo", members: ["Navia", "Xilonen", "Bennett"] },
-                    { label: "F2P Mono Geo", members: ["Ningguang", "Geo Traveler", "Bennett"] }
+                    { label: "Premium Geo", members: ["Navia", "Xilonen", "Chiori"] },
+                    { label: "Hu Tao Vape", members: ["Hu Tao", "Yelan", "Xingqiu"] },
+                    { label: "F2P Geo Core", members: ["Kachina", "Ningguang", "Bennett"] }
                 ],
                 constellations: [
-                    { name: "Rock, the Backbone of Earth", desc: "Increases the maximum number of Stone Steles created by Dominus Lapidis that may exist simultaneously to 2." },
-                    { name: "Stone, the Cradle of Jade", desc: "Planet Befall grants nearby characters on the field a Jade Shield when it descends." },
-                    { name: "Jade, Shimmering through Darkness", desc: "Increases the Level of Dominus Lapidis by 3." },
-                    { name: "Topaz, Unbreakable and Fearless", desc: "Increases Planet Befall's AoE by 20% and increases the duration of Planet Befall's Petrification effect by 2s." },
-                    { name: "Lapis, Herald of the Order", desc: "Increases the Level of Planet Befall by 3." },
-                    { name: "Chrysos, Bounty of Dominator", desc: "When the Jade Shield takes DMG, 40% of that incoming DMG is converted to HP for the current character." }
+                    { name: "C1: Rock, the Backbone of Earth", desc: "Allows him to place two Stone Pillars at the same time." },
+                    { name: "C2: Stone, the Cradle of Jade", desc: "Casting his Burst automatically gives a Jade Shield to nearby teammates (great in Co-Op)." },
+                    { name: "C3: Jade, Shimmering through Darkness", desc: "Increases his Skill level by 3." },
+                    { name: "C4: Topaz, Unbreakable and Fearless", desc: "Increases his Burst's area of effect and freezes enemies in stone for 2 extra seconds." },
+                    { name: "C5: Lapis, Herald of the Order", desc: "Increases his Burst level by 3." },
+                    { name: "C6: Chrysos, Bounty of Dominator", desc: "When the Jade Shield takes damage, it heals the active character for a portion of the damage blocked." }
                 ]
             },
             { 
                 id: 'nahida', name: "Nahida", element: "Dendro", elementIcon: "fa-leaf", elementColor: "#32cd32", rarity: 5, 
                 role: "Sub-DPS / Enabler", weaponType: "Catalyst", 
-                introGuide: "Nahida is a 5-star Dendro Catalyst character in Genshin Impact. Learn about Nahida's build, ascension materials, best weapons, best artifacts, talent priority, skills, teams, and our rating of the character in this build guide!",
+                introGuide: "Nahida is a 5-star Dendro Catalyst character. Discover her Burning/Burgeon synergies, F2P weapon Magic Guide, and check out her simplified constellations.",
                 title: "Physic of Purity", constellation: "Sapientia Oromasdis",
                 loreQuote: "A caged bird secluded within the confines of the Sanctuary of Surasthana who can only see the world in her dreams.",
                 talentPriority: "Elemental Skill > Elemental Burst > Normal Attack",
-                bestWeapon: "A Thousand Floating Dreams", altWeapon: "Kagura's Verity / Sacrificial Fragments", 
-                artifactSet: "Deepwood Memories (4-Piece)", altArtifacts: "Gilded Dreams (4-Piece) / 2pc EM Mix", 
+                bestWeapon: "A Thousand Floating Dreams", altWeapon: "Magic Guide (F2P) / Sacrificial Fragments", 
+                artifactSet: "Deepwood Memories (4-Piece)", altArtifacts: "Gilded Dreams (4-Piece)", 
                 sands: "Elemental Mastery", goblet: "EM / Dendro DMG", circlet: "EM / CRIT", 
                 image: "https://img.game8.co/3864067/a0e8aae1557152bb3c7f0f57ed0d829f.png/show",
                 stats: [ { label: "Elemental Mastery", value: "800 - 1,000" }, { label: "Energy Recharge", value: "130% - 150%" }, { label: "CRIT Rate", value: "50%+" }, { label: "CRIT DMG", value: "120%+" } ],
                 teams: [
-                    { label: "Premium Bloom", members: ["Nilou", "Sangonomiya Kokomi", "Alhaitham"] },
-                    { label: "Hyperbloom", members: ["Cyno", "Yelan", "Baizhu"] },
-                    { label: "F2P Hyperbloom", members: ["Kuki Shinobu", "Xingqiu", "Dendro Traveler"] }
+                    { label: "Premium Burning", members: ["Kinich", "Mavuika", "Emilie"] },
+                    { label: "Hyperbloom", members: ["Alhaitham", "Yelan", "Kuki Shinobu"] },
+                    { label: "F2P Burgeon", members: ["Thoma", "Xingqiu", "Yaoyao"] }
                 ],
                 constellations: [
-                    { name: "The Seed of Stored Knowledge", desc: "When calculating party elemental types for the Burst, adds 1 to the count of Pyro, Electro, and Hydro characters." },
-                    { name: "The Root of All Fullness", desc: "Opponents marked by the Seed of Skandha can take CRIT Hits from Bloom reactions, and Quicken reduces DEF by 30%." },
-                    { name: "The Shoot of Conscious Attainment", desc: "Increases the Level of All Schemes to Know by 3." },
-                    { name: "The Stem of Manifest Inference", desc: "When 1/2/3/4 or more opponents are linked by Seed of Skandha, Nahida's EM is increased by 100/120/140/160." },
-                    { name: "The Leaves of Enlightening Speech", desc: "Increases the Level of Illusory Heart by 3." },
-                    { name: "The Fruit of Reason's Culmination", desc: "After using Burst, Nahida's Normal/Charged Attacks trigger Karmic Oblivion on marked opponents, dealing massive Dendro DMG." }
+                    { name: "C1: The Seed of Stored Knowledge", desc: "Burst acts as if you have an extra Pyro, Electro, and Hydro teammate, maximizing all shrine buffs." },
+                    { name: "C2: The Root of All Fullness", desc: "Bloom/Hyperbloom/Burgeon reactions can now CRIT. Quicken reactions lower enemy DEF by 30%." },
+                    { name: "C3: The Shoot of Conscious Attainment", desc: "Increases her Skill level by 3." },
+                    { name: "C4: The Stem of Manifest Inference", desc: "Boosts Nahida's Elemental Mastery based on how many enemies are marked by her Skill." },
+                    { name: "C5: The Leaves of Enlightening Speech", desc: "Increases her Burst level by 3." },
+                    { name: "C6: The Fruit of Reason's Culmination", desc: "After using her Burst, her Normal/Charged attacks deal massive Dendro damage to marked enemies." }
                 ]
             },
             { 
                 id: 'neuvillette', name: "Neuvillette", element: "Hydro", elementIcon: "fa-water", elementColor: "#00bfff", rarity: 5, 
                 role: "On-Field DPS", weaponType: "Catalyst", 
-                introGuide: "Neuvillette is a 5-star Hydro Catalyst character in Genshin Impact. Learn about Neuvillette's build, ascension materials, best weapons, best artifacts, talent priority, skills, teams, and our rating of the character in this build guide!",
+                introGuide: "Neuvillette is a 5-star Hydro Catalyst character. See his meta updates, F2P alternative Prototype Amber, and easy-to-read constellations.",
                 title: "Ordainer of Inexorable Judgment", constellation: "Leviathan Judicator",
                 loreQuote: "The Iudex of Fontaine, known as the embodiment of justice and flawlessness.",
                 talentPriority: "Normal Attack > Elemental Burst > Elemental Skill",
-                bestWeapon: "Tome of the Eternal Flow", altWeapon: "Sacrificial Jade (BP) / Prototype Amber", 
-                artifactSet: "Marechaussee Hunter (4-Piece)", altArtifacts: "Heart of Depth (4-Piece) / Wanderer's Troupe", 
+                bestWeapon: "Tome of the Eternal Flow", altWeapon: "Prototype Amber (F2P) / Sacrificial Jade", 
+                artifactSet: "Marechaussee Hunter (4-Piece)", altArtifacts: "Heart of Depth (4-Piece)", 
                 sands: "HP%", goblet: "Hydro DMG / HP%", circlet: "CRIT DMG / CRIT Rate", 
                 image: "https://img.game8.co/3864870/8ab4c2bb6691abe12434e310a4a638a8.png/show",
-                stats: [ { label: "Max HP", value: "35,000+" }, { label: "Energy Recharge", value: "120% - 140%" }, { label: "CRIT Rate", value: "50% - 64%" }, { label: "CRIT DMG", value: "200%+" } ],
+                stats: [ { label: "Max HP", value: "35,000+" }, { label: "Energy Recharge", value: "120% - 130%" }, { label: "CRIT Rate", value: "50% - 64%" }, { label: "CRIT DMG", value: "200%+" } ],
                 teams: [
-                    { label: "Premium Hyper", members: ["Furina", "Kaedehara Kazuha", "Xilonen"] },
-                    { label: "Taser Output", members: ["Fischl", "Kaedehara Kazuha", "Zhongli"] },
-                    { label: "F2P Taser", members: ["Fischl", "Sucrose", "Layla"] }
+                    { label: "Premium Output", members: ["Furina", "Xilonen", "Kaedehara Kazuha"] },
+                    { label: "Taser / Shield", members: ["Fischl", "Kazuha", "Zhongli"] },
+                    { label: "F2P Friendly", members: ["Fischl", "Sucrose", "Layla"] }
                 ],
                 constellations: [
-                    { name: "Venerable Institution", desc: "When Neuvillette takes the field, he gains 1 stack of Past Draconic Glories. He also gains interruption resistance while casting Charged Attack." },
-                    { name: "Juridical Exhortation", desc: "Each stack of Past Draconic Glories increases Charged Attack CRIT DMG by 14%, up to a maximum of 42%." },
-                    { name: "Ancient Postulation", desc: "Increases the Level of Normal Attack: As Water Seeks Equilibrium by 3." },
-                    { name: "Crown of Commiseration", desc: "When Neuvillette is on the field and is healed, 1 Sourcewater Droplet will be generated (once every 4s)." },
-                    { name: "Axiomatic Judgment", desc: "Increases the Level of O Tears, I Shall Repay by 3." },
-                    { name: "Wrathful Recompense", desc: "When using Charged Attack: Equitable Judgment, he absorbs Droplets to extend the duration. Also fires additional currents dealing 10% Max HP as Hydro DMG." }
+                    { name: "C1: Venerable Institution", desc: "Gives 1 free stack for his passive damage boost and prevents him from being interrupted while using his Charged Attack." },
+                    { name: "C2: Juridical Exhortation", desc: "Each passive stack gives his Charged Attack an extra 14% CRIT DMG (up to 42%)." },
+                    { name: "C3: Ancient Postulation", desc: "Increases his Normal/Charged Attack level by 3." },
+                    { name: "C4: Crown of Commiseration", desc: "Generates an extra healing droplet every 4 seconds whenever he gets healed on the field." },
+                    { name: "C5: Axiomatic Judgment", desc: "Increases his Burst level by 3." },
+                    { name: "C6: Wrathful Recompense", desc: "His Charged Attack lasts longer by absorbing extra droplets and fires bonus high-damage water currents." }
                 ]
             },
             { 
                 id: 'hutao', name: "Hu Tao", element: "Pyro", elementIcon: "fa-fire", elementColor: "#ec4923", rarity: 5, 
                 role: "On-Field DPS", weaponType: "Polearm", 
-                introGuide: "Hu Tao is a 5-star Pyro Polearm character in Genshin Impact. Learn about Hu Tao's build, ascension materials, best weapons, best artifacts, talent priority, skills, teams, and our rating of the character in this build guide!",
+                introGuide: "Hu Tao is a 5-star Pyro Polearm character. Discover how her classic Vaporize and Plunge setups work with F2P weapons like White Tassel and Dragon's Bane.",
                 title: "Fragrance in Thaw", constellation: "Papilio Charontis",
                 loreQuote: "The 77th Director of the Wangsheng Funeral Parlor. She took over the business at a rather young age.",
                 talentPriority: "Normal Attack > Elemental Skill > Elemental Burst",
-                bestWeapon: "Staff of Homa", altWeapon: "Dragon's Bane / Ballad of the Fjords / White Tassel", 
+                bestWeapon: "Staff of Homa", altWeapon: "Dragon's Bane / White Tassel (F2P)", 
                 artifactSet: "Crimson Witch of Flames (4-Piece)", altArtifacts: "Shimenawa's Reminiscence (4-Piece)", 
                 sands: "EM / HP%", goblet: "Pyro DMG Bonus", circlet: "CRIT Rate / CRIT DMG", 
                 image: "https://img.game8.co/3863977/9d9c63d832868a4061172d90e3471267.png/show",
                 stats: [ { label: "Max HP", value: "30,000+" }, { label: "Elemental Mastery", value: "200 - 300" }, { label: "CRIT Rate", value: "70%+" }, { label: "CRIT DMG", value: "200%+" } ],
                 teams: [
-                    { label: "Premium Vape", members: ["Yelan", "Xingqiu", "Zhongli"] },
+                    { label: "Premium Vape", members: ["Yelan", "Xingqiu", "Xilonen"] },
                     { label: "Plunge Vape", members: ["Xianyun", "Furina", "Yelan"] },
                     { label: "F2P Vaporize", members: ["Xingqiu", "Sucrose", "Thoma"] }
                 ],
                 constellations: [
-                    { name: "Crimson Bouquet", desc: "While in a Paramita Papilio state activated by Guide to Afterlife, Hu Tao's Charge Attacks do not consume Stamina." },
-                    { name: "Ominous Rainfall", desc: "Increases the Blood Blossom DMG by an amount equal to 10% of Hu Tao's Max HP." },
-                    { name: "Lingering Carmine", desc: "Increases the Level of Guide to Afterlife by 3." },
-                    { name: "Garden of Eternal Rest", desc: "Upon defeating an enemy affected by Blood Blossom, all nearby allies (excluding Hu Tao) get 12% CRIT Rate for 15s." },
-                    { name: "Floral Incense", desc: "Increases the Level of Spirit Soother by 3." },
-                    { name: "Butterfly's Embrace", desc: "Triggers when HP drops below 25% or suffers a lethal strike: Hu Tao will not fall, gains 200% All RES, and 100% CRIT Rate for 10s." }
+                    { name: "C1: Crimson Bouquet", desc: "Her Charged Attacks consume absolutely zero stamina while her Skill is active." },
+                    { name: "C2: Ominous Rainfall", desc: "Increases the damage of her Blood Blossom burn effect based on her Max HP." },
+                    { name: "C3: Lingering Carmine", desc: "Increases her Skill level by 3." },
+                    { name: "C4: Garden of Eternal Rest", desc: "Defeating an enemy affected by Blood Blossom gives the rest of the team a 12% CRIT Rate boost." },
+                    { name: "C5: Floral Incense", desc: "Increases her Burst level by 3." },
+                    { name: "C6: Butterfly's Embrace", desc: "If her HP hits 1, she doesn't die. Instead, she gains massive resistances and 100% CRIT Rate for 10 seconds." }
                 ]
             },
             { 
                 id: 'kazuha', name: "Kaedehara Kazuha", element: "Anemo", elementIcon: "fa-wind", elementColor: "#20b2aa", rarity: 5, 
                 role: "Anemo Support / CC", weaponType: "Sword", 
-                introGuide: "Kaedehara Kazuha is a 5-star Anemo Sword character in Genshin Impact. Learn about Kazuha's build, ascension materials, best weapons, best artifacts, talent priority, skills, teams, and our rating of the character in this build guide!",
+                introGuide: "Kaedehara Kazuha is a 5-star Anemo Sword character. Explore his team recommendations, top F2P weapons like Iron Sting, and easy-to-read constellations.",
                 title: "Scarlet Leaves Pursue Wild Waves", constellation: "Acer Palmatum",
                 loreQuote: "A wandering samurai from Inazuma who is currently with Liyue's Crux Fleet. A gentle and carefree soul.",
                 talentPriority: "Elemental Burst > Elemental Skill > Normal Attack",
-                bestWeapon: "Freedom-Sworn", altWeapon: "Xiphos' Moonlight / Favonius Sword / Iron Sting", 
-                artifactSet: "Viridescent Venerer (4-Piece)", altArtifacts: "Instructor (4-Piece - Early Game) / 2pc EM Mix", 
+                bestWeapon: "Freedom-Sworn", altWeapon: "Iron Sting (F2P) / Xiphos' Moonlight", 
+                artifactSet: "Viridescent Venerer (4-Piece)", altArtifacts: "Instructor (4-Piece - Early Game)", 
                 sands: "Elemental Mastery", goblet: "Elemental Mastery", circlet: "Elemental Mastery", 
                 image: "https://img.game8.co/3865063/3ef6e7557173885d6e507edc601d32e8.png/show",
                 stats: [ { label: "Elemental Mastery", value: "800 - 1,000+" }, { label: "Energy Recharge", value: "160% - 200%" }, { label: "CRIT Rate", value: "25%+" }, { label: "ATK", value: "1,200+" } ],
                 teams: [
-                    { label: "Premium Freeze", members: ["Kamisato Ayaka", "Shenhe", "Sangonomiya Kokomi"] },
-                    { label: "International", members: ["Tartaglia", "Mavuika", "Bennett"] },
+                    { label: "Neuvillette Hyper", members: ["Neuvillette", "Furina", "Zhongli"] },
+                    { label: "Mavuika Overvape", members: ["Mavuika", "Yelan", "Xilonen"] },
                     { label: "F2P Aggravate", members: ["Keqing", "Fischl", "Yaoyao"] }
                 ],
                 constellations: [
-                    { name: "Scarlet Hills", desc: "Decreases Chihayaburu's CD by 10%. Using Kazuha Slash resets the CD of Chihayaburu." },
-                    { name: "Yamaarashi Tailwind", desc: "The Kazuha Slash field increases Kazuha's EM by 200, and increases the EM of characters within the field by 200." },
-                    { name: "Maple Monogatari", desc: "Increases the Level of Chihayaburu by 3." },
-                    { name: "Oozora Genpou", desc: "When Kazuha's Energy is lower than 45, using his Skill restores Energy. Gliding also restores Energy." },
-                    { name: "Wisdom of Bansei", desc: "Increases the Level of Kazuha Slash by 3." },
-                    { name: "Crimson Momiji", desc: "After using his Skill or Burst, Kazuha gains an Anemo Infusion for 5s. Each point of EM increases Normal/Charged/Plunging Attack DMG by 0.2%." }
+                    { name: "C1: Scarlet Hills", desc: "Lowers his Skill cooldown by 10%. Using his Burst instantly resets his Skill cooldown." },
+                    { name: "C2: Yamaarashi Tailwind", desc: "His Burst grants 200 Elemental Mastery to himself and any character standing inside the field." },
+                    { name: "C3: Maple Monogatari", desc: "Increases his Skill level by 3." },
+                    { name: "C4: Oozora Genpou", desc: "He regenerates extra Energy from his Skill and from gliding when his Energy is below 45." },
+                    { name: "C5: Wisdom of Bansei", desc: "Increases his Burst level by 3." },
+                    { name: "C6: Crimson Momiji", desc: "Using his Skill or Burst infuses his attacks with Anemo. His attack damage is massively boosted based on his EM." }
                 ]
             },
             { 
                 id: 'ayaka', name: "Kamisato Ayaka", element: "Cryo", elementIcon: "fa-snowflake", elementColor: "#4682b4", rarity: 5, 
                 role: "Freeze DPS", weaponType: "Sword", 
-                introGuide: "Kamisato Ayaka is a 5-star Cryo Sword character in Genshin Impact. Learn about Ayaka's build, ascension materials, best weapons, best artifacts, talent priority, skills, teams, and our rating of the character in this build guide!",
+                introGuide: "Kamisato Ayaka is a 5-star Cryo Sword character. See how she pairs with Freeze teams, F2P weapon Amenoma Kageuchi, and simplified constellations.",
                 title: "Frostflake Heron", constellation: "Grus Nivis",
                 loreQuote: "Daughter of the Yashiro Commission's Kamisato Clan from Inazuma. Dignified and elegant, wise and strong.",
                 talentPriority: "Elemental Burst > Normal Attack > Elemental Skill",
-                bestWeapon: "Mistsplitter Reforged", altWeapon: "Primordial Jade Cutter / Amenoma Kageuchi", 
+                bestWeapon: "Mistsplitter Reforged", altWeapon: "Amenoma Kageuchi (F2P) / Finale of the Deep", 
                 artifactSet: "Blizzard Strayer (4-Piece)", altArtifacts: "2pc Blizzard / 2pc ATK% Mix", 
                 sands: "ATK%", goblet: "Cryo DMG Bonus", circlet: "CRIT DMG", 
                 image: "https://img.game8.co/3864034/5712cd2f340a86cab11ddb50eea61676.png/show",
                 stats: [ { label: "ATK", value: "2,000+" }, { label: "Energy Recharge", value: "130% - 140%" }, { label: "CRIT Rate", value: "35% - 45%" }, { label: "CRIT DMG", value: "200%+" } ],
                 teams: [
-                    { label: "Premium Freeze", members: ["Shenhe", "Kaedehara Kazuha", "Sangonomiya Kokomi"] },
+                    { label: "Premium Freeze", members: ["Odette", "Vodyanitsa", "Shenhe"] },
                     { label: "Standard Freeze", members: ["Furina", "Charlotte", "Kaedehara Kazuha"] },
                     { label: "F2P Freeze", members: ["Rosaria", "Sucrose", "Barbara"] }
                 ],
                 constellations: [
-                    { name: "Snowswept Sakura", desc: "When Ayaka's Normal or Charged Attacks deal Cryo DMG, there is a 50% chance of decreasing the CD of Kamisato Art: Hyouka by 0.3s." },
-                    { name: "Blizzard Blade Seki no To", desc: "When casting Kamisato Art: Soumetsu, unleashes 2 smaller Frostflake Seki no To, each dealing 20% of the original DMG." },
-                    { name: "Frostbloom Kamifubuki", desc: "Increases the Level of Kamisato Art: Soumetsu by 3." },
-                    { name: "Ebb and Flow", desc: "Opponents damaged by Kamisato Art: Soumetsu's Frostflake Seki no To will have their DEF decreased by 30% for 6s." },
-                    { name: "Blossom Cloud Irutsuki", desc: "Increases the Level of Kamisato Art: Hyouka by 3." },
-                    { name: "Dance of Suigetsu", desc: "Ayaka gains Usurahi Butou every 10s, increasing her Charged Attack DMG by 298%. Cleared 0.5s after her Charged Attack hits." }
+                    { name: "C1: Snowswept Sakura", desc: "Her Normal and Charged attacks have a 50% chance to slightly reduce her Skill cooldown." },
+                    { name: "C2: Blizzard Blade Seki no To", desc: "Her Burst fires two additional smaller snowstorms that deal 20% of the main storm's damage." },
+                    { name: "C3: Frostbloom Kamifubuki", desc: "Increases her Burst level by 3." },
+                    { name: "C4: Ebb and Flow", desc: "Enemies hit by her Burst have their DEF reduced by 30% for 6 seconds." },
+                    { name: "C5: Blossom Cloud Irutsuki", desc: "Increases her Skill level by 3." },
+                    { name: "C6: Dance of Suigetsu", desc: "Every 10 seconds, her next Charged Attack deals nearly triple the damage." }
                 ]
             },
             { 
                 id: 'bennett', name: "Bennett", element: "Pyro", elementIcon: "fa-fire", elementColor: "#ec4923", rarity: 4, 
                 role: "Healer / Buffer", weaponType: "Sword", 
-                introGuide: "Bennett is a 4-star Pyro Sword character in Genshin Impact. Learn about Bennett's build, ascension materials, best weapons, best artifacts, talent priority, skills, teams, and our rating of the character in this build guide!",
+                introGuide: "Bennett is a 4-star Pyro Sword character. Check out his role in team buffs, top F2P weapons like Sapwood Blade, and easy-to-read constellations.",
                 title: "Trial by Fire", constellation: "Rota Calamitas",
                 loreQuote: "A righteous and good-natured adventurer from Mondstadt who's unfortunately extremely unlucky.",
                 talentPriority: "Elemental Burst > Elemental Skill > Normal Attack",
-                bestWeapon: "Aquila Favonia / Mistsplitter", altWeapon: "Skyward Blade / Sapwood Blade (F2P)", 
+                bestWeapon: "Aquila Favonia / Mistsplitter", altWeapon: "Sapwood Blade (F2P) / Favonius Sword", 
                 artifactSet: "Noblesse Oblige (4-Piece)", altArtifacts: "Instructor (4-Piece) / Maiden Beloved", 
                 sands: "Energy Recharge / HP%", goblet: "HP%", circlet: "Healing Bonus / HP%", 
                 image: "https://img.game8.co/3863971/7212b295607f923dad43ee5cc45175f9.png/show",
                 stats: [ { label: "Base ATK", value: "700 - 800+" }, { label: "Energy Recharge", value: "200% - 250%+" }, { label: "Max HP", value: "25,000+" }, { label: "Healing Bonus", value: "35.9%+" } ],
                 teams: [
-                    { label: "Rational", members: ["Raiden Shogun", "Xiangling", "Xingqiu"] },
+                    { label: "Natlan Core", members: ["Mavuika", "Citlali", "Varesa"] },
                     { label: "International", members: ["Tartaglia", "Kaedehara Kazuha", "Xiangling"] },
                     { label: "F2P National", members: ["Xiangling", "Xingqiu", "Sucrose"] }
                 ],
                 constellations: [
-                    { name: "Grand Expectation", desc: "Fantastic Voyage's ATK increase no longer has an HP restriction, and gains an additional 20% of Bennett's Base ATK." },
-                    { name: "Impasse Conqueror", desc: "When Bennett's HP falls below 70%, his Energy Recharge is increased by 30%." },
-                    { name: "Unstoppable Fervor", desc: "Increases the Level of Passion Overload by 3." },
-                    { name: "Unexpected Odyssey", desc: "Using a Normal Attack when executing the second attack of Passion Overload's Charge Level 1 allows an additional attack." },
-                    { name: "True Explorer", desc: "Increases the Level of Fantastic Voyage by 3." },
-                    { name: "Fire Ventures with Me", desc: "Sword, Claymore, or Polearm-wielding characters inside Fantastic Voyage's radius gain a 15% Pyro DMG Bonus and are infused with Pyro." }
+                    { name: "C1: Grand Expectation", desc: "His Burst's ATK buff no longer requires teammates to be above 70% HP, and the buff itself is stronger." },
+                    { name: "C2: Impasse Conqueror", desc: "His Energy Recharge increases by 30% when his HP falls below 70%." },
+                    { name: "C3: Unstoppable Fervor", desc: "Increases his Skill level by 3." },
+                    { name: "C4: Unexpected Odyssey", desc: "Allows him to perform an extra follow-up attack during his Level 1 Charged Skill." },
+                    { name: "C5: True Explorer", desc: "Increases his Burst level by 3." },
+                    { name: "C6: Fire Ventures with Me", desc: "Gives melee characters standing in his Burst a 15% Pyro DMG bonus and infuses their attacks with Pyro." }
+                ]
+            },
+            { 
+                id: 'odette', name: "Odette", element: "Cryo", elementIcon: "fa-snowflake", elementColor: "#4682b4", rarity: 5, 
+                role: "Sub-DPS / Buffer", weaponType: "Sword", 
+                introGuide: "Odette is a 5-star Cryo Sword character. A famed Snezhnayan ballerina, she excels as an off-field Sub-DPS who deeply buffs Stellar-Conduct and Swirl reactions using her Marvelous Splendor stacks.",
+                title: "Famed Snezhnayan Ballerina", constellation: "Cygnus",
+                loreQuote: "A famed Snezhnayan ballerina who blossoms against the frozen landscape with a beauty as sharp as frost. Every performance demands a tribute of ice.",
+                talentPriority: "Elemental Skill > Elemental Burst > Normal Attack",
+                bestWeapon: "Whitelake Frostfeather", altWeapon: "Finale of the Deep (F2P) / Favonius Sword", 
+                artifactSet: "Heart of the Furnace (4-Piece)", altArtifacts: "Disenchantment in Deep Shadow (4-Piece) / Noblesse Oblige", 
+                sands: "ATK% / Energy Recharge", goblet: "Cryo DMG Bonus", circlet: "CRIT Rate / CRIT DMG", 
+                image: "https://img.game8.co/4576453/7fc1b2a7e323171796607d73d2e77324.png/show",
+                stats: [ { label: "ATK", value: "2,200 - 2,500+" }, { label: "Energy Recharge", value: "130% - 150%" }, { label: "CRIT Rate", value: "65%+" }, { label: "CRIT DMG", value: "140%+" } ],
+                teams: [
+                    { label: "Stellar-Conduct", members: ["Sandrone", "Yae Miko", "Qiqi"] },
+                    { label: "Stellar Swirl", members: ["Vesna", "Vodyanitsa", "Traveler (Cryo)"] },
+                    { label: "F2P Friendly", members: ["Cryo Traveler", "Sucrose", "Diona"] }
+                ],
+                constellations: [
+                    { name: "C1: Swan's First Position", desc: "Increases her maximum stack limit by 2. Stacks drain faster to grant team buffs more quickly." },
+                    { name: "C2: Pas de Deux of Frost", desc: "When triggering Stellar-Conduct or Swirl, the team gains 25% Cryo DMG for 12 seconds." },
+                    { name: "C3: Pirouette of the Pale Moon", desc: "Increases her Skill level by 3." },
+                    { name: "C4: Curtain Call: Winter's Grasp", desc: "Hitting enemies with her Burst lowers their Cryo and Electro resistance by 20% for 8 seconds." },
+                    { name: "C5: Ovation of the Ice Queen", desc: "Increases her Burst level by 3." },
+                    { name: "C6: Grand Jeté of the Abyss", desc: "Her special Skill deals massive ATK-scaling bonus damage and ignores 40% of enemy DEF at max stacks." }
+                ]
+            },
+            { 
+                id: 'vesna', name: "Vesna", element: "Anemo", elementIcon: "fa-wind", elementColor: "#20b2aa", rarity: 5, 
+                role: "On-Field DPS", weaponType: "Sword", 
+                introGuide: "Vesna is a 5-star Anemo Sword character. She specializes in dealing constant Anemo and Stellar Swirl damage while supported by her team and utilizing F2P craftable swords like Iron Sting.",
+                title: "Snowland Fae", constellation: "Fata Nivis",
+                loreQuote: "One of the Snowland Fae in the land of Snezhnaya and a member of the Tsaritsa's royal army.",
+                talentPriority: "Normal Attack > Elemental Skill > Elemental Burst",
+                bestWeapon: "Beyond the Chrysalis", altWeapon: "Iron Sting (F2P) / Mistsplitter Reforged", 
+                artifactSet: "Scarlet Proof (4-Piece)", altArtifacts: "Viridescent Venerer (4-Piece)", 
+                sands: "ATK% / Elemental Mastery", goblet: "Anemo DMG Bonus", circlet: "CRIT Rate / CRIT DMG", 
+                image: "https://img.game8.co/4609741/737f4af76591d47a281128da8b9cee15.png/show",
+                stats: [ { label: "ATK", value: "1,900 - 2,100+" }, { label: "Elemental Mastery", value: "250 - 400" }, { label: "CRIT Rate", value: "70%+" }, { label: "CRIT DMG", value: "180%+" } ],
+                teams: [
+                    { label: "Premium Stellar Swirl", members: ["Vodyanitsa", "Odette", "Traveler (Cryo)"] },
+                    { label: "Double Cryo Core", members: ["Shenhe", "Layla", "Vodyanitsa"] },
+                    { label: "F2P Swirl", members: ["Sucrose", "Rosaria", "Barbara"] }
+                ],
+                constellations: [
+                    { name: "C1: Gale of the First Flurry", desc: "Instantly generates 2 Sword stacks and gives a 15% Anemo DMG boost upon entering combat stance." },
+                    { name: "C2: Blades of the North Wind", desc: "Spirit Blades from her Skill deal 40% more damage based on her Elemental Mastery." },
+                    { name: "C3: Whispers of the Fae", desc: "Increases her Skill level by 3." },
+                    { name: "C4: Eye of the Snowstorm", desc: "Triggering a Stellar Swirl restores 4 Energy to the team (once every 3 seconds)." },
+                    { name: "C5: Tsaritsa's Vanguard", desc: "Increases her Burst level by 3." },
+                    { name: "C6: Dance of the Winter Zephyr", desc: "Normal Attacks have a 50% chance to summon a giant Spirit Blade dealing 300% bonus Anemo damage." }
+                ]
+            },
+            { 
+                id: 'vodynitsa', name: "Vodyanitsa", element: "Hydro", elementIcon: "fa-water", elementColor: "#00bfff", rarity: 5, 
+                role: "Buffer / Healer", weaponType: "Catalyst", 
+                introGuide: "Vodyanitsa is a 5-star Hydro Catalyst character. She provides healing, Hydro application, and Stellar Swirl DMG buffs, utilizing F2P catalysts like Thrilling Tales of Dragon Slayers or Prototype Amber.",
+                title: "Fleet of Form, Sweet of Song", constellation: "Sirenidae",
+                loreQuote: "Leads a song of the Water Imps which lures its listeners to their doom.",
+                talentPriority: "Elemental Skill > Elemental Burst > Normal Attack",
+                bestWeapon: "Hymn of the Maelstrom", altWeapon: "Prototype Amber / Thrilling Tales of Dragon Slayers (F2P)", 
+                artifactSet: "Tenacity of the Millelith (4-Piece)", altArtifacts: "Ocean-Hued Clam (4-Piece)", 
+                sands: "HP% / Energy Recharge", goblet: "HP%", circlet: "Healing Bonus / HP%", 
+                image: "https://img.game8.co/4616629/4461fb30b865b7677ae4ca3a3917e462.png/show",
+                stats: [ { label: "Max HP", value: "45,000 - 55,000+" }, { label: "Energy Recharge", value: "160% - 180%" }, { label: "Healing Bonus", value: "35.9%+" }, { label: "Elemental Mastery", value: "150+" } ],
+                teams: [
+                    { label: "Premium SSW", members: ["Vesna", "Odette", "Mizuki"] },
+                    { label: "Pure Freeze", members: ["Skirk", "Escoffier", "Shenhe"] },
+                    { label: "F2P Flex", members: ["Kaeya", "Rosaria", "Sucrose"] }
+                ],
+                constellations: [
+                    { name: "C1: Ripple of the Deep", desc: "Increases healing output by 30% for teammates whose HP drops below 50%." },
+                    { name: "C2: Abyssal Chanty", desc: "Extends Skill duration and grants a 60% CRIT DMG bonus to Swirl, Hydro, and Cryo attacks." },
+                    { name: "C3: Song of the Water Imps", desc: "Increases her Skill level by 3." },
+                    { name: "C4: Tides of Mercy", desc: "Healing teammates slightly reduces her Burst cooldown." },
+                    { name: "C5: Lullaby of the Frozen Sea", desc: "Increases her Burst level by 3." },
+                    { name: "C6: Siren's Final Requiem", desc: "Overhealing past max HP is converted into a flat team-wide damage bonus." }
+                ]
+            },
+            { 
+                id: 'clorinde', name: "Clorinde", element: "Electro", elementIcon: "fa-bolt", elementColor: "#8a2be2", rarity: 5, 
+                role: "On-Field DPS", weaponType: "Sword", 
+                introGuide: "Clorinde is a 5-star Electro Sword character. Her gun-and-lunge gameplay leverages the Bond of Life mechanic, pairing with F2P options like Finale of the Deep.",
+                title: "Candlebearer, Hunter", constellation: "Rapperia",
+                loreQuote: "A Champion Duelist of Fontaine whose unmatched skills with a blade are known throughout the nation.",
+                talentPriority: "Elemental Skill > Normal Attack > Elemental Burst",
+                bestWeapon: "Absolution", altWeapon: "Finale of the Deep (F2P) / Mistsplitter Reforged", 
+                artifactSet: "Fragment of Harmonic Whimsy (4-Piece)", altArtifacts: "Thundering Fury (4-Piece) / Gladiator's Finale (4-Piece)", 
+                sands: "ATK%", goblet: "Electro DMG Bonus", circlet: "CRIT Rate / CRIT DMG", 
+                image: "https://img.game8.co/3903867/e679c53516e4efe81bf1a65c39029ec9.png/show",
+                stats: [ { label: "ATK", value: "2,000 - 2,300" }, { label: "Energy Recharge", value: "110% - 130%" }, { label: "CRIT Rate", value: "70% - 85%" }, { label: "CRIT DMG", value: "160%+" } ],
+                teams: [
+                    { label: "Aggravate", members: ["Fischl", "Nahida", "Zhongli"] },
+                    { label: "Quickbloom", members: ["Furina", "Nahida", "Baizhu"] },
+                    { label: "Chevreuse Overload", members: ["Chevreuse", "Xiangling", "Thoma"] }
+                ],
+                constellations: [
+                    { name: "C1: Pass the Candle's Shadow", desc: "Normal Attacks summon a phantom executing a follow-up attack for 30% Electro DMG." },
+                    { name: "C2: Perils of the Long Night", desc: "Her passive buff is 50% stronger and grants interruption resistance at max stacks." },
+                    { name: "C3: Oath of Daylight", desc: "Increases her Skill level by 3." },
+                    { name: "C4: Enshrine Tears, Life, and Love", desc: "Burst deals up to 200% more damage based on current Bond of Life." },
+                    { name: "C5: Hold Dawn's Coming as My Vow", desc: "Increases her Burst level by 3." },
+                    { name: "C6: Hope Never Extinguish", desc: "Grants 10% CRIT Rate, 70% CRIT DMG, full interruption resistance, and 80% damage reduction." }
+                ]
+            },
+            { 
+                id: 'varesa', name: "Varesa", element: "Electro", elementIcon: "fa-bolt", elementColor: "#8a2be2", rarity: 5, 
+                role: "Plunge DPS", weaponType: "Catalyst", 
+                introGuide: "Varesa is a 5-star Electro Catalyst character from Natlan who explosively dispatches enemies with Plunge Attacks during her Nightsoul state, using F2P catalysts like Ring of Yaxche.",
+                title: "Champion Luchador", constellation: "Luchador",
+                loreQuote: "Gotta try... to do battle like the greatest champion luchadors do!",
+                talentPriority: "Elemental Skill > Elemental Burst > Normal Attack",
+                bestWeapon: "Kagura's Verity", altWeapon: "Ring of Yaxche (F2P) / The Widsith", 
+                artifactSet: "Obsidian Codex (4-Piece)", altArtifacts: "Thundering Fury (4-Piece)", 
+                sands: "ATK%", goblet: "Electro DMG Bonus", circlet: "CRIT Rate / CRIT DMG", 
+                image: "https://img.game8.co/4617279/2fa0d4959c5dc6558e044687fab141d2.png/show",
+                stats: [ { label: "ATK", value: "1,900 - 2,200+" }, { label: "Energy Recharge", value: "120% - 150%" }, { label: "CRIT Rate", value: "50% - 70%" }, { label: "CRIT DMG", value: "180% - 220%" } ],
+                teams: [
+                    { label: "Premium Plunge", members: ["Xianyun", "Furina", "Iansan"] },
+                    { label: "Natlan Overload", members: ["Chevreuse", "Iansan", "Xiangling"] },
+                    { label: "F2P Friendly", members: ["Bennett", "Traveler (Pyro)", "Fischl"] }
+                ],
+                constellations: [
+                    { name: "C1: Ring Entrance Flare", desc: "Generates 30% more Nightsoul energy for smoother Plunging Attack combos." },
+                    { name: "C2: Heavyweight Champion", desc: "Increases Plunging Attack damage by 50% against enemies affected by Pyro or Electro." },
+                    { name: "C3: Soaring Luchador", desc: "Increases her Skill level by 3." },
+                    { name: "C4: Crowd's Roaring Approval", desc: "Plunge Attacks restore up to 15 Energy for her Burst." },
+                    { name: "C5: Unbreakable Will", desc: "Increases her Burst level by 3." },
+                    { name: "C6: Grand Finale: Meteoric Slam", desc: "Nightsoul Plunge shockwaves deal 200% bonus Electro damage and ignore 25% DEF." }
                 ]
             }
         ];
+
 
         const hexToRgb = (hex) => {
             const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
