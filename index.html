@@ -3,22 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Genshin Impact | Best Character Builds & Guides</title>
+    <title>Genshin Impact | Character Builds & Guides</title>
     
-    <!-- SEO Meta Tags -->
     <meta name="description" content="Discover the best Genshin Impact character builds, optimal weapons, artifact sets, and team recommendations for every element. F2P and 5-star setups.">
     <meta name="keywords" content="Genshin Impact, Character Builds, Artifacts, Weapons, Guides, F2P, Genshin Tier List">
     
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- FontAwesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    
-    <!-- Google Fonts: Serif for Headings, Sans for Body -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
 
     <script>
         tailwind.config = {
@@ -60,22 +54,19 @@
             overflow-x: hidden;
         }
 
-        /* --- Genshin Live Background --- */
+        /* --- Live Background --- */
         .live-bg {
             position: fixed;
-            inset: -50%; /* extend to allow panning */
+            inset: -50%;
             z-index: -1;
-            background-color: #0f111a; /* Deeper space background */
+            background-color: #0f111a; 
             background-image: 
                 radial-gradient(circle at 25% 40%, rgba(30, 45, 75, 0.6), transparent 40%),
                 radial-gradient(circle at 75% 60%, rgba(45, 30, 65, 0.5), transparent 40%),
                 radial-gradient(circle at 50% 90%, rgba(20, 35, 55, 0.8), transparent 50%);
         }
         
-        @keyframes starFloat { 
-            0% { transform: translateY(0) rotate(0deg); } 
-            100% { transform: translateY(-500px) rotate(5deg); } 
-        }
+        @keyframes starFloat { 0% { transform: translateY(0) rotate(0deg); } 100% { transform: translateY(-500px) rotate(5deg); } }
         @keyframes pulseGlow { 0%, 100% { opacity: 0.3; } 50% { opacity: 0.8; } }
 
         .live-bg::before, .live-bg::after {
@@ -125,35 +116,12 @@
             clip-path: polygon(8% 0, 100% 0, 92% 100%, 0 100%);
             padding: 8px 24px;
         }
-        .filter-tab:hover, .filter-tab:focus-visible {
-            background: rgba(204, 165, 116, 0.2);
-            border-color: #cca574;
-            transform: translateY(-2px);
-            outline: none;
-        }
-        .filter-tab.active {
-            background: #ece5d8;
-            color: #3b4255;
-            border-color: #e6c875;
-            font-weight: bold;
-        }
+        .filter-tab:hover, .filter-tab:focus-visible { background: rgba(204, 165, 116, 0.2); border-color: #cca574; transform: translateY(-2px); }
+        .filter-tab.active { background: #ece5d8; color: #3b4255; border-color: #e6c875; font-weight: bold; }
 
-        .char-img-container {
-            aspect-ratio: 3/4;
-            width: 100%;
-            overflow: hidden;
-            position: relative;
-        }
-        
-        .char-img-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: 75% 15%; 
-            transition: transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
-        }
+        .char-img-container { aspect-ratio: 3/4; width: 100%; overflow: hidden; position: relative; }
+        .char-img-container img { width: 100%; height: 100%; object-fit: cover; object-position: 75% 15%; transition: transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1); }
 
-        /* Character Card - Element Dynamic Outlines */
         .char-card {
             transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
             position: relative;
@@ -162,132 +130,119 @@
         }
         
         .char-card::after {
-            content: '';
-            position: absolute;
-            inset: 3px;
-            border: 1px solid rgba(var(--elem-rgb), 0.2);
-            border-radius: inherit;
-            pointer-events: none;
-            transition: all 0.4s ease;
-            z-index: 20;
+            content: ''; position: absolute; inset: 3px; border: 1px solid rgba(var(--elem-rgb), 0.2); border-radius: inherit; pointer-events: none; transition: all 0.4s ease; z-index: 20;
         }
 
         .char-card:hover, .char-card:focus-visible {
             transform: scale(1.05) translateY(-5px);
-            box-shadow: 
-                inset 0 0 30px rgba(var(--elem-rgb), 0.4), 
-                0 0 20px rgba(var(--elem-rgb), 0.4),
-                0 15px 30px rgba(0,0,0,0.7);
-            border-color: rgba(var(--elem-rgb), 0.9);
-            z-index: 10;
+            box-shadow: inset 0 0 30px rgba(var(--elem-rgb), 0.4), 0 0 20px rgba(var(--elem-rgb), 0.4), 0 15px 30px rgba(0,0,0,0.7);
+            border-color: rgba(var(--elem-rgb), 0.9); z-index: 10;
+        }
+        
+        .char-card:hover::after, .char-card:focus-visible::after { border-color: rgba(var(--elem-rgb), 1); inset: 4px; }
+        .char-card:hover .char-img-container img { transform: scale(1.1); }
+
+        /* --- Minimalist Stripe Nav --- */
+        .minimal-nav-container {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            padding: 1rem 0 0.5rem 0;
+            border-bottom: 2px solid rgba(255,255,255,0.1);
+            margin: 0 1.5rem;
+            overflow-x: auto;
+            scrollbar-width: none; /* Firefox */
+        }
+        .minimal-nav-container::-webkit-scrollbar { display: none; }
+        
+        .minimal-tab {
+            position: relative;
+            background: transparent;
+            border: none;
+            color: rgba(227, 216, 200, 0.6);
+            font-family: 'Nunito', sans-serif;
+            font-weight: 700;
+            font-size: 0.95rem;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
             outline: none;
         }
-        
-        .char-card:hover::after, .char-card:focus-visible::after {
-            border-color: rgba(var(--elem-rgb), 1);
-            inset: 4px;
-        }
-        .char-card:hover .char-img-container img {
-            transform: scale(1.1);
-        }
 
-        .stat-row {
-            background: linear-gradient(90deg, rgba(40,46,60,0.9) 0%, rgba(59,66,85,0.4) 100%);
-            border-left: 4px solid #cca574;
-            transition: transform 0.2s;
-        }
-        .stat-row:hover {
-            transform: translateX(5px);
-            background: linear-gradient(90deg, rgba(59,66,85,0.9) 0%, rgba(74,83,107,0.4) 100%);
-        }
-
-        /* Hover Interactive Stats Table */
-        .stats-table-container {
-            position: relative;
-            overflow: hidden;
-            border-radius: 0.5rem;
-            background: rgba(0,0,0,0.4);
-            border: 1px solid rgba(204,165,116,0.3);
-            transition: all 0.4s ease;
-        }
-        .stats-table-container:hover {
-            border-color: rgba(230,200,117,0.8);
-            box-shadow: 0 0 20px rgba(204,165,116,0.2);
-        }
-        
-        .stat-tr {
-            transition: all 0.3s ease;
-            position: relative;
-            z-index: 1;
-        }
-        .stat-tr::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(90deg, transparent, rgba(230,200,117,0.15), transparent);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            z-index: -1;
-        }
-        .stat-tr:hover {
-            transform: scale(1.02);
-        }
-        .stat-tr:hover::before {
-            opacity: 1;
-        }
-        .stat-tr:hover td {
+        .minimal-tab:hover {
             color: #fff;
         }
-        .stat-tr:hover .stat-value {
-            color: #e6c875;
-            text-shadow: 0 0 10px rgba(230,200,117,0.5);
-            transform: scale(1.05);
+
+        .minimal-tab.active {
+            color: var(--elem-color);
+            text-shadow: 0 0 8px rgba(var(--elem-rgb), 0.6);
         }
 
-        ::-webkit-scrollbar { width: 6px; }
+        .minimal-tab::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--elem-color);
+            transform: scaleX(0);
+            transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            transform-origin: center;
+            box-shadow: 0 -2px 10px var(--elem-color);
+        }
+
+        .minimal-tab.active::after {
+            transform: scaleX(1);
+        }
+
+        /* --- Panel Components --- */
+        .modal-panel-content { display: none; animation: fadeSlideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        .modal-panel-content.active { display: block; }
+
+        .stat-row { background: linear-gradient(90deg, rgba(40,46,60,0.9) 0%, rgba(59,66,85,0.4) 100%); transition: transform 0.2s; }
+        .stat-row:hover { transform: translateX(5px); background: linear-gradient(90deg, rgba(59,66,85,0.9) 0%, rgba(74,83,107,0.4) 100%); }
+
+        .stats-table-container {
+            position: relative; overflow: hidden; border-radius: 0.5rem; background: rgba(0,0,0,0.4);
+            border: 1px solid rgba(204,165,116,0.3); transition: all 0.4s ease;
+        }
+        .stats-table-container:hover { border-color: rgba(230,200,117,0.8); box-shadow: 0 0 20px rgba(204,165,116,0.2); }
+        
+        .stat-tr { transition: all 0.3s ease; position: relative; z-index: 1; }
+        .stat-tr::before { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, transparent, rgba(230,200,117,0.15), transparent); opacity: 0; transition: opacity 0.3s ease; z-index: -1; }
+        .stat-tr:hover { transform: scale(1.02); }
+        .stat-tr:hover::before { opacity: 1; }
+        .stat-tr:hover td { color: #fff; }
+        .stat-tr:hover .stat-value { color: #e6c875; text-shadow: 0 0 10px rgba(230,200,117,0.5); transform: scale(1.05); }
+
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
         ::-webkit-scrollbar-track { background: rgba(0,0,0,0.2); border-radius: 10px; }
         ::-webkit-scrollbar-thumb { background: #cca574; border-radius: 10px; }
         ::-webkit-scrollbar-thumb:hover { background: #e6c875; }
+        .custom-scrollbar::-webkit-scrollbar { width: 4px; height: 4px; }
 
-        @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .animate-fade-up {
-            animation: fadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-            opacity: 0;
-        }
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeSlideUp { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+        .animate-fade-up { animation: fadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; opacity: 0; }
 
-        #modal-overlay {
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(8px);
-        }
-        #modal-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-        #modal-content {
-            transform: scale(0.9) translateY(20px);
-            opacity: 0;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-        #modal-overlay.active #modal-content {
-            transform: scale(1) translateY(0);
-            opacity: 1;
-        }
+        #modal-overlay { opacity: 0; visibility: hidden; transition: all 0.3s ease; backdrop-filter: blur(8px); }
+        #modal-overlay.active { opacity: 1; visibility: visible; }
+        #modal-content { transform: scale(0.9) translateY(20px); opacity: 0; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        #modal-overlay.active #modal-content { transform: scale(1) translateY(0); opacity: 1; }
 
-        .btn-close {
-            background: #ece5d8;
-            color: #3b4255;
-            border: 2px solid #cca574;
-            transition: all 0.2s;
-        }
-        .btn-close:hover {
-            background: #cca574;
-            color: #fff;
-            transform: scale(1.1) rotate(90deg);
+        .btn-close { background: #ece5d8; color: #3b4255; border: 2px solid #cca574; transition: all 0.2s; }
+        .btn-close:hover { background: #cca574; color: #fff; transform: scale(1.1) rotate(90deg); }
+        
+        .intro-text-box {
+            background: linear-gradient(135deg, rgba(204,165,116,0.1), rgba(0,0,0,0.2));
+            border-radius: 8px;
+            padding: 1.25rem;
+            border-left: 4px solid var(--elem-color);
+            box-shadow: inset 0 2px 10px rgba(0,0,0,0.3);
+            margin-bottom: 1.5rem;
         }
     </style>
 </head>
@@ -316,32 +271,16 @@
         
         <nav class="flex flex-wrap justify-center gap-2 md:gap-3 mb-10" id="filterContainer">
             <button class="filter-tab active font-serif text-sm tracking-wider" data-element="All">ALL</button>
-            <button class="filter-tab font-serif text-sm tracking-wider flex items-center gap-2" data-element="Pyro">
-                <i class="fa-solid fa-fire" style="color: var(--tw-colors-gi-pyro)"></i> PYRO
-            </button>
-            <button class="filter-tab font-serif text-sm tracking-wider flex items-center gap-2" data-element="Hydro">
-                <i class="fa-solid fa-water" style="color: var(--tw-colors-gi-hydro)"></i> HYDRO
-            </button>
-            <button class="filter-tab font-serif text-sm tracking-wider flex items-center gap-2" data-element="Anemo">
-                <i class="fa-solid fa-wind" style="color: var(--tw-colors-gi-anemo)"></i> ANEMO
-            </button>
-            <button class="filter-tab font-serif text-sm tracking-wider flex items-center gap-2" data-element="Electro">
-                <i class="fa-solid fa-bolt" style="color: var(--tw-colors-gi-electro)"></i> ELECTRO
-            </button>
-            <button class="filter-tab font-serif text-sm tracking-wider flex items-center gap-2" data-element="Dendro">
-                <i class="fa-solid fa-leaf" style="color: var(--tw-colors-gi-dendro)"></i> DENDRO
-            </button>
-            <button class="filter-tab font-serif text-sm tracking-wider flex items-center gap-2" data-element="Cryo">
-                <i class="fa-solid fa-snowflake" style="color: var(--tw-colors-gi-cryo)"></i> CRYO
-            </button>
-            <button class="filter-tab font-serif text-sm tracking-wider flex items-center gap-2" data-element="Geo">
-                <i class="fa-solid fa-mountain" style="color: var(--tw-colors-gi-geo)"></i> GEO
-            </button>
+            <button class="filter-tab font-serif text-sm tracking-wider flex items-center gap-2" data-element="Pyro"><i class="fa-solid fa-fire" style="color: var(--tw-colors-gi-pyro)"></i> PYRO</button>
+            <button class="filter-tab font-serif text-sm tracking-wider flex items-center gap-2" data-element="Hydro"><i class="fa-solid fa-water" style="color: var(--tw-colors-gi-hydro)"></i> HYDRO</button>
+            <button class="filter-tab font-serif text-sm tracking-wider flex items-center gap-2" data-element="Anemo"><i class="fa-solid fa-wind" style="color: var(--tw-colors-gi-anemo)"></i> ANEMO</button>
+            <button class="filter-tab font-serif text-sm tracking-wider flex items-center gap-2" data-element="Electro"><i class="fa-solid fa-bolt" style="color: var(--tw-colors-gi-electro)"></i> ELECTRO</button>
+            <button class="filter-tab font-serif text-sm tracking-wider flex items-center gap-2" data-element="Dendro"><i class="fa-solid fa-leaf" style="color: var(--tw-colors-gi-dendro)"></i> DENDRO</button>
+            <button class="filter-tab font-serif text-sm tracking-wider flex items-center gap-2" data-element="Cryo"><i class="fa-solid fa-snowflake" style="color: var(--tw-colors-gi-cryo)"></i> CRYO</button>
+            <button class="filter-tab font-serif text-sm tracking-wider flex items-center gap-2" data-element="Geo"><i class="fa-solid fa-mountain" style="color: var(--tw-colors-gi-geo)"></i> GEO</button>
         </nav>
 
-        <section id="characterGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-6 md:gap-8 pb-10">
-            <!-- Cards injected by JS -->
-        </section>
+        <section id="characterGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-6 md:gap-8 pb-10"></section>
         
         <div id="emptyState" class="hidden text-center py-24">
             <i class="fa-solid fa-ghost text-6xl text-gi-panelLight mb-6 opacity-50"></i>
@@ -355,217 +294,259 @@
         </p>
     </footer>
 
-    <div id="modal-overlay" class="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4">
-        <button id="closeModalBtn" class="btn-close fixed top-6 right-6 z-[60] w-12 h-12 rounded-full flex items-center justify-center text-xl shadow-[0_0_15px_rgba(204,165,116,0.3)]">
+    <!-- Modal Container -->
+    <div id="modal-overlay" class="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-2 sm:p-4">
+        <button id="closeModalBtn" class="btn-close fixed top-4 right-4 sm:top-6 sm:right-6 z-[60] w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center text-xl shadow-[0_0_15px_rgba(204,165,116,0.3)]">
             <i class="fa-solid fa-xmark"></i>
         </button>
 
-        <div id="modal-content" class="ui-panel w-full max-w-6xl max-h-[90vh] rounded-2xl overflow-hidden flex flex-col lg:flex-row relative">
-            <div id="modal-body" class="w-full h-full flex flex-col lg:flex-row overflow-y-auto lg:overflow-hidden"></div>
+        <div id="modal-content" class="ui-panel w-full max-w-6xl h-[95vh] lg:h-[85vh] rounded-2xl overflow-hidden flex flex-col lg:flex-row relative">
+            <div id="modal-body" class="w-full h-full flex flex-col lg:flex-row overflow-hidden"></div>
         </div>
     </div>
 
     <script>
         const characters = [
             { 
-                id: 'furina', 
-                name: "Furina", 
-                element: "Hydro", 
-                elementIcon: "fa-water", 
-                elementColor: "#00bfff", 
-                rarity: 5, 
-                weaponType: "Sword", 
-                bestWeapon: "Splendor of Tranquil Waters", 
-                altWeapon: "Festering Desire / Fleuve Cendre", 
-                artifactSet: "Golden Troupe (4-Piece)", 
-                sands: "HP% / Energy Recharge", 
-                goblet: "HP% / Hydro DMG", 
-                circlet: "CRIT Rate / CRIT DMG", 
+                id: 'furina', name: "Furina", element: "Hydro", elementIcon: "fa-water", elementColor: "#00bfff", rarity: 5, 
+                role: "Sub-DPS / Buffer", weaponType: "Sword", 
+                introGuide: "Furina is a 5-star Hydro Sword character in Genshin Impact. Learn about Furina's build, ascension materials, best weapons, best artifacts, talent priority, skills, teams, and our rating of the character in this build guide!",
+                title: "Endless Solo of Solitude", constellation: "Animula Choragi",
+                loreQuote: "The absolute focus of the stage, until the final applause sounds.",
+                talentPriority: "Elemental Skill > Elemental Burst > Normal Attack",
+                bestWeapon: "Splendor of Tranquil Waters", altWeapon: "Festering Desire (R5) / Fleuve Cendre Ferryman", 
+                artifactSet: "Golden Troupe (4-Piece)", altArtifacts: "Tenacity of the Millelith (4-Piece) / 2pc HP% Mix", 
+                sands: "HP% / Energy Recharge", goblet: "HP% / Hydro DMG", circlet: "CRIT Rate / CRIT DMG", 
                 image: "https://img.game8.co/4595141/ec2f77c8abc1a78183a9e2930ac18664.png/show",
-                stats: [
-                    { label: "Max HP", value: "40,000+" },
-                    { label: "Energy Recharge", value: "160% - 200%" },
-                    { label: "CRIT Rate", value: "70%+" },
-                    { label: "CRIT DMG", value: "140%+" }
+                stats: [ { label: "Max HP", value: "40,000+" }, { label: "Energy Recharge", value: "160% - 200%" }, { label: "CRIT Rate", value: "70%+" }, { label: "CRIT DMG", value: "140%+" } ],
+                teams: [
+                    { label: "Premium Meta", members: ["Neuvillette", "Kaedehara Kazuha", "Baizhu"] },
+                    { label: "Quickbloom", members: ["Cyno", "Nahida", "Baizhu"] },
+                    { label: "F2P Friendly", members: ["Noelle", "Xingqiu", "Fischl"] }
+                ],
+                constellations: [
+                    { name: "Love Is a Rebellious Bird...", desc: "When using Let the People Rejoice, Furina gains 150 Fanfare. Fanfare limit is increased by 150." },
+                    { name: "A Woman Adapts Like Duckweed...", desc: "Fanfare gain from HP changes is increased by 250%. Each point over the limit increases Furina's Max HP." },
+                    { name: "My Secret Is Hidden Within Me...", desc: "Increases the Level of Let the People Rejoice by 3. Maximum upgrade level is 15." },
+                    { name: "They Know Not Life...", desc: "When Salon Members hit opponents or the Singer heals, Furina restores 4 Energy. This triggers once every 5s." },
+                    { name: "His Name I Now Know, It Is...!", desc: "Increases the Level of Salon Solitaire by 3. Maximum upgrade level is 15." },
+                    { name: "Hear Me — Let Us Raise...", desc: "Using her Elemental Skill grants 'Center of Attention' for 10s, infusing her Normal Attacks with Hydro and granting scaling buffs." }
                 ]
             },
             { 
-                id: 'raiden', 
-                name: "Raiden Shogun", 
-                element: "Electro", 
-                elementIcon: "fa-bolt", 
-                elementColor: "#8a2be2", 
-                rarity: 5, 
-                weaponType: "Polearm", 
-                bestWeapon: "Engulfing Lightning", 
-                altWeapon: "The Catch", 
-                artifactSet: "Emblem of Severed Fate (4-Piece)", 
-                sands: "Energy Recharge / ATK%", 
-                goblet: "Electro DMG / ATK%", 
-                circlet: "CRIT Rate / CRIT DMG", 
+                id: 'raiden', name: "Raiden Shogun", element: "Electro", elementIcon: "fa-bolt", elementColor: "#8a2be2", rarity: 5, 
+                role: "On-Field DPS / Battery", weaponType: "Polearm", 
+                introGuide: "Raiden Shogun is a 5-star Electro Polearm character in Genshin Impact. Learn about Raiden Shogun's build, ascension materials, best weapons, best artifacts, talent priority, skills, teams, and our rating of the character in this build guide!",
+                title: "Plane of Euthymia", constellation: "Imperatrix Umbrosa",
+                loreQuote: "Her Excellency, the Almighty Narukami Ogosho, who promised the people of Inazuma an unchanging Eternity.",
+                talentPriority: "Elemental Burst > Elemental Skill > Normal Attack",
+                bestWeapon: "Engulfing Lightning", altWeapon: "The Catch (F2P) / Staff of Homa / Skyward Spine", 
+                artifactSet: "Emblem of Severed Fate (4-Piece)", altArtifacts: "Gilded Dreams (4-Piece for Hyperbloom)", 
+                sands: "Energy Recharge / EM", goblet: "Electro DMG / EM", circlet: "CRIT / EM", 
                 image: "https://img.game8.co/3865328/f43ce6a0dea44d17bb8ee0eb0bfbbce8.png/show",
-                stats: [
-                    { label: "Energy Recharge", value: "250%+" },
-                    { label: "ATK", value: "1,600+" },
-                    { label: "CRIT Rate", value: "60%+" },
-                    { label: "CRIT DMG", value: "120%+" }
+                stats: [ { label: "Energy Recharge", value: "250%+" }, { label: "ATK", value: "1,600+" }, { label: "CRIT Rate", value: "60%+" }, { label: "CRIT DMG", value: "120%+" } ],
+                teams: [
+                    { label: "Hypercarry", members: ["Kujou Sara (C6)", "Kaedehara Kazuha", "Bennett"] },
+                    { label: "Rational", members: ["Xiangling", "Xingqiu", "Bennett"] },
+                    { label: "Natlan Overload", members: ["Chevreuse", "Mavuika", "Kujou Sara"] }
+                ],
+                constellations: [
+                    { name: "Ominous Inscription", desc: "Chakra Desiderata gathers Resolve even faster. Electro characters' Bursts grant 80% more Resolve." },
+                    { name: "Steelbreaker", desc: "Secret Art: Musou Shinsetsu's attacks ignore 60% of opponents' DEF." },
+                    { name: "Shinkage Bygones", desc: "Increases the Level of Secret Art: Musou Shinsetsu by 3." },
+                    { name: "Pledge of Propriety", desc: "When the Musou Isshin state expires, all nearby party members (excluding Raiden) gain 30% bonus ATK for 10s." },
+                    { name: "Shogun's Descent", desc: "Increases the Level of Transcendence: Baleful Omen by 3." },
+                    { name: "Wishbearer", desc: "While in the Musou Isshin state, Raiden's Normal Attacks decrease all nearby party members' Elemental Burst CD by 1s (max 5 times)." }
                 ]
             },
             { 
-                id: 'zhongli', 
-                name: "Zhongli", 
-                element: "Geo", 
-                elementIcon: "fa-mountain", 
-                elementColor: "#daa520", 
-                rarity: 5, 
-                weaponType: "Polearm", 
-                bestWeapon: "Staff of Homa", 
-                altWeapon: "Black Tassel (F2P)", 
-                artifactSet: "Tenacity of the Millelith (4-Piece)", 
-                sands: "HP%", 
-                goblet: "HP%", 
-                circlet: "HP%", 
+                id: 'zhongli', name: "Zhongli", element: "Geo", elementIcon: "fa-mountain", elementColor: "#daa520", rarity: 5, 
+                role: "Shielder / Support", weaponType: "Polearm", 
+                introGuide: "Zhongli is a 5-star Geo Polearm character in Genshin Impact. Learn about Zhongli's build, ascension materials, best weapons, best artifacts, talent priority, skills, teams, and our rating of the character in this build guide!",
+                title: "Vago Mundo", constellation: "Lapis Dei",
+                loreQuote: "A mysterious expert contracted by the Wangsheng Funeral Parlor. Extremely knowledgeable in all things.",
+                talentPriority: "Elemental Skill > Elemental Burst > Normal Attack",
+                bestWeapon: "Black Tassel (Shield) / Staff of Homa", altWeapon: "Favonius Lance / Rightful Reward", 
+                artifactSet: "Tenacity of the Millelith (4-Piece)", altArtifacts: "Archaic Petra (4-Piece) / Noblesse Oblige", 
+                sands: "HP%", goblet: "HP%", circlet: "HP%", 
                 image: "https://img.game8.co/3863434/98a9b6abc09d75128c4c3687da5d6500.png/show",
-                stats: [
-                    { label: "Max HP", value: "40,000 - 50,000+" },
-                    { label: "Energy Recharge", value: "130%+" },
-                    { label: "CRIT Rate", value: "50%+" },
-                    { label: "CRIT DMG", value: "100%+" }
+                stats: [ { label: "Max HP", value: "40,000 - 50,000+" }, { label: "Energy Recharge", value: "130%+" }, { label: "CRIT Rate", value: "50%+" }, { label: "CRIT DMG", value: "100%+" } ],
+                teams: [
+                    { label: "Premium Hu Tao", members: ["Hu Tao", "Yelan", "Xingqiu"] },
+                    { label: "Double Geo", members: ["Navia", "Xilonen", "Bennett"] },
+                    { label: "F2P Mono Geo", members: ["Ningguang", "Geo Traveler", "Bennett"] }
+                ],
+                constellations: [
+                    { name: "Rock, the Backbone of Earth", desc: "Increases the maximum number of Stone Steles created by Dominus Lapidis that may exist simultaneously to 2." },
+                    { name: "Stone, the Cradle of Jade", desc: "Planet Befall grants nearby characters on the field a Jade Shield when it descends." },
+                    { name: "Jade, Shimmering through Darkness", desc: "Increases the Level of Dominus Lapidis by 3." },
+                    { name: "Topaz, Unbreakable and Fearless", desc: "Increases Planet Befall's AoE by 20% and increases the duration of Planet Befall's Petrification effect by 2s." },
+                    { name: "Lapis, Herald of the Order", desc: "Increases the Level of Planet Befall by 3." },
+                    { name: "Chrysos, Bounty of Dominator", desc: "When the Jade Shield takes DMG, 40% of that incoming DMG is converted to HP for the current character." }
                 ]
             },
             { 
-                id: 'nahida', 
-                name: "Nahida", 
-                element: "Dendro", 
-                elementIcon: "fa-leaf", 
-                elementColor: "#32cd32", 
-                rarity: 5, 
-                weaponType: "Catalyst", 
-                bestWeapon: "A Thousand Floating Dreams", 
-                altWeapon: "Sacrificial Fragments", 
-                artifactSet: "Deepwood Memories (4-Piece)", 
-                sands: "Elemental Mastery", 
-                goblet: "EM / Dendro DMG", 
-                circlet: "EM / CRIT", 
+                id: 'nahida', name: "Nahida", element: "Dendro", elementIcon: "fa-leaf", elementColor: "#32cd32", rarity: 5, 
+                role: "Sub-DPS / Enabler", weaponType: "Catalyst", 
+                introGuide: "Nahida is a 5-star Dendro Catalyst character in Genshin Impact. Learn about Nahida's build, ascension materials, best weapons, best artifacts, talent priority, skills, teams, and our rating of the character in this build guide!",
+                title: "Physic of Purity", constellation: "Sapientia Oromasdis",
+                loreQuote: "A caged bird secluded within the confines of the Sanctuary of Surasthana who can only see the world in her dreams.",
+                talentPriority: "Elemental Skill > Elemental Burst > Normal Attack",
+                bestWeapon: "A Thousand Floating Dreams", altWeapon: "Kagura's Verity / Sacrificial Fragments", 
+                artifactSet: "Deepwood Memories (4-Piece)", altArtifacts: "Gilded Dreams (4-Piece) / 2pc EM Mix", 
+                sands: "Elemental Mastery", goblet: "EM / Dendro DMG", circlet: "EM / CRIT", 
                 image: "https://img.game8.co/3864067/a0e8aae1557152bb3c7f0f57ed0d829f.png/show",
-                stats: [
-                    { label: "Elemental Mastery", value: "800 - 1,000" },
-                    { label: "Energy Recharge", value: "130% - 150%" },
-                    { label: "CRIT Rate", value: "50%+" },
-                    { label: "CRIT DMG", value: "120%+" }
+                stats: [ { label: "Elemental Mastery", value: "800 - 1,000" }, { label: "Energy Recharge", value: "130% - 150%" }, { label: "CRIT Rate", value: "50%+" }, { label: "CRIT DMG", value: "120%+" } ],
+                teams: [
+                    { label: "Premium Bloom", members: ["Nilou", "Sangonomiya Kokomi", "Alhaitham"] },
+                    { label: "Hyperbloom", members: ["Cyno", "Yelan", "Baizhu"] },
+                    { label: "F2P Hyperbloom", members: ["Kuki Shinobu", "Xingqiu", "Dendro Traveler"] }
+                ],
+                constellations: [
+                    { name: "The Seed of Stored Knowledge", desc: "When calculating party elemental types for the Burst, adds 1 to the count of Pyro, Electro, and Hydro characters." },
+                    { name: "The Root of All Fullness", desc: "Opponents marked by the Seed of Skandha can take CRIT Hits from Bloom reactions, and Quicken reduces DEF by 30%." },
+                    { name: "The Shoot of Conscious Attainment", desc: "Increases the Level of All Schemes to Know by 3." },
+                    { name: "The Stem of Manifest Inference", desc: "When 1/2/3/4 or more opponents are linked by Seed of Skandha, Nahida's EM is increased by 100/120/140/160." },
+                    { name: "The Leaves of Enlightening Speech", desc: "Increases the Level of Illusory Heart by 3." },
+                    { name: "The Fruit of Reason's Culmination", desc: "After using Burst, Nahida's Normal/Charged Attacks trigger Karmic Oblivion on marked opponents, dealing massive Dendro DMG." }
                 ]
             },
             { 
-                id: 'neuvillette', 
-                name: "Neuvillette", 
-                element: "Hydro", 
-                elementIcon: "fa-water", 
-                elementColor: "#00bfff", 
-                rarity: 5, 
-                weaponType: "Catalyst", 
-                bestWeapon: "Tome of the Eternal Flow", 
-                altWeapon: "Prototype Amber (F2P)", 
-                artifactSet: "Marechaussee Hunter (4-Piece)", 
-                sands: "HP%", 
-                goblet: "Hydro DMG / HP%", 
-                circlet: "CRIT DMG / CRIT Rate", 
+                id: 'neuvillette', name: "Neuvillette", element: "Hydro", elementIcon: "fa-water", elementColor: "#00bfff", rarity: 5, 
+                role: "On-Field DPS", weaponType: "Catalyst", 
+                introGuide: "Neuvillette is a 5-star Hydro Catalyst character in Genshin Impact. Learn about Neuvillette's build, ascension materials, best weapons, best artifacts, talent priority, skills, teams, and our rating of the character in this build guide!",
+                title: "Ordainer of Inexorable Judgment", constellation: "Leviathan Judicator",
+                loreQuote: "The Iudex of Fontaine, known as the embodiment of justice and flawlessness.",
+                talentPriority: "Normal Attack > Elemental Burst > Elemental Skill",
+                bestWeapon: "Tome of the Eternal Flow", altWeapon: "Sacrificial Jade (BP) / Prototype Amber", 
+                artifactSet: "Marechaussee Hunter (4-Piece)", altArtifacts: "Heart of Depth (4-Piece) / Wanderer's Troupe", 
+                sands: "HP%", goblet: "Hydro DMG / HP%", circlet: "CRIT DMG / CRIT Rate", 
                 image: "https://img.game8.co/3864870/8ab4c2bb6691abe12434e310a4a638a8.png/show",
-                stats: [
-                    { label: "Max HP", value: "35,000+" },
-                    { label: "Energy Recharge", value: "120% - 140%" },
-                    { label: "CRIT Rate", value: "50% - 64%" },
-                    { label: "CRIT DMG", value: "200%+" }
+                stats: [ { label: "Max HP", value: "35,000+" }, { label: "Energy Recharge", value: "120% - 140%" }, { label: "CRIT Rate", value: "50% - 64%" }, { label: "CRIT DMG", value: "200%+" } ],
+                teams: [
+                    { label: "Premium Hyper", members: ["Furina", "Kaedehara Kazuha", "Xilonen"] },
+                    { label: "Taser Output", members: ["Fischl", "Kaedehara Kazuha", "Zhongli"] },
+                    { label: "F2P Taser", members: ["Fischl", "Sucrose", "Layla"] }
+                ],
+                constellations: [
+                    { name: "Venerable Institution", desc: "When Neuvillette takes the field, he gains 1 stack of Past Draconic Glories. He also gains interruption resistance while casting Charged Attack." },
+                    { name: "Juridical Exhortation", desc: "Each stack of Past Draconic Glories increases Charged Attack CRIT DMG by 14%, up to a maximum of 42%." },
+                    { name: "Ancient Postulation", desc: "Increases the Level of Normal Attack: As Water Seeks Equilibrium by 3." },
+                    { name: "Crown of Commiseration", desc: "When Neuvillette is on the field and is healed, 1 Sourcewater Droplet will be generated (once every 4s)." },
+                    { name: "Axiomatic Judgment", desc: "Increases the Level of O Tears, I Shall Repay by 3." },
+                    { name: "Wrathful Recompense", desc: "When using Charged Attack: Equitable Judgment, he absorbs Droplets to extend the duration. Also fires additional currents dealing 10% Max HP as Hydro DMG." }
                 ]
             },
             { 
-                id: 'hutao', 
-                name: "Hu Tao", 
-                element: "Pyro", 
-                elementIcon: "fa-fire", 
-                elementColor: "#ec4923", 
-                rarity: 5, 
-                weaponType: "Polearm", 
-                bestWeapon: "Staff of Homa", 
-                altWeapon: "Dragon's Bane", 
-                artifactSet: "Crimson Witch of Flames (4-Piece)", 
-                sands: "EM / HP%", 
-                goblet: "Pyro DMG Bonus", 
-                circlet: "CRIT Rate / CRIT DMG", 
+                id: 'hutao', name: "Hu Tao", element: "Pyro", elementIcon: "fa-fire", elementColor: "#ec4923", rarity: 5, 
+                role: "On-Field DPS", weaponType: "Polearm", 
+                introGuide: "Hu Tao is a 5-star Pyro Polearm character in Genshin Impact. Learn about Hu Tao's build, ascension materials, best weapons, best artifacts, talent priority, skills, teams, and our rating of the character in this build guide!",
+                title: "Fragrance in Thaw", constellation: "Papilio Charontis",
+                loreQuote: "The 77th Director of the Wangsheng Funeral Parlor. She took over the business at a rather young age.",
+                talentPriority: "Normal Attack > Elemental Skill > Elemental Burst",
+                bestWeapon: "Staff of Homa", altWeapon: "Dragon's Bane / Ballad of the Fjords / White Tassel", 
+                artifactSet: "Crimson Witch of Flames (4-Piece)", altArtifacts: "Shimenawa's Reminiscence (4-Piece)", 
+                sands: "EM / HP%", goblet: "Pyro DMG Bonus", circlet: "CRIT Rate / CRIT DMG", 
                 image: "https://img.game8.co/3863977/9d9c63d832868a4061172d90e3471267.png/show",
-                stats: [
-                    { label: "Max HP", value: "30,000+" },
-                    { label: "Elemental Mastery", value: "200 - 300" },
-                    { label: "CRIT Rate", value: "70%+" },
-                    { label: "CRIT DMG", value: "200%+" }
+                stats: [ { label: "Max HP", value: "30,000+" }, { label: "Elemental Mastery", value: "200 - 300" }, { label: "CRIT Rate", value: "70%+" }, { label: "CRIT DMG", value: "200%+" } ],
+                teams: [
+                    { label: "Premium Vape", members: ["Yelan", "Xingqiu", "Zhongli"] },
+                    { label: "Plunge Vape", members: ["Xianyun", "Furina", "Yelan"] },
+                    { label: "F2P Vaporize", members: ["Xingqiu", "Sucrose", "Thoma"] }
+                ],
+                constellations: [
+                    { name: "Crimson Bouquet", desc: "While in a Paramita Papilio state activated by Guide to Afterlife, Hu Tao's Charge Attacks do not consume Stamina." },
+                    { name: "Ominous Rainfall", desc: "Increases the Blood Blossom DMG by an amount equal to 10% of Hu Tao's Max HP." },
+                    { name: "Lingering Carmine", desc: "Increases the Level of Guide to Afterlife by 3." },
+                    { name: "Garden of Eternal Rest", desc: "Upon defeating an enemy affected by Blood Blossom, all nearby allies (excluding Hu Tao) get 12% CRIT Rate for 15s." },
+                    { name: "Floral Incense", desc: "Increases the Level of Spirit Soother by 3." },
+                    { name: "Butterfly's Embrace", desc: "Triggers when HP drops below 25% or suffers a lethal strike: Hu Tao will not fall, gains 200% All RES, and 100% CRIT Rate for 10s." }
                 ]
             },
             { 
-                id: 'kazuha', 
-                name: "Kaedehara Kazuha", 
-                element: "Anemo", 
-                elementIcon: "fa-wind", 
-                elementColor: "#20b2aa", 
-                rarity: 5, 
-                weaponType: "Sword", 
-                bestWeapon: "Freedom-Sworn", 
-                altWeapon: "Iron Sting / Xiphos' Moonlight", 
-                artifactSet: "Viridescent Venerer (4-Piece)", 
-                sands: "Elemental Mastery", 
-                goblet: "Elemental Mastery", 
-                circlet: "Elemental Mastery", 
+                id: 'kazuha', name: "Kaedehara Kazuha", element: "Anemo", elementIcon: "fa-wind", elementColor: "#20b2aa", rarity: 5, 
+                role: "Anemo Support / CC", weaponType: "Sword", 
+                introGuide: "Kaedehara Kazuha is a 5-star Anemo Sword character in Genshin Impact. Learn about Kazuha's build, ascension materials, best weapons, best artifacts, talent priority, skills, teams, and our rating of the character in this build guide!",
+                title: "Scarlet Leaves Pursue Wild Waves", constellation: "Acer Palmatum",
+                loreQuote: "A wandering samurai from Inazuma who is currently with Liyue's Crux Fleet. A gentle and carefree soul.",
+                talentPriority: "Elemental Burst > Elemental Skill > Normal Attack",
+                bestWeapon: "Freedom-Sworn", altWeapon: "Xiphos' Moonlight / Favonius Sword / Iron Sting", 
+                artifactSet: "Viridescent Venerer (4-Piece)", altArtifacts: "Instructor (4-Piece - Early Game) / 2pc EM Mix", 
+                sands: "Elemental Mastery", goblet: "Elemental Mastery", circlet: "Elemental Mastery", 
                 image: "https://img.game8.co/3865063/3ef6e7557173885d6e507edc601d32e8.png/show",
-                stats: [
-                    { label: "Elemental Mastery", value: "800 - 1,000+" },
-                    { label: "Energy Recharge", value: "160% - 200%" },
-                    { label: "CRIT Rate", value: "25%+" },
-                    { label: "ATK", value: "1,200+" }
+                stats: [ { label: "Elemental Mastery", value: "800 - 1,000+" }, { label: "Energy Recharge", value: "160% - 200%" }, { label: "CRIT Rate", value: "25%+" }, { label: "ATK", value: "1,200+" } ],
+                teams: [
+                    { label: "Premium Freeze", members: ["Kamisato Ayaka", "Shenhe", "Sangonomiya Kokomi"] },
+                    { label: "International", members: ["Tartaglia", "Mavuika", "Bennett"] },
+                    { label: "F2P Aggravate", members: ["Keqing", "Fischl", "Yaoyao"] }
+                ],
+                constellations: [
+                    { name: "Scarlet Hills", desc: "Decreases Chihayaburu's CD by 10%. Using Kazuha Slash resets the CD of Chihayaburu." },
+                    { name: "Yamaarashi Tailwind", desc: "The Kazuha Slash field increases Kazuha's EM by 200, and increases the EM of characters within the field by 200." },
+                    { name: "Maple Monogatari", desc: "Increases the Level of Chihayaburu by 3." },
+                    { name: "Oozora Genpou", desc: "When Kazuha's Energy is lower than 45, using his Skill restores Energy. Gliding also restores Energy." },
+                    { name: "Wisdom of Bansei", desc: "Increases the Level of Kazuha Slash by 3." },
+                    { name: "Crimson Momiji", desc: "After using his Skill or Burst, Kazuha gains an Anemo Infusion for 5s. Each point of EM increases Normal/Charged/Plunging Attack DMG by 0.2%." }
                 ]
             },
             { 
-                id: 'ayaka', 
-                name: "Kamisato Ayaka", 
-                element: "Cryo", 
-                elementIcon: "fa-snowflake", 
-                elementColor: "#4682b4", 
-                rarity: 5, 
-                weaponType: "Sword", 
-                bestWeapon: "Mistsplitter Reforged", 
-                altWeapon: "Amenoma Kageuchi", 
-                artifactSet: "Blizzard Strayer (4-Piece)", 
-                sands: "ATK%", 
-                goblet: "Cryo DMG Bonus", 
-                circlet: "CRIT DMG", 
+                id: 'ayaka', name: "Kamisato Ayaka", element: "Cryo", elementIcon: "fa-snowflake", elementColor: "#4682b4", rarity: 5, 
+                role: "Freeze DPS", weaponType: "Sword", 
+                introGuide: "Kamisato Ayaka is a 5-star Cryo Sword character in Genshin Impact. Learn about Ayaka's build, ascension materials, best weapons, best artifacts, talent priority, skills, teams, and our rating of the character in this build guide!",
+                title: "Frostflake Heron", constellation: "Grus Nivis",
+                loreQuote: "Daughter of the Yashiro Commission's Kamisato Clan from Inazuma. Dignified and elegant, wise and strong.",
+                talentPriority: "Elemental Burst > Normal Attack > Elemental Skill",
+                bestWeapon: "Mistsplitter Reforged", altWeapon: "Primordial Jade Cutter / Amenoma Kageuchi", 
+                artifactSet: "Blizzard Strayer (4-Piece)", altArtifacts: "2pc Blizzard / 2pc ATK% Mix", 
+                sands: "ATK%", goblet: "Cryo DMG Bonus", circlet: "CRIT DMG", 
                 image: "https://img.game8.co/3864034/5712cd2f340a86cab11ddb50eea61676.png/show",
-                stats: [
-                    { label: "ATK", value: "2,000+" },
-                    { label: "Energy Recharge", value: "130% - 140%" },
-                    { label: "CRIT Rate", value: "35% - 45%" },
-                    { label: "CRIT DMG", value: "200%+" }
+                stats: [ { label: "ATK", value: "2,000+" }, { label: "Energy Recharge", value: "130% - 140%" }, { label: "CRIT Rate", value: "35% - 45%" }, { label: "CRIT DMG", value: "200%+" } ],
+                teams: [
+                    { label: "Premium Freeze", members: ["Shenhe", "Kaedehara Kazuha", "Sangonomiya Kokomi"] },
+                    { label: "Standard Freeze", members: ["Furina", "Charlotte", "Kaedehara Kazuha"] },
+                    { label: "F2P Freeze", members: ["Rosaria", "Sucrose", "Barbara"] }
+                ],
+                constellations: [
+                    { name: "Snowswept Sakura", desc: "When Ayaka's Normal or Charged Attacks deal Cryo DMG, there is a 50% chance of decreasing the CD of Kamisato Art: Hyouka by 0.3s." },
+                    { name: "Blizzard Blade Seki no To", desc: "When casting Kamisato Art: Soumetsu, unleashes 2 smaller Frostflake Seki no To, each dealing 20% of the original DMG." },
+                    { name: "Frostbloom Kamifubuki", desc: "Increases the Level of Kamisato Art: Soumetsu by 3." },
+                    { name: "Ebb and Flow", desc: "Opponents damaged by Kamisato Art: Soumetsu's Frostflake Seki no To will have their DEF decreased by 30% for 6s." },
+                    { name: "Blossom Cloud Irutsuki", desc: "Increases the Level of Kamisato Art: Hyouka by 3." },
+                    { name: "Dance of Suigetsu", desc: "Ayaka gains Usurahi Butou every 10s, increasing her Charged Attack DMG by 298%. Cleared 0.5s after her Charged Attack hits." }
                 ]
             },
             { 
-                id: 'bennett', 
-                name: "Bennett", 
-                element: "Pyro", 
-                elementIcon: "fa-fire", 
-                elementColor: "#ec4923", 
-                rarity: 4, 
-                weaponType: "Sword", 
-                bestWeapon: "Aquila Favonia / Skyward Blade", 
-                altWeapon: "Sapwood Blade", 
-                artifactSet: "Noblesse Oblige (4-Piece)", 
-                sands: "Energy Recharge", 
-                goblet: "HP%", 
-                circlet: "Healing Bonus / HP%", 
+                id: 'bennett', name: "Bennett", element: "Pyro", elementIcon: "fa-fire", elementColor: "#ec4923", rarity: 4, 
+                role: "Healer / Buffer", weaponType: "Sword", 
+                introGuide: "Bennett is a 4-star Pyro Sword character in Genshin Impact. Learn about Bennett's build, ascension materials, best weapons, best artifacts, talent priority, skills, teams, and our rating of the character in this build guide!",
+                title: "Trial by Fire", constellation: "Rota Calamitas",
+                loreQuote: "A righteous and good-natured adventurer from Mondstadt who's unfortunately extremely unlucky.",
+                talentPriority: "Elemental Burst > Elemental Skill > Normal Attack",
+                bestWeapon: "Aquila Favonia / Mistsplitter", altWeapon: "Skyward Blade / Sapwood Blade (F2P)", 
+                artifactSet: "Noblesse Oblige (4-Piece)", altArtifacts: "Instructor (4-Piece) / Maiden Beloved", 
+                sands: "Energy Recharge / HP%", goblet: "HP%", circlet: "Healing Bonus / HP%", 
                 image: "https://img.game8.co/3863971/7212b295607f923dad43ee5cc45175f9.png/show",
-                stats: [
-                    { label: "Base ATK", value: "700 - 800+" },
-                    { label: "Energy Recharge", value: "200% - 250%+" },
-                    { label: "Max HP", value: "25,000+" },
-                    { label: "Healing Bonus", value: "35.9%+" }
+                stats: [ { label: "Base ATK", value: "700 - 800+" }, { label: "Energy Recharge", value: "200% - 250%+" }, { label: "Max HP", value: "25,000+" }, { label: "Healing Bonus", value: "35.9%+" } ],
+                teams: [
+                    { label: "Rational", members: ["Raiden Shogun", "Xiangling", "Xingqiu"] },
+                    { label: "International", members: ["Tartaglia", "Kaedehara Kazuha", "Xiangling"] },
+                    { label: "F2P National", members: ["Xiangling", "Xingqiu", "Sucrose"] }
+                ],
+                constellations: [
+                    { name: "Grand Expectation", desc: "Fantastic Voyage's ATK increase no longer has an HP restriction, and gains an additional 20% of Bennett's Base ATK." },
+                    { name: "Impasse Conqueror", desc: "When Bennett's HP falls below 70%, his Energy Recharge is increased by 30%." },
+                    { name: "Unstoppable Fervor", desc: "Increases the Level of Passion Overload by 3." },
+                    { name: "Unexpected Odyssey", desc: "Using a Normal Attack when executing the second attack of Passion Overload's Charge Level 1 allows an additional attack." },
+                    { name: "True Explorer", desc: "Increases the Level of Fantastic Voyage by 3." },
+                    { name: "Fire Ventures with Me", desc: "Sword, Claymore, or Polearm-wielding characters inside Fantastic Voyage's radius gain a 15% Pyro DMG Bonus and are infused with Pyro." }
                 ]
             }
         ];
+
+        const hexToRgb = (hex) => {
+            const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+            return result ? `${parseInt(result[1], 16)}, ${parseInt(result[2], 16)}, ${parseInt(result[3], 16)}` : '204, 165, 116';
+        };
 
         const grid = document.getElementById('characterGrid');
         const emptyState = document.getElementById('emptyState');
@@ -580,7 +561,6 @@
 
         function renderCards() {
             grid.innerHTML = '';
-            
             const filtered = characters.filter(char => {
                 const searchMatch = char.name.toLowerCase().includes(currentSearch.toLowerCase());
                 const filterMatch = currentFilter === 'All' || char.element === currentFilter;
@@ -598,13 +578,6 @@
 
             filtered.forEach((char, index) => {
                 const bgClass = char.rarity === 5 ? 'bg-5star' : 'bg-4star';
-                
-                // Convert Hex to RGB for CSS Custom Properties
-                const hexToRgb = (hex) => {
-                    const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-                    return result ? `${parseInt(result[1], 16)}, ${parseInt(result[2], 16)}, ${parseInt(result[3], 16)}` : '204, 165, 116';
-                };
-                
                 const card = document.createElement('article');
                 card.className = `char-card ${bgClass} rounded-br-[2rem] rounded-tl-lg overflow-hidden cursor-pointer flex flex-col shadow-lg animate-fade-up`;
                 card.style.animationDelay = `${index * 0.05}s`;
@@ -632,8 +605,8 @@
 
         function openModal(char) {
             const bgClass = char.rarity === 5 ? 'bg-5star' : 'bg-4star';
+            const rgbColor = hexToRgb(char.elementColor);
             
-            // Build Stats Table Rows
             const statsRows = char.stats.map(stat => `
                 <tr class="stat-tr border-b border-gi-gold/20 last:border-0 cursor-crosshair">
                     <td class="py-3 px-4 text-gi-textLight/90 font-medium transition-colors">${stat.label}</td>
@@ -641,8 +614,50 @@
                 </tr>
             `).join('');
 
+            const teamCards = char.teams.map((team, idx) => {
+                let rankBadge = '';
+                if(idx === 0) rankBadge = '<span class="text-[10px] sm:text-xs text-gi-pyro font-bold bg-gi-pyro/10 px-2 py-1 rounded border border-gi-pyro/30"><i class="fa-solid fa-fire mr-1"></i> Highest DMG</span>';
+                else if(idx === 1) rankBadge = '<span class="text-[10px] sm:text-xs text-gi-gold font-bold bg-gi-gold/10 px-2 py-1 rounded border border-gi-gold/30"><i class="fa-solid fa-star mr-1"></i> Standard</span>';
+                else rankBadge = '<span class="text-[10px] sm:text-xs text-gi-dendro font-bold bg-gi-dendro/10 px-2 py-1 rounded border border-gi-dendro/30"><i class="fa-solid fa-leaf mr-1"></i> F2P Friendly</span>';
+
+                const membersHtml = team.members.map(m => `
+                    <div class="flex-1 bg-black/40 py-2 px-1 rounded border border-gi-gold/20 flex flex-col items-center justify-center text-center shadow-inner group transition-all duration-300 hover:border-gi-gold/50">
+                        <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full border border-dashed border-gi-gold/40 bg-black/50 mb-1 flex items-center justify-center overflow-hidden transition-all duration-300 group-hover:border-solid group-hover:border-gi-gold">
+                             <!-- Character Image Placeholder -->
+                             <i class="fa-solid fa-user text-gi-textLight/30 text-xs sm:text-sm group-hover:text-gi-gold/50 transition-colors"></i>
+                        </div>
+                        <span class="text-[9px] sm:text-[11px] text-gi-parchment font-semibold leading-tight">${m}</span>
+                    </div>
+                `).join('');
+
+                return `
+                    <div class="bg-gi-bgDark/40 p-4 rounded-xl border border-gi-gold/10 hover:border-gi-gold/40 transition-colors shadow-md">
+                        <div class="flex justify-between items-center mb-3 border-b border-gi-gold/10 pb-2">
+                            <span class="text-gi-goldBright font-bold font-serif text-sm tracking-wide uppercase">${team.label}</span>
+                            ${rankBadge}
+                        </div>
+                        <div class="flex gap-1 sm:gap-2 w-full items-center">
+                            <div class="flex-1 py-2 px-1 rounded border flex flex-col items-center justify-center text-center shadow-[0_0_10px_rgba(var(--elem-rgb),0.15)] group" style="background: rgba(var(--elem-rgb), 0.15); border-color: rgba(var(--elem-rgb), 0.5)">
+                                <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-full border border-dashed border-white/40 bg-black/50 mb-1 flex items-center justify-center overflow-hidden transition-all duration-300 group-hover:border-solid group-hover:border-white">
+                                    <!-- Main Character Image Placeholder -->
+                                    <i class="fa-solid ${char.elementIcon} text-xs sm:text-sm transition-colors" style="color: var(--elem-color)"></i>
+                                </div>
+                                <span class="text-[9px] sm:text-[11px] text-white font-bold leading-tight drop-shadow-md">${char.name}</span>
+                            </div>
+                            <div class="text-gi-gold/30 text-[10px]"><i class="fa-solid fa-plus"></i></div>
+                            ${membersHtml}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            // Format Talent Priority string into nice badges
+            const talentPriorityHtml = char.talentPriority ? 
+                char.talentPriority.split(' > ').map(t => `<span class="bg-gi-panel px-2 py-1 rounded whitespace-nowrap">${t}</span>`).join('<i class="fa-solid fa-chevron-right text-gi-gold/50 text-xs"></i>') : '';
+
             modalBody.innerHTML = `
-                <div class="w-full lg:w-4/12 h-64 lg:h-auto ${bgClass} relative flex items-center justify-center overflow-hidden border-b-2 lg:border-b-0 lg:border-r-2 border-gi-gold/40 shadow-inner">
+                <!-- Left: Image Section -->
+                <div class="w-full lg:w-4/12 h-64 lg:h-full ${bgClass} relative flex items-center justify-center overflow-hidden border-b-2 lg:border-b-0 lg:border-r-2 border-gi-gold/40 shadow-inner flex-shrink-0">
                     <div class="absolute inset-0 opacity-20 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjgiPgo8cmVjdCB3aWR0aD0iOCIgaGVpZ2h0PSI4IiBmaWxsPSIjZmZmIiBmaWxsLW9wYWNpdHk9IjAuMSIvPgo8L3N2Zz4=')]"></div>
                     <i class="fa-solid ${char.elementIcon} absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-[15rem] lg:text-[20rem] opacity-10" style="color: #fff"></i>
                     <img src="${char.image}" alt="${char.name}" class="relative z-10 w-full h-full object-cover lg:object-contain object-[75%_15%] lg:object-center drop-shadow-[0_15px_25px_rgba(0,0,0,0.8)] p-4 lg:p-8">
@@ -662,75 +677,270 @@
                     </div>
                 </div>
                 
-                <div class="w-full lg:w-8/12 bg-gi-panel p-6 lg:p-10 lg:overflow-y-auto custom-scrollbar relative flex flex-col justify-center">
-                    <div class="absolute top-0 right-0 w-20 h-20 border-t-[3px] border-r-[3px] border-gi-gold/30 m-4 rounded-tr-xl pointer-events-none"></div>
-                    <div class="absolute bottom-0 left-0 w-20 h-20 border-b-[3px] border-l-[3px] border-gi-gold/30 m-4 rounded-bl-xl pointer-events-none"></div>
+                <!-- Right: Content Area -->
+                <div class="w-full lg:w-8/12 bg-gi-panel flex flex-col relative overflow-hidden" style="--elem-color: ${char.elementColor}; --elem-rgb: ${rgbColor}">
+                    
+                    <!-- Decorative Corners -->
+                    <div class="absolute top-0 right-0 w-16 h-16 border-t-[3px] border-r-[3px] border-gi-gold/30 m-4 rounded-tr-xl pointer-events-none z-0 hidden lg:block"></div>
+                    <div class="absolute bottom-0 right-0 w-16 h-16 border-b-[3px] border-r-[3px] border-gi-gold/30 m-4 rounded-br-xl pointer-events-none z-0 hidden lg:block"></div>
 
-                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 font-sans">
+                    <!-- Sleek Minimalist Stripe Nav -->
+                    <div class="minimal-nav-container">
+                        <button class="minimal-tab active" data-target="panel-details"><i class="fa-solid fa-address-card mr-2 opacity-80"></i>Info</button>
+                        <button class="minimal-tab" data-target="panel-weapons"><i class="fa-solid fa-khanda mr-2 opacity-80"></i>Weapons</button>
+                        <button class="minimal-tab" data-target="panel-artifacts"><i class="fa-solid fa-gem mr-2 opacity-80"></i>Artifacts</button>
+                        <button class="minimal-tab" data-target="panel-teams"><i class="fa-solid fa-users mr-2 opacity-80"></i>Teams</button>
+                        <button class="minimal-tab" data-target="panel-constellations"><i class="fa-solid fa-star-of-life mr-2 opacity-80"></i>Constellations</button>
+                    </div>
+
+                    <!-- Tab Panels Container -->
+                    <div class="flex-grow p-6 lg:p-10 overflow-y-auto custom-scrollbar relative z-10 h-full">
                         
-                        <!-- Left Column: Equipment -->
-                        <div class="space-y-6">
-                            <h3 class="font-serif text-xl text-gi-parchment border-b-[2px] border-gi-gold/50 pb-2 tracking-wide flex items-center gap-2">
-                                <i class="fa-solid fa-khanda text-gi-gold"></i> Equipment
-                            </h3>
-                            <div>
-                                <p class="text-gi-gold font-bold text-xs uppercase tracking-widest mb-2 opacity-90"><i class="fa-solid fa-gavel mr-2"></i>Weapons</p>
-                                <div class="stat-row p-3 rounded-r-lg mb-2 flex flex-col justify-between gap-1 shadow-md">
-                                    <span class="text-gi-textLight font-semibold text-xs">Best in Slot</span>
-                                    <span class="text-gi-goldBright font-bold text-sm">${char.bestWeapon}</span>
-                                </div>
-                                <div class="stat-row p-3 rounded-r-lg flex flex-col justify-between gap-1 shadow-md opacity-90">
-                                    <span class="text-gi-textLight font-semibold text-xs">Alternative</span>
-                                    <span class="text-gi-parchment font-bold text-sm">${char.altWeapon}</span>
-                                </div>
+                        <!-- Panel: Details -->
+                        <div id="panel-details" class="modal-panel-content active space-y-6">
+                            <div class="intro-text-box">
+                                <p class="text-gi-textLight text-[14px] leading-relaxed font-sans font-medium tracking-wide">
+                                    ${char.introGuide}
+                                </p>
+                            </div>
+
+                            <div class="flex flex-col gap-1 mb-2">
+                                <h3 class="text-xl lg:text-3xl font-serif text-white tracking-wide border-b-[2px] border-gi-gold/50 pb-3">${char.title}</h3>
+                            </div>
+
+                            <div class="bg-black/30 p-5 rounded-lg border-l-4 shadow-inner relative overflow-hidden" style="border-color: var(--elem-color)">
+                                <i class="fa-solid fa-quote-left absolute top-3 left-3 text-4xl opacity-10" style="color: var(--elem-color)"></i>
+                                <p class="text-gi-textLight leading-relaxed text-[14px] lg:text-[15px] italic relative z-10 pl-6 drop-shadow-md">"${char.loreQuote}"</p>
                             </div>
                             
-                            <div>
-                                <p class="text-gi-gold font-bold text-xs uppercase tracking-widest mb-2 opacity-90"><i class="fa-solid fa-gem mr-2"></i>Artifacts</p>
-                                <div class="stat-row p-4 rounded-r-lg shadow-md">
-                                    <span class="text-white font-bold text-md tracking-wide">${char.artifactSet}</span>
+                            <div class="grid grid-cols-2 gap-4 mt-6">
+                                <div class="bg-gi-bgDark/50 p-4 rounded-lg border border-gi-gold/10 shadow-inner">
+                                    <p class="text-[10px] lg:text-xs text-gi-gold uppercase tracking-widest mb-1 opacity-80">Role Focus</p>
+                                    <p class="text-md lg:text-lg font-bold text-gi-parchment">${char.role}</p>
+                                </div>
+                                <div class="bg-gi-bgDark/50 p-4 rounded-lg border border-gi-gold/10 shadow-inner">
+                                    <p class="text-[10px] lg:text-xs text-gi-gold uppercase tracking-widest mb-1 opacity-80">Weapon Type</p>
+                                    <p class="text-md lg:text-lg font-bold text-gi-parchment">${char.weaponType}</p>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Right Column: Target Stats & Main Stats -->
-                        <div class="space-y-6">
-                            <h3 class="font-serif text-xl text-gi-parchment border-b-[2px] border-gi-gold/50 pb-2 tracking-wide flex items-center gap-2">
-                                <i class="fa-solid fa-chart-simple text-gi-gold"></i> Sub-Stat Priority
+                        <!-- Panel: Weapons -->
+                        <div id="panel-weapons" class="modal-panel-content space-y-6">
+                            <h3 class="font-serif text-2xl text-gi-parchment border-b-[2px] border-gi-gold/50 pb-2 tracking-wide flex items-center gap-3">
+                                <i class="fa-solid fa-khanda text-gi-gold"></i> Recommended Weapons
+                            </h3>
+                            <div class="space-y-4">
+                                <div class="stat-row p-5 rounded-r-lg flex items-center gap-4 shadow-md border-l-4" style="border-color: var(--elem-color)">
+                                    <div class="w-14 h-14 lg:w-16 lg:h-16 rounded-full border-2 border-dashed border-gi-gold/40 bg-black/50 flex-shrink-0 flex items-center justify-center overflow-hidden">
+                                        <!-- Weapon Image Placeholder -->
+                                        <i class="fa-solid fa-khanda text-gi-textLight/20 text-xl lg:text-2xl"></i>
+                                    </div>
+                                    <div class="flex flex-col gap-1">
+                                        <span class="text-gi-gold font-bold text-xs uppercase tracking-widest"><i class="fa-solid fa-crown mr-2"></i>Best in Slot</span>
+                                        <span class="text-white font-bold text-lg lg:text-xl drop-shadow-md">${char.bestWeapon}</span>
+                                    </div>
+                                </div>
+                                <div class="stat-row p-5 rounded-r-lg flex items-center gap-4 shadow-md opacity-90 mt-4 border-l-4 border-gi-panelLight">
+                                    <div class="w-12 h-12 lg:w-14 lg:h-14 rounded-full border-2 border-dashed border-gi-gold/30 bg-black/40 flex-shrink-0 flex items-center justify-center overflow-hidden">
+                                        <!-- Weapon Image Placeholder -->
+                                        <i class="fa-solid fa-khanda text-gi-textLight/20 text-lg lg:text-xl"></i>
+                                    </div>
+                                    <div class="flex flex-col gap-1">
+                                        <span class="text-gi-textLight font-bold text-xs uppercase tracking-widest"><i class="fa-solid fa-scale-balanced mr-2"></i>Strong Alternatives</span>
+                                        <span class="text-gi-parchment font-bold text-md lg:text-lg">${char.altWeapon}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Panel: Artifacts & Stats -->
+                        <div id="panel-artifacts" class="modal-panel-content space-y-6">
+                            <h3 class="font-serif text-2xl text-gi-parchment border-b-[2px] border-gi-gold/50 pb-2 tracking-wide flex items-center gap-3">
+                                <i class="fa-solid fa-gem text-gi-gold"></i> Artifacts & Priority
                             </h3>
                             
+                            <!-- Talent Priority Addition -->
+                            <div class="bg-black/30 p-4 rounded-lg border border-gi-gold/20 shadow-inner mb-6">
+                                <p class="text-gi-gold font-bold text-[10px] uppercase tracking-widest mb-2 flex items-center gap-2"><i class="fa-solid fa-book-journal-whills"></i> Talent Level-Up Priority</p>
+                                <div class="flex flex-wrap items-center gap-2 text-gi-parchment text-xs sm:text-sm font-bold">
+                                    ${talentPriorityHtml}
+                                </div>
+                            </div>
+
+                            <div class="space-y-3 mb-6">
+                                <div class="stat-row p-4 rounded-r-lg flex items-center gap-4 shadow-md border-l-4" style="border-color: var(--elem-color)">
+                                    <div class="w-12 h-12 lg:w-14 lg:h-14 rounded-full border-2 border-dashed border-gi-gold/40 bg-black/50 flex-shrink-0 flex items-center justify-center overflow-hidden">
+                                        <!-- Artifact Image Placeholder -->
+                                        <i class="fa-solid fa-gem text-gi-textLight/20 text-lg"></i>
+                                    </div>
+                                    <div class="flex flex-col gap-1">
+                                        <span class="text-gi-gold font-bold text-[10px] uppercase tracking-widest block mb-1">Best Artifact Set</span>
+                                        <span class="text-white font-bold text-md lg:text-lg tracking-wide drop-shadow-md">${char.artifactSet}</span>
+                                    </div>
+                                </div>
+                                <div class="stat-row p-4 rounded-r-lg flex items-center gap-4 shadow-md opacity-90 border-l-4 border-gi-panelLight">
+                                    <div class="w-10 h-10 lg:w-12 lg:h-12 rounded-full border-2 border-dashed border-gi-gold/30 bg-black/40 flex-shrink-0 flex items-center justify-center overflow-hidden">
+                                        <!-- Artifact Image Placeholder -->
+                                        <i class="fa-solid fa-gem text-gi-textLight/20 text-md"></i>
+                                    </div>
+                                    <div class="flex flex-col gap-1">
+                                        <span class="text-gi-textLight font-bold text-[10px] uppercase tracking-widest block mb-1">Alternative Options</span>
+                                        <span class="text-gi-parchment font-bold text-[14px] lg:text-[15px] tracking-wide">${char.altArtifacts}</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-3 gap-2 sm:gap-3 mb-6">
+                                <div class="bg-black/40 border border-gi-gold/20 p-2 sm:p-3 rounded-lg text-center shadow-inner hover:border-gi-gold/60 transition-colors">
+                                    <i class="fa-regular fa-hourglass-half text-gi-gold text-sm sm:text-lg mb-1"></i>
+                                    <p class="text-[8px] sm:text-[9px] text-gi-textLight uppercase tracking-widest mb-1">Sands</p>
+                                    <p class="text-[10px] sm:text-xs text-gi-parchment font-bold leading-tight">${char.sands}</p>
+                                </div>
+                                <div class="bg-black/40 border border-gi-gold/20 p-2 sm:p-3 rounded-lg text-center shadow-inner hover:border-gi-gold/60 transition-colors">
+                                    <i class="fa-solid fa-wine-glass text-gi-gold text-sm sm:text-lg mb-1"></i>
+                                    <p class="text-[8px] sm:text-[9px] text-gi-textLight uppercase tracking-widest mb-1">Goblet</p>
+                                    <p class="text-[10px] sm:text-xs text-gi-parchment font-bold leading-tight">${char.goblet}</p>
+                                </div>
+                                <div class="bg-black/40 border border-gi-gold/20 p-2 sm:p-3 rounded-lg text-center shadow-inner hover:border-gi-gold/60 transition-colors">
+                                    <i class="fa-solid fa-crown text-gi-gold text-sm sm:text-lg mb-1"></i>
+                                    <p class="text-[8px] sm:text-[9px] text-gi-textLight uppercase tracking-widest mb-1">Circlet</p>
+                                    <p class="text-[10px] sm:text-xs text-gi-parchment font-bold leading-tight">${char.circlet}</p>
+                                </div>
+                            </div>
+
+                            <p class="text-gi-gold font-bold text-[10px] uppercase tracking-widest mb-2 opacity-90 border-t border-gi-gold/20 pt-4">Target Sub-Stats</p>
                             <div class="stats-table-container">
-                                <table class="w-full text-left text-sm">
-                                    <tbody>
-                                        ${statsRows}
-                                    </tbody>
+                                <table class="w-full text-left text-xs sm:text-sm">
+                                    <tbody>${statsRows}</tbody>
                                 </table>
                             </div>
+                        </div>
 
-                            <div class="grid grid-cols-3 gap-3 mt-4">
-                                <div class="bg-black/40 border border-gi-gold/20 p-3 rounded-lg text-center shadow-inner hover:border-gi-gold/60 transition-colors">
-                                    <i class="fa-regular fa-hourglass-half text-gi-gold text-lg mb-1"></i>
-                                    <p class="text-[9px] text-gi-textLight uppercase tracking-widest mb-1">Sands</p>
-                                    <p class="text-xs text-gi-parchment font-bold">${char.sands.split('/')[0].trim()}</p>
+                        <!-- Panel: Team Comps -->
+                        <div id="panel-teams" class="modal-panel-content space-y-6">
+                            <h3 class="font-serif text-2xl text-gi-parchment border-b-[2px] border-gi-gold/50 pb-2 tracking-wide flex items-center gap-3">
+                                <i class="fa-solid fa-users text-gi-gold"></i> Best Synergies
+                            </h3>
+                            <div class="flex flex-col gap-4">
+                                ${teamCards}
+                            </div>
+                        </div>
+
+                        <!-- Panel: Constellations -->
+                        <div id="panel-constellations" class="modal-panel-content h-full">
+                            <div class="flex flex-col space-y-6 h-full">
+                                <h3 class="font-serif text-2xl text-gi-parchment border-b-[2px] border-gi-gold/50 pb-2 tracking-wide flex items-center gap-3 shrink-0">
+                                    <i class="fa-solid fa-star-of-life text-gi-gold"></i> Constellation
+                                </h3>
+                                <p class="text-gi-gold font-bold text-[10px] lg:text-xs uppercase tracking-widest mb-2"><i class="fa-solid fa-star-of-life mr-1"></i> ${char.constellation}</p>
+                                
+                                <!-- Constellation Star Map -->
+                                <div class="relative w-full h-48 md:h-64 bg-black/40 rounded-xl border border-gi-gold/20 overflow-hidden shrink-0 shadow-inner group">
+                                    <!-- Background Glow based on Element -->
+                                    <div class="absolute inset-0 opacity-20 transition-opacity duration-500 group-hover:opacity-40" style="background: radial-gradient(circle at 50% 50%, rgba(var(--elem-rgb), 0.8), transparent 70%);"></div>
+                                    
+                                    <!-- Connecting Path -->
+                                    <svg class="absolute inset-0 w-full h-full drop-shadow-md" viewBox="0 0 100 100" preserveAspectRatio="none">
+                                        <polyline points="15,80 30,35 50,70 70,25 85,60 95,15" fill="none" stroke="rgba(204,165,116,0.4)" stroke-width="0.8" stroke-dasharray="2 2" class="opacity-80"/>
+                                    </svg>
+
+                                    <!-- Constellation Nodes -->
+                                    <!-- C1 -->
+                                    <button class="constel-node active absolute w-8 h-8 md:w-10 md:h-10 rounded-full border-2 border-gi-goldBright bg-gi-panel transform -translate-x-1/2 -translate-y-1/2 flex items-center justify-center shadow-[0_0_15px_rgba(230,200,117,0.8)] transition-all duration-300 hover:scale-110 z-10 scale-110" style="left: 15%; top: 80%;" data-idx="0">
+                                        <span class="text-xs md:text-sm text-gi-parchment font-bold">1</span>
+                                    </button>
+                                    <!-- C2 -->
+                                    <button class="constel-node absolute w-8 h-8 md:w-10 md:h-10 rounded-full border-2 border-gi-gold/60 bg-gi-panel transform -translate-x-1/2 -translate-y-1/2 flex items-center justify-center shadow-[0_0_10px_rgba(0,0,0,0.5)] transition-all duration-300 hover:border-gi-goldBright hover:scale-110 z-10" style="left: 30%; top: 35%;" data-idx="1">
+                                        <span class="text-xs md:text-sm text-gi-parchment font-bold opacity-70">2</span>
+                                    </button>
+                                    <!-- C3 -->
+                                    <button class="constel-node absolute w-8 h-8 md:w-10 md:h-10 rounded-full border-2 border-gi-gold/60 bg-gi-panel transform -translate-x-1/2 -translate-y-1/2 flex items-center justify-center shadow-[0_0_10px_rgba(0,0,0,0.5)] transition-all duration-300 hover:border-gi-goldBright hover:scale-110 z-10" style="left: 50%; top: 70%;" data-idx="2">
+                                        <span class="text-xs md:text-sm text-gi-parchment font-bold opacity-70">3</span>
+                                    </button>
+                                    <!-- C4 -->
+                                    <button class="constel-node absolute w-8 h-8 md:w-10 md:h-10 rounded-full border-2 border-gi-gold/60 bg-gi-panel transform -translate-x-1/2 -translate-y-1/2 flex items-center justify-center shadow-[0_0_10px_rgba(0,0,0,0.5)] transition-all duration-300 hover:border-gi-goldBright hover:scale-110 z-10" style="left: 70%; top: 25%;" data-idx="3">
+                                        <span class="text-xs md:text-sm text-gi-parchment font-bold opacity-70">4</span>
+                                    </button>
+                                    <!-- C5 -->
+                                    <button class="constel-node absolute w-8 h-8 md:w-10 md:h-10 rounded-full border-2 border-gi-gold/60 bg-gi-panel transform -translate-x-1/2 -translate-y-1/2 flex items-center justify-center shadow-[0_0_10px_rgba(0,0,0,0.5)] transition-all duration-300 hover:border-gi-goldBright hover:scale-110 z-10" style="left: 85%; top: 60%;" data-idx="4">
+                                        <span class="text-xs md:text-sm text-gi-parchment font-bold opacity-70">5</span>
+                                    </button>
+                                    <!-- C6 -->
+                                    <button class="constel-node absolute w-8 h-8 md:w-10 md:h-10 rounded-full border-2 border-gi-gold/60 bg-gi-panel transform -translate-x-1/2 -translate-y-1/2 flex items-center justify-center shadow-[0_0_10px_rgba(0,0,0,0.5)] transition-all duration-300 hover:border-gi-goldBright hover:scale-110 z-10" style="left: 95%; top: 15%;" data-idx="5">
+                                        <span class="text-xs md:text-sm text-gi-parchment font-bold opacity-70">6</span>
+                                    </button>
                                 </div>
-                                <div class="bg-black/40 border border-gi-gold/20 p-3 rounded-lg text-center shadow-inner hover:border-gi-gold/60 transition-colors">
-                                    <i class="fa-solid fa-wine-glass text-gi-gold text-lg mb-1"></i>
-                                    <p class="text-[9px] text-gi-textLight uppercase tracking-widest mb-1">Goblet</p>
-                                    <p class="text-xs text-gi-parchment font-bold">${char.goblet.split('/')[0].trim()}</p>
-                                </div>
-                                <div class="bg-black/40 border border-gi-gold/20 p-3 rounded-lg text-center shadow-inner hover:border-gi-gold/60 transition-colors">
-                                    <i class="fa-solid fa-crown text-gi-gold text-lg mb-1"></i>
-                                    <p class="text-[9px] text-gi-textLight uppercase tracking-widest mb-1">Circlet</p>
-                                    <p class="text-xs text-gi-parchment font-bold">${char.circlet.split('/')[0].trim()}</p>
+
+                                <!-- Details Display -->
+                                <div class="bg-black/30 p-5 rounded-lg border-l-4 shadow-inner flex-grow flex flex-col justify-center transition-all duration-300" style="border-color: var(--elem-color)">
+                                    <span id="constel-level" class="text-gi-gold font-bold text-xs uppercase tracking-widest mb-2"><i class="fa-solid fa-star-half-stroke mr-1"></i> Constellation 1</span>
+                                    <h4 id="constel-title" class="text-lg md:text-xl font-serif text-white mb-3 tracking-wide drop-shadow-md">${char.constellations[0].name}</h4>
+                                    <p id="constel-desc" class="text-gi-textLight text-sm md:text-[15px] leading-relaxed font-sans">${char.constellations[0].desc}</p>
                                 </div>
                             </div>
-
                         </div>
+
                     </div>
                 </div>
             `;
+            
             modalOverlay.classList.add('active');
             document.body.style.overflow = 'hidden'; 
+
+            // Initialize Tab Switching Logic
+            const tabs = modalBody.querySelectorAll('.minimal-tab');
+            const panels = modalBody.querySelectorAll('.modal-panel-content');
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    tabs.forEach(t => t.classList.remove('active'));
+                    panels.forEach(p => p.classList.remove('active'));
+                    
+                    tab.classList.add('active');
+                    const target = tab.getAttribute('data-target');
+                    modalBody.querySelector(`#${target}`).classList.add('active');
+                });
+            });
+
+            // Initialize Constellation Node Logic
+            const constelNodes = modalBody.querySelectorAll('.constel-node');
+            const constelTitle = modalBody.querySelector('#constel-title');
+            const constelDesc = modalBody.querySelector('#constel-desc');
+            const constelLevel = modalBody.querySelector('#constel-level');
+
+            constelNodes.forEach(node => {
+                node.addEventListener('click', () => {
+                    const idx = parseInt(node.getAttribute('data-idx'));
+                    
+                    // Reset all nodes styling
+                    constelNodes.forEach(n => {
+                        n.classList.remove('active', 'border-gi-goldBright', 'scale-110', 'shadow-[0_0_15px_rgba(230,200,117,0.8)]');
+                        n.classList.add('border-gi-gold/60');
+                        n.querySelector('span').classList.add('opacity-70');
+                    });
+                    
+                    // Activate clicked node
+                    node.classList.add('active', 'border-gi-goldBright', 'scale-110', 'shadow-[0_0_15px_rgba(230,200,117,0.8)]');
+                    node.classList.remove('border-gi-gold/60');
+                    node.querySelector('span').classList.remove('opacity-70');
+
+                    // Add a tiny animation effect to text update
+                    constelDesc.style.opacity = 0;
+                    constelTitle.style.opacity = 0;
+                    
+                    setTimeout(() => {
+                        constelLevel.innerHTML = `<i class="fa-solid fa-star-half-stroke mr-1"></i> Constellation ${idx + 1}`;
+                        constelTitle.innerHTML = char.constellations[idx].name;
+                        constelDesc.innerHTML = char.constellations[idx].desc;
+                        
+                        constelDesc.style.opacity = 1;
+                        constelTitle.style.opacity = 1;
+                        constelDesc.style.transition = 'opacity 0.3s ease';
+                        constelTitle.style.transition = 'opacity 0.3s ease';
+                    }, 150);
+                });
+            });
         }
 
         function closeModal() {
