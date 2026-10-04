@@ -152,20 +152,29 @@
         .char-card:hover::after, .char-card:focus-visible::after { border-color: rgba(var(--elem-rgb), 1); inset: 4px; }
         .char-card:hover .char-img-container img { transform: scale(1.1) translateZ(0); }
 
-        /* --- Minimalist Stripe Nav --- */
+                /* --- Minimalist Stripe Nav --- */
         .minimal-nav-container {
             position: relative;
             display: flex;
-            justify-content: center;
-            gap: 1rem;
-            padding: 1rem 0 0.5rem 0;
+            justify-content: flex-start; /* Anchors left on mobile so first tabs aren't cut off */
+            gap: 0.5rem;
+            padding: 1rem 1.5rem 0.5rem 1.5rem; /* Padding replaces margin for flush edge scrolling */
             border-bottom: 2px solid rgba(255,255,255,0.1);
-            margin: 0 1.5rem;
             overflow-x: auto;
             scrollbar-width: none; /* Firefox */
             -webkit-overflow-scrolling: touch; /* Momentum scrolling for mobile */
             scroll-behavior: smooth;
         }
+
+        /* Center the strip perfectly on PC */
+        @media (min-width: 1024px) {
+            .minimal-nav-container {
+                justify-content: center;
+                gap: 1rem;
+                padding: 1.5rem 2rem 0.5rem 2rem;
+            }
+        }
+        
         .minimal-nav-container::-webkit-scrollbar { display: none; }
         
         .minimal-tab {
@@ -175,12 +184,21 @@
             color: rgba(227, 216, 200, 0.6);
             font-family: 'Nunito', sans-serif;
             font-weight: 700;
-            font-size: 0.95rem;
-            padding: 0.5rem 1rem;
+            font-size: 0.9rem; /* Slightly smaller for mobile optimization */
+            padding: 0.5rem 0.75rem;
             cursor: pointer;
             transition: color 0.3s ease, text-shadow 0.3s ease;
             white-space: nowrap;
             outline: none;
+            flex-shrink: 0; /* Prevents text/icons from squishing together */
+        }
+
+        /* Restore larger tab sizing on PC */
+        @media (min-width: 1024px) {
+            .minimal-tab {
+                font-size: 0.95rem;
+                padding: 0.5rem 1rem;
+            }
         }
 
         .minimal-tab:hover {
