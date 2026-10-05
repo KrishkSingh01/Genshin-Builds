@@ -45,6 +45,20 @@
 
         /* Element SVG Styling */
         .elem-svg { width: 1.2em; height: 1.2em; object-fit: contain; vertical-align: middle; filter: drop-shadow(0 2px 3px rgba(0,0,0,0.6)); }
+
+        .elem-svg.element-fallback {
+            width: 1.2em; height: 1.2em; min-width: 1.2em;
+            display: inline-flex; align-items: center; justify-content: center;
+            object-fit: contain; vertical-align: middle;
+            filter: drop-shadow(0 2px 3px rgba(0,0,0,0.6));
+        }
+        .element-fallback-glyph {
+            width: 1.2em; height: 1.2em; display: inline-flex; align-items: center; justify-content: center;
+            font-size: 0.95em; line-height: 1; font-weight: 900;
+            border-radius: 50%; background: rgba(0,0,0,0.35);
+            border: 1px solid currentColor; text-shadow: 0 1px 3px #000;
+        }
+
         
         /* Live Background */
         .live-bg { position: fixed; inset: 0; z-index: -1; background: #0b0d17; overflow: hidden; pointer-events: none; }
@@ -402,13 +416,13 @@
                     <div class="filter-group-title">Element</div>
                     <div class="filter-options">
                         <button class="filter-chip active" data-type="element" data-val="All">All</button>
-                        <button class="filter-chip" data-type="element" data-val="Pyro"><img src="https://static.wikia.nocookie.net/gensin-impact/images/2/2c/Element_Pyro.svg/revision/latest?cb=20240401115510" class="elem-svg" alt="Pyro"> Pyro</button>
-                        <button class="filter-chip" data-type="element" data-val="Hydro"><img src="https://static.wikia.nocookie.net/gensin-impact/images/8/80/Element_Hydro.svg/revision/latest?cb=20240401115449" class="elem-svg" alt="Hydro"> Hydro</button>
-                        <button class="filter-chip" data-type="element" data-val="Anemo"><img src="https://static.wikia.nocookie.net/gensin-impact/images/1/10/Element_Anemo.svg/revision/latest?cb=20240401115016" class="elem-svg" alt="Anemo"> Anemo</button>
-                        <button class="filter-chip" data-type="element" data-val="Electro"><img src="https://static.wikia.nocookie.net/gensin-impact/images/f/ff/Element_Electro.svg/revision/latest?cb=20240401115329" class="elem-svg" alt="Electro"> Electro</button>
-                        <button class="filter-chip" data-type="element" data-val="Dendro"><img src="https://static.wikia.nocookie.net/gensin-impact/images/7/73/Element_Dendro.svg/revision/latest?cb=20240401115226" class="elem-svg" alt="Dendro"> Dendro</button>
-                        <button class="filter-chip" data-type="element" data-val="Cryo"><img src="https://static.wikia.nocookie.net/gensin-impact/images/7/72/Element_Cryo.svg/revision/latest?cb=20240401115157" class="elem-svg" alt="Cryo"> Cryo</button>
-                        <button class="filter-chip" data-type="element" data-val="Geo"><img src="https://static.wikia.nocookie.net/gensin-impact/images/9/9b/Element_Geo.svg/revision/latest?cb=20240401115352" class="elem-svg" alt="Geo"> Geo</button>
+                        <button class="filter-chip" data-type="element" data-val="Pyro"><img src="https://static.wikia.nocookie.net/gensin-impact/images/2/2c/Element_Pyro.svg/revision/latest?cb=20240401115510" referrerpolicy="no-referrer" class="elem-svg" alt="Pyro"> Pyro</button>
+                        <button class="filter-chip" data-type="element" data-val="Hydro"><img src="https://static.wikia.nocookie.net/gensin-impact/images/8/80/Element_Hydro.svg/revision/latest?cb=20240401115449" referrerpolicy="no-referrer" class="elem-svg" alt="Hydro"> Hydro</button>
+                        <button class="filter-chip" data-type="element" data-val="Anemo"><img src="https://static.wikia.nocookie.net/gensin-impact/images/1/10/Element_Anemo.svg/revision/latest?cb=20240401115016" referrerpolicy="no-referrer" class="elem-svg" alt="Anemo"> Anemo</button>
+                        <button class="filter-chip" data-type="element" data-val="Electro"><img src="https://static.wikia.nocookie.net/gensin-impact/images/f/ff/Element_Electro.svg/revision/latest?cb=20240401115329" referrerpolicy="no-referrer" class="elem-svg" alt="Electro"> Electro</button>
+                        <button class="filter-chip" data-type="element" data-val="Dendro"><img src="https://static.wikia.nocookie.net/gensin-impact/images/7/73/Element_Dendro.svg/revision/latest?cb=20240401115226" referrerpolicy="no-referrer" class="elem-svg" alt="Dendro"> Dendro</button>
+                        <button class="filter-chip" data-type="element" data-val="Cryo"><img src="https://static.wikia.nocookie.net/gensin-impact/images/7/72/Element_Cryo.svg/revision/latest?cb=20240401115157" referrerpolicy="no-referrer" class="elem-svg" alt="Cryo"> Cryo</button>
+                        <button class="filter-chip" data-type="element" data-val="Geo"><img src="https://static.wikia.nocookie.net/gensin-impact/images/9/9b/Element_Geo.svg/revision/latest?cb=20240401115352" referrerpolicy="no-referrer" class="elem-svg" alt="Geo"> Geo</button>
                     </div>
                 </div>
 
@@ -462,6 +476,41 @@
             Cryo: "https://static.wikia.nocookie.net/gensin-impact/images/7/72/Element_Cryo.svg/revision/latest?cb=20240401115157",
             Dendro: "https://static.wikia.nocookie.net/gensin-impact/images/7/73/Element_Dendro.svg/revision/latest?cb=20240401115226"
         };
+
+        // Element icon resilience: external Fandom/Wikia SVGs can be blocked by
+        // hotlink protection, extensions, CSP, or temporary CDN failures.
+        // Keep the requested URLs as the primary source, but never leave a blank icon.
+        const elementFallbacks = {
+            Pyro: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" aria-hidden="true"><path fill="#ec4923" d="M35 4c5 12-3 17 7 24 5 4 9 9 9 16 0 10-8 17-19 17S12 54 12 43c0-10 6-17 15-24 0 8 3 12 7 15-1-9 5-17 1-30Z"/><path fill="#ffd37a" d="M36 28c7 8 9 12 9 17 0 7-5 11-12 11-6 0-11-4-11-10 0-5 4-9 9-14 0 5 2 7 5 9-1-5 0-9 0-13Z"/></svg>',
+            Electro: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" aria-hidden="true"><path fill="#9b59ff" d="M38 3 12 35h17l-5 26 28-36H35Z"/></svg>',
+            Geo: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" aria-hidden="true"><path fill="#e0ad35" d="m32 5 24 14v27L32 59 8 46V19Zm0 9L17 23v15l15 9 15-9V23Z"/><path fill="#f5d77a" d="m32 21 10 6-10 6-10-6Z"/></svg>',
+            Anemo: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" aria-hidden="true"><path fill="#55d8c8" d="M31 7c10 0 17 6 17 14 0 7-5 12-12 12h-9c-5 0-8 3-8 7s3 7 8 7c7 0 11-4 15-9l5 4c-5 8-11 12-20 12-10 0-17-6-17-14 0-8 6-14 16-14h10c3 0 5-2 5-5 0-4-4-7-9-7-7 0-11 4-15 9l-5-4C17 11 23 7 31 7Z"/></svg>',
+            Hydro: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" aria-hidden="true"><path fill="#31c7ff" d="M32 4S12 28 12 41c0 12 9 19 20 19s20-7 20-19C52 28 32 4 32 4Z"/><path fill="#a9ecff" d="M32 18c-7 10-11 17-11 22 0 6 4 10 10 10 2 0 4 0 6-1-7-2-10-6-10-11 0-5 2-11 5-20Z"/></svg>',
+            Cryo: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" aria-hidden="true"><g fill="none" stroke="#9feaff" stroke-width="5" stroke-linecap="round"><path d="M32 5v54M9 18l46 28M9 46l46-28M20 11l12 21 12-21M20 53l12-21 12 21"/></g></svg>',
+            Dendro: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" aria-hidden="true"><path fill="#54d94f" d="M32 57c-2-15-9-24-20-30 3-12 13-20 25-20 2 0 5 0 7 1 0 12-5 22-14 28 6-1 12-4 17-9 4 8 1 18-7 23-3 2-5 4-8 7Z"/><path fill="#b8f39a" d="M31 50c1-12 5-21 12-29-8 5-13 12-16 21Z"/></svg>'
+        };
+
+        function elementFallbackDataUri(element) {
+            const svg = elementFallbacks[element] || elementFallbacks.Geo;
+            return 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(svg);
+        }
+
+        function installElementIconFallbacks(root = document) {
+            root.querySelectorAll('img.elem-svg, img.elem-bg-icon, .modal-title-icon img').forEach(img => {
+                if (img.dataset.elementFallbackBound === '1') return;
+                img.dataset.elementFallbackBound = '1';
+                img.addEventListener('error', () => {
+                    const element = img.dataset.element || img.alt || Object.keys(elemIcons).find(k => img.src.includes(elemIcons[k])) || 'Geo';
+                    img.onerror = null;
+                    img.src = elementFallbackDataUri(element);
+                    img.classList.add('element-fallback');
+                }, { once: true });
+            });
+        }
+
+        // Covers both static filters and dynamically-created card/modal markup.
+        installElementIconFallbacks();
+
 
         const teamCompImages = {
     "Furina": "https://img.game8.co/3790954/846f7e8888c6580354c236409f8a7f2f.png/show",
@@ -3351,7 +3400,7 @@
             
             if(filters.rarity !== 'All' || filters.element !== 'All' || filters.role !== 'All') {
                 if(filters.rarity !== 'All') activeFiltersContainer.innerHTML += `<span class="filter-tag"><i class="fa-solid fa-star"></i> ${filters.rarity}-Star</span>`;
-                if(filters.element !== 'All') activeFiltersContainer.innerHTML += `<span class="filter-tag"><img src="${elemIcons[filters.element]}" class="elem-svg" alt="${filters.element}"> ${filters.element}</span>`;
+                if(filters.element !== 'All') activeFiltersContainer.innerHTML += `<span class="filter-tag"><img src="${elemIcons[filters.element]}" referrerpolicy="no-referrer" data-element="${filters.element}" class="elem-svg" alt="${filters.element}"> ${filters.element}</span>`;
                 if(filters.role !== 'All') activeFiltersContainer.innerHTML += `<span class="filter-tag">${filters.role}</span>`;
             } else {
                 activeFiltersContainer.innerHTML = `<span class="filter-tag">All Characters (${characters.length})</span>`;
@@ -3510,11 +3559,11 @@
 
             const teamCards = char.teams.map((team, idx) => {
                 const badges = [
-                    `<span class="team-badge badge-0"><img src="${elemIcons.Pyro}" class="elem-svg"> Highest DMG</span>`,
-                    `<span class="team-badge badge-1"><img src="${elemIcons.Electro}" class="elem-svg"> Alternative Meta</span>`,
-                    `<span class="team-badge badge-2"><img src="${elemIcons.Geo}" class="elem-svg"> Standard Core</span>`,
-                    `<span class="team-badge badge-3"><img src="${elemIcons.Hydro}" class="elem-svg"> Flex Synergy</span>`,
-                    `<span class="team-badge badge-4"><img src="${elemIcons.Dendro}" class="elem-svg"> F2P Friendly</span>`
+                    `<span class="team-badge badge-0"><img src="${elemIcons.Pyro}" referrerpolicy="no-referrer" data-element="Pyro" class="elem-svg" alt="Pyro"> Highest DMG</span>`,
+                    `<span class="team-badge badge-1"><img src="${elemIcons.Electro}" referrerpolicy="no-referrer" data-element="Electro" class="elem-svg" alt="Electro"> Alternative Meta</span>`,
+                    `<span class="team-badge badge-2"><img src="${elemIcons.Geo}" referrerpolicy="no-referrer" data-element="Geo" class="elem-svg" alt="Geo"> Standard Core</span>`,
+                    `<span class="team-badge badge-3"><img src="${elemIcons.Hydro}" referrerpolicy="no-referrer" data-element="Hydro" class="elem-svg" alt="Hydro"> Flex Synergy</span>`,
+                    `<span class="team-badge badge-4"><img src="${elemIcons.Dendro}" referrerpolicy="no-referrer" data-element="Dendro" class="elem-svg" alt="Dendro"> F2P Friendly</span>`
                 ];
                 
                 const rankBadge = badges[idx] || badges[2];
@@ -3554,12 +3603,12 @@
             modalBody.innerHTML = `
                 <div class="modal-img-wrapper ${bgClass}">
                     <div class="bg-pattern"></div>
-                    <img src="${elemIcons[char.element]}" class="elem-bg-icon" alt="${char.element}">
+                    <img src="${elemIcons[char.element]}" referrerpolicy="no-referrer" data-element="${char.element}" class="elem-bg-icon" alt="${char.element}">
                     <img src="${char.image}" alt="${char.name}" class="char-full-img">
                     
                     <div class="modal-title-box">
                         <div class="modal-title-icon" style="border-color: ${char.elementColor}">
-                            <img src="${elemIcons[char.element]}" alt="${char.element}" style="width: 1.8rem; height: 1.8rem; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.8));">
+                            <img src="${elemIcons[char.element]}" referrerpolicy="no-referrer" data-element="${char.element}" alt="${char.element}" style="width: 1.8rem; height: 1.8rem; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.8));">
                         </div>
                         <div class="modal-title-text">
                             <h2>${char.name}</h2>
@@ -3712,6 +3761,8 @@
                 </div>
             `;
             
+            installElementIconFallbacks(modalBody);
+
             modalOverlay.classList.add('active');
             document.body.style.overflow = 'hidden'; 
 
