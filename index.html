@@ -7,8 +7,8 @@
     <style>
         :root {
             /* Core Theme Colors */
-            --bg-deep-blue: #040a18;
-            --bg-gold-tint: #1c1502;
+            --bg-deep-blue: #080812;
+            --bg-gold-tint: #180d25;
             
             /* Neon Accents */
             --neon-gold: #FFD700;
@@ -17,11 +17,11 @@
             --neon-green: #32CD32;
             --neon-green-glow: rgba(50, 205, 50, 0.8);
             
-            --neon-cyan: #00f3ff;
-            --neon-cyan-glow: rgba(0, 243, 255, 0.6);
+            --neon-cyan: #a78bfa;
+            --neon-cyan-glow: rgba(167, 139, 250, 0.62);
 
-            --ui-dark: rgba(5, 10, 20, 0.9);
-            --ui-border: rgba(255, 215, 0, 0.15); 
+            --ui-dark: rgba(10, 9, 20, 0.92);
+            --ui-border: rgba(167, 139, 250, 0.22); 
         }
 
         * {
@@ -48,7 +48,7 @@
         .base-bg {
             position: fixed;
             top: 0; left: 0; width: 100vw; height: 100vh;
-            background: linear-gradient(135deg, var(--bg-deep-blue) 0%, #0a1128 50%, var(--bg-gold-tint) 100%);
+            background: radial-gradient(ellipse at 18% 18%, rgba(124, 58, 237, 0.16), transparent 42%), linear-gradient(135deg, #080812 0%, #11101f 52%, #180d25 100%);
             z-index: 0;
             pointer-events: none;
         }
@@ -81,7 +81,7 @@
             background-size: contain;
             background-repeat: no-repeat;
             background-position: center;
-            filter: drop-shadow(0 0 18px rgba(0, 243, 255, 0.30));
+            filter: drop-shadow(0 0 18px rgba(167, 139, 250, 0.30));
             transition: opacity 0.45s ease, filter 0.45s ease;
         }
 
@@ -102,7 +102,7 @@
             content: "";
             position: absolute;
             inset: 0;
-            background: linear-gradient(135deg, rgba(4, 10, 24, 0.22), rgba(4, 10, 24, 0.38));
+            background: linear-gradient(135deg, rgba(8, 8, 18, 0.18), rgba(8, 8, 18, 0.40));
             pointer-events: none;
         }
 
@@ -111,8 +111,8 @@
             top: 0; left: 0; width: 100vw; height: 100vh;
             z-index: 2;
             background-image: 
-                linear-gradient(rgba(255, 215, 0, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255, 215, 0, 0.03) 1px, transparent 1px);
+                linear-gradient(rgba(167, 139, 250, 0.045) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(167, 139, 250, 0.045) 1px, transparent 1px);
             background-size: 40px 40px;
             pointer-events: none;
         }
@@ -316,7 +316,7 @@
             border-color: rgba(255, 215, 0, 0.1);
             border-top-color: var(--neon-gold);
             text-shadow: 0 0 10px var(--neon-gold-glow);
-            background: linear-gradient(180deg, rgba(255, 215, 0, 0.05) 0%, rgba(4, 10, 24, 0.9) 100%);
+            background: linear-gradient(180deg, rgba(255, 215, 0, 0.05) 0%, rgba(10, 9, 20, 0.92) 100%);
         }
         .dynamic-box.active-genshin::before {
             background: var(--neon-gold);
@@ -330,7 +330,7 @@
             border-color: rgba(50, 205, 50, 0.1);
             border-top-color: var(--neon-green);
             text-shadow: 0 0 10px var(--neon-green-glow);
-            background: linear-gradient(180deg, rgba(50, 205, 50, 0.05) 0%, rgba(4, 10, 24, 0.9) 100%);
+            background: linear-gradient(180deg, rgba(50, 205, 50, 0.05) 0%, rgba(10, 9, 20, 0.92) 100%);
         }
         .dynamic-box.active-minecraft::before {
             background: var(--neon-green);
@@ -514,8 +514,8 @@
                     <circle class="ring-med" cx="300" cy="300" r="220" stroke="url(#green-neon)" stroke-width="2" stroke-dasharray="90 30 15 30" fill="none" filter="drop-shadow(0 0 6px var(--neon-green-glow))"/>
                     <circle class="ring-slow" cx="300" cy="300" r="198" stroke="rgba(255,255,255,0.15)" stroke-width="1" stroke-dasharray="6 6" fill="none" />
 
-                    <a href="./coregenshin.html" id="genshin-link" aria-label="Open Genshin Impact">
-                        <g class="half-group half-genshin" id="btn-genshin" role="button" tabindex="0" aria-label="Open Genshin Impact">
+                    <a href="coregenshin.html" id="genshin-link" target="_blank" rel="noopener noreferrer" aria-label="Open Genshin Impact">
+                        <g class="half-group half-genshin" id="btn-genshin" aria-hidden="true">
                             <path class="half-path" d="M 296 120 
                                                        A 180 180 0 0 0 296 480 
                                                        L 296 380 
@@ -562,9 +562,7 @@
             const bgMinecraft = document.getElementById('bg-minecraft');
             const infoBox = document.getElementById('info-box');
             const defaultText = 'System Standby';
-            const redirectDelay = 1000;
-            let redirectTimer = null;
-            let redirecting = false;
+            let resetTimer = null;
 
             function showGame(game) {
                 backgroundLayer.classList.add('is-hovering');
@@ -578,7 +576,6 @@
             }
 
             function resetBackground() {
-                if (redirecting) return;
                 backgroundLayer.classList.remove('is-hovering');
                 bgGenshin.style.opacity = '0';
                 bgMinecraft.style.opacity = '0';
@@ -586,18 +583,6 @@
                 bgMinecraft.style.transform = 'scale(1)';
                 infoBox.textContent = defaultText;
                 infoBox.className = 'dynamic-box';
-            }
-
-            function openGenshin() {
-                if (redirecting) return;
-                redirecting = true;
-                showGame('genshin');
-                infoBox.textContent = 'Launching Genshin Impact…';
-                btnGenshin.setAttribute('aria-label', 'Launching Genshin Impact');
-                redirectTimer = window.setTimeout(() => {
-                    redirectTimer = null;
-                    window.location.assign(genshinLink.href);
-                }, redirectDelay);
             }
 
             // Desktop: smooth hover previews. Touch devices: tapping gives the same preview.
@@ -608,13 +593,16 @@
                 btnMinecraft.addEventListener('mouseleave', resetBackground);
             }
 
-            // Use click as the single activation path: it works for mouse, touch,
-            // stylus and keyboard-generated clicks without double-triggering navigation.
-            // Use a native SVG anchor as the hit target for reliable touch activation.
-            // JavaScript retains the 1-second launch animation; href is a fallback.
-            genshinLink.addEventListener('click', (event) => {
-                event.preventDefault();
-                openGenshin();
+            // Native anchor navigation opens Genshin in a new tab immediately.
+            // No scripted popup or delayed redirect: this is more reliable on phones,
+            // desktop browsers, and keyboard navigation.
+            genshinLink.addEventListener('click', () => {
+                showGame('genshin');
+                if (resetTimer !== null) window.clearTimeout(resetTimer);
+                resetTimer = window.setTimeout(() => {
+                    resetTimer = null;
+                    resetBackground();
+                }, 160);
             });
 
             btnMinecraft.addEventListener('click', (event) => {
@@ -622,35 +610,20 @@
                 showGame('minecraft');
             });
 
-            // SVG groups are not native buttons, so explicitly support keyboard activation.
-            [btnGenshin, btnMinecraft].forEach((button) => {
-                button.addEventListener('keydown', (event) => {
-                    if (event.key === 'Enter' || event.key === ' ') {
-                        event.preventDefault();
-                        if (button === btnGenshin) openGenshin();
-                        else showGame('minecraft');
-                    }
-                });
-            });
-
-            // Clear pending navigation when leaving this page.
-            window.addEventListener('pagehide', () => {
-                if (redirectTimer !== null) {
-                    window.clearTimeout(redirectTimer);
-                    redirectTimer = null;
+            // Minecraft is an SVG group rather than a native link/button.
+            btnMinecraft.addEventListener('keydown', (event) => {
+                if (event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault();
+                    showGame('minecraft');
                 }
             });
 
-            // Mobile browsers often restore this page from the back-forward cache.
-            // Reset the old launch/hover state and restart the animated wheel so it
-            // doesn't return frozen after the user presses the phone's Back button.
+            // Restore a clean standby state when returning from another page/tab.
             window.addEventListener('pageshow', (event) => {
-                redirecting = false;
-                if (redirectTimer !== null) {
-                    window.clearTimeout(redirectTimer);
-                    redirectTimer = null;
+                if (resetTimer !== null) {
+                    window.clearTimeout(resetTimer);
+                    resetTimer = null;
                 }
-                btnGenshin.setAttribute('aria-label', 'Genshin Impact');
                 resetBackground();
 
                 if (event.persisted) {
@@ -659,7 +632,6 @@
                     );
                     animatedParts.forEach((part) => {
                         part.style.animation = 'none';
-                        // Force layout before restoring the CSS animation.
                         void part.getBoundingClientRect();
                         part.style.animation = '';
                     });
