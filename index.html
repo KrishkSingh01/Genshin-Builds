@@ -514,7 +514,7 @@
                     <circle class="ring-med" cx="300" cy="300" r="220" stroke="url(#green-neon)" stroke-width="2" stroke-dasharray="90 30 15 30" fill="none" filter="drop-shadow(0 0 6px var(--neon-green-glow))"/>
                     <circle class="ring-slow" cx="300" cy="300" r="198" stroke="rgba(255,255,255,0.15)" stroke-width="1" stroke-dasharray="6 6" fill="none" />
 
-                    <a href="coregenshin.html" id="genshin-link" target="_blank" rel="noopener noreferrer" aria-label="Open Genshin Impact">
+                    <a href="coregenshin.html" id="genshin-link" aria-label="Open Genshin Impact">
                         <g class="half-group half-genshin" id="btn-genshin" aria-hidden="true">
                             <path class="half-path" d="M 296 120 
                                                        A 180 180 0 0 0 296 480 
@@ -596,13 +596,15 @@
             // Native anchor navigation opens Genshin in a new tab immediately.
             // No scripted popup or delayed redirect: this is more reliable on phones,
             // desktop browsers, and keyboard navigation.
-            genshinLink.addEventListener('click', () => {
+            genshinLink.addEventListener('click', (event) => {
+                event.preventDefault(); // Stops the immediate link navigation
                 showGame('genshin');
-                if (resetTimer !== null) window.clearTimeout(resetTimer);
-                resetTimer = window.setTimeout(() => {
-                    resetTimer = null;
-                    resetBackground();
-                }, 160);
+                infoBox.textContent = 'Launching Genshin Impact'; // Updates the status bar
+                
+                // Waits 1.25 seconds before redirecting in the same tab
+                setTimeout(() => {
+                    window.location.href = 'coregenshin.html';
+                }, 1250);
             });
 
             btnMinecraft.addEventListener('click', (event) => {
