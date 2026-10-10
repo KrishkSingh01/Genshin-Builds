@@ -341,6 +341,13 @@
 
 
         /* Responsive polish: preserve the neon motion while adapting to touch screens. */
+        #genshin-link {
+            cursor: pointer;
+            pointer-events: all;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+        }
+
         .half-group {
             -webkit-tap-highlight-color: transparent;
             touch-action: manipulation;
@@ -507,14 +514,16 @@
                     <circle class="ring-med" cx="300" cy="300" r="220" stroke="url(#green-neon)" stroke-width="2" stroke-dasharray="90 30 15 30" fill="none" filter="drop-shadow(0 0 6px var(--neon-green-glow))"/>
                     <circle class="ring-slow" cx="300" cy="300" r="198" stroke="rgba(255,255,255,0.15)" stroke-width="1" stroke-dasharray="6 6" fill="none" />
 
-                    <g class="half-group half-genshin" id="btn-genshin" role="button" tabindex="0" aria-label="Open Genshin Impact">
-                        <path class="half-path" d="M 296 120 
-                                                   A 180 180 0 0 0 296 480 
-                                                   L 296 380 
-                                                   A 80 80 0 0 1 296 220 Z" />
-                        <image class="logo-img" href="https://b.thumbs.redditmedia.com/82Mcyb68wCcglmF4t5ePl40F_a8nrPiaf5pCimG8FaU.jpg" xlink:href="https://b.thumbs.redditmedia.com/82Mcyb68wCcglmF4t5ePl40F_a8nrPiaf5pCimG8FaU.jpg" x="125" y="255" width="90" height="90" clip-path="url(#clip-left)" preserveAspectRatio="xMidYMid slice" />
-                        <circle cx="170" cy="300" r="45" fill="none" stroke="var(--neon-gold)" stroke-width="2" opacity="0.5" />
-                    </g>
+                    <a href="./coregenshin.html" id="genshin-link" aria-label="Open Genshin Impact">
+                        <g class="half-group half-genshin" id="btn-genshin" role="button" tabindex="0" aria-label="Open Genshin Impact">
+                            <path class="half-path" d="M 296 120 
+                                                       A 180 180 0 0 0 296 480 
+                                                       L 296 380 
+                                                       A 80 80 0 0 1 296 220 Z" />
+                            <image class="logo-img" href="https://b.thumbs.redditmedia.com/82Mcyb68wCcglmF4t5ePl40F_a8nrPiaf5pCimG8FaU.jpg" xlink:href="https://b.thumbs.redditmedia.com/82Mcyb68wCcglmF4t5ePl40F_a8nrPiaf5pCimG8FaU.jpg" x="125" y="255" width="90" height="90" clip-path="url(#clip-left)" preserveAspectRatio="xMidYMid slice" />
+                            <circle cx="170" cy="300" r="45" fill="none" stroke="var(--neon-gold)" stroke-width="2" opacity="0.5" />
+                        </g>
+                    </a>
 
                     <g class="half-group half-minecraft" id="btn-minecraft" role="button" tabindex="0" aria-label="Minecraft game preview">
                         <path class="half-path" d="M 304 120 
@@ -546,6 +555,7 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const btnGenshin = document.getElementById('btn-genshin');
+            const genshinLink = document.getElementById('genshin-link');
             const btnMinecraft = document.getElementById('btn-minecraft');
             const backgroundLayer = document.getElementById('background-layer');
             const bgGenshin = document.getElementById('bg-genshin');
@@ -585,7 +595,8 @@
                 infoBox.textContent = 'Launching Genshin Impact…';
                 btnGenshin.setAttribute('aria-label', 'Launching Genshin Impact');
                 redirectTimer = window.setTimeout(() => {
-                    window.location.href = './coregenshin.html';
+                    redirectTimer = null;
+                    window.location.assign(genshinLink.href);
                 }, redirectDelay);
             }
 
@@ -599,7 +610,9 @@
 
             // Use click as the single activation path: it works for mouse, touch,
             // stylus and keyboard-generated clicks without double-triggering navigation.
-            btnGenshin.addEventListener('click', (event) => {
+            // Use a native SVG anchor as the hit target for reliable touch activation.
+            // JavaScript retains the 1-second launch animation; href is a fallback.
+            genshinLink.addEventListener('click', (event) => {
                 event.preventDefault();
                 openGenshin();
             });
@@ -620,9 +633,37 @@
                 });
             });
 
-            // Prevent an accidental pending navigation if the page is restored from history.
+            // Clear pending navigation when leaving this page.
             window.addEventListener('pagehide', () => {
-                if (redirectTimer !== null) window.clearTimeout(redirectTimer);
+                if (redirectTimer !== null) {
+                    window.clearTimeout(redirectTimer);
+                    redirectTimer = null;
+                }
+            });
+
+            // Mobile browsers often restore this page from the back-forward cache.
+            // Reset the old launch/hover state and restart the animated wheel so it
+            // doesn't return frozen after the user presses the phone's Back button.
+            window.addEventListener('pageshow', (event) => {
+                redirecting = false;
+                if (redirectTimer !== null) {
+                    window.clearTimeout(redirectTimer);
+                    redirectTimer = null;
+                }
+                btnGenshin.setAttribute('aria-label', 'Genshin Impact');
+                resetBackground();
+
+                if (event.persisted) {
+                    const animatedParts = document.querySelectorAll(
+                        '.ring-fast, .ring-slow, .ring-med, .core-pulse'
+                    );
+                    animatedParts.forEach((part) => {
+                        part.style.animation = 'none';
+                        // Force layout before restoring the CSS animation.
+                        void part.getBoundingClientRect();
+                        part.style.animation = '';
+                    });
+                }
             });
         });
     </script>
