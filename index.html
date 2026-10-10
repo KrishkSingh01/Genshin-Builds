@@ -593,26 +593,16 @@
                 btnMinecraft.addEventListener('mouseleave', resetBackground);
             }
 
-            // Show the game background first, then open the game page after 1.25 seconds.
-            // Open the tab synchronously during the click so browsers are less likely to block it.
-            genshinLink.addEventListener('click', (event) => {
-                event.preventDefault();
+            // Native anchor navigation opens Genshin in a new tab immediately.
+            // No scripted popup or delayed redirect: this is more reliable on phones,
+            // desktop browsers, and keyboard navigation.
+            genshinLink.addEventListener('click', () => {
                 showGame('genshin');
-
                 if (resetTimer !== null) window.clearTimeout(resetTimer);
-
-                const destination = genshinLink.href;
-                const gameTab = window.open('about:blank', '_blank');
-
                 resetTimer = window.setTimeout(() => {
                     resetTimer = null;
-                    if (gameTab && !gameTab.closed) {
-                        gameTab.location.href = destination;
-                    } else {
-                        // If a browser blocks the new tab, keep the delayed navigation usable.
-                        window.location.href = destination;
-                    }
-                }, 1250);
+                    resetBackground();
+                }, 160);
             });
 
             btnMinecraft.addEventListener('click', (event) => {
