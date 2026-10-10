@@ -345,6 +345,18 @@
             -webkit-tap-highlight-color: transparent;
             touch-action: manipulation;
             outline: none;
+            cursor: pointer;
+            pointer-events: all;
+        }
+
+        .half-group .half-path,
+        .half-group .logo-img,
+        .half-group circle {
+            pointer-events: all;
+        }
+
+        .wheel-svg {
+            touch-action: manipulation;
         }
 
         .half-group:focus-visible .half-path {
@@ -525,7 +537,7 @@
             const bgMinecraft = document.getElementById('bg-minecraft');
             const infoBox = document.getElementById('info-box');
             const defaultText = 'System Standby';
-            const redirectDelay = 2000;
+            const redirectDelay = 1000;
             let redirectTimer = null;
             let redirecting = false;
 
@@ -570,10 +582,19 @@
                 btnMinecraft.addEventListener('mouseleave', resetBackground);
             }
 
-            btnGenshin.addEventListener('click', openGenshin);
-            btnMinecraft.addEventListener('click', () => showGame('minecraft'));
+            // Use click as the single activation path: it works for mouse, touch,
+            // stylus and keyboard-generated clicks without double-triggering navigation.
+            btnGenshin.addEventListener('click', (event) => {
+                event.preventDefault();
+                openGenshin();
+            });
 
-            // Allow keyboard users to activate the game sections.
+            btnMinecraft.addEventListener('click', (event) => {
+                event.preventDefault();
+                showGame('minecraft');
+            });
+
+            // SVG groups are not native buttons, so explicitly support keyboard activation.
             [btnGenshin, btnMinecraft].forEach((button) => {
                 button.addEventListener('keydown', (event) => {
                     if (event.key === 'Enter' || event.key === ' ') {
